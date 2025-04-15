@@ -22,10 +22,10 @@ public class Grafo {
         Nodos.agregarNodo(nuevo);
     }
     public void agregarArista(Arista nuevo){
-        Aristas.agregarArista(new Arista(nuevo.getFin(),nuevo.getInicio(),nuevo.getPeso()));
+        Aristas.agregarArista(new Arista(nuevo.getFin(),nuevo.getInicio(),nuevo.getPeso(),nuevo.isEscaleras()));
         Aristas.agregarArista(nuevo);
     }
-    public ListaEnlazada Dijkstra(Nodo ini, Nodo fn) {
+    public ListaEnlazada Dijkstra(Nodo ini, Nodo fn, boolean escaleras) {
     int[] distancias = new int[Nodos.getSize()];
     ListaEnlazada visitados = new ListaEnlazada();
     int[] padres = new int[Nodos.getSize()];
@@ -35,11 +35,13 @@ public class Grafo {
     
     PriorityQueue pq = new PriorityQueue();
     ListaEnlazadaAristas vecinos = Aristas.obtenerPorInicio(ini.getNombre());
-    pq.push(new Arista(null, ini, 0));
+    pq.push(new Arista(null, ini, 0,!escaleras));
+    boolean c1 = false;
 
     while (visitados.getSize() < Nodos.getSize() && !pq.isEmpty()) {
         Arista act = pq.pop();
         Nodo act1 = act.getFin();
+        
         
         if (visitados.NodoPresente(act1.getNombre())) {
             continue;
@@ -51,17 +53,22 @@ public class Grafo {
         Arista vec = vecinos.getCabeza();
         
         while (vec != null) {
+            if(vec.isEscaleras() == escaleras){
+                vec = vec.getSiguiente();
+                continue;
+            }
             Nodo nodoVecino = vec.getFin();
             int nDis = distancias[act1.getId()] + vec.getPeso();
             
             if (nDis < distancias[nodoVecino.getId()]) {
                 distancias[nodoVecino.getId()] = nDis;
                 padres[nodoVecino.getId()] = act1.getId();
-                pq.push(new Arista(null, nodoVecino, nDis));
+                pq.push(new Arista(null, nodoVecino, nDis,vec.isEscaleras()));
             }
             
             vec = vec.getSiguiente();
         }
+        c1 = true;
     }
     
     System.out.println("Ponderado: " + distancias[fn.getId()] );
@@ -69,37 +76,55 @@ public class Grafo {
 }
     public ListaEnlazada rCamino(Nodo origen, Nodo destino, int[] padres) {
     ListaEnlazada caminoList = new ListaEnlazada();
-    
 
-    if (origen.equals(destino)) {
-        caminoList.agregarNodo2(origen);
+    if (origen == null || destino == null || padres == null) {
         return caminoList;
     }
 
-    if (padres[destino.getId()] == -1) {
+    if (origen.equals(destino)) {
+        Nodo copia = new Nodo(origen.getNombre());
+        copia.setId(origen.getId());
+        caminoList.agregarNodo2(copia);
+        return caminoList;
+    }
+    if (destino.getId() < 0 || destino.getId() >= padres.length || padres[destino.getId()] == -1) {
         return caminoList;
     }
 
     Stack pila = new Stack();
     int actualId = destino.getId();
+    boolean caminoValido = true;
     
-    while (actualId != -1) {
+    // Rastrear predecesores
+    while (actualId != -1 && caminoValido) {
         Nodo nodo = Nodos.obtenerNodo(actualId);
-        if (nodo == null) break;
-        nodo.setSiguiente(null);
-        pila.push(nodo);
-        actualId = padres[actualId];
-    }
+        if (nodo == null) {
+            caminoValido = false;
+            break;
+        }
 
-    if (pila.isEmpty() || !pila.peek().equals(origen)) {
+        Nodo copiaNodo = new Nodo(nodo.getNombre());
+        copiaNodo.setId(nodo.getId());
+        pila.push(copiaNodo);
+        
+        actualId = padres[actualId];
+
+        if (pila.getTam() > Nodos.getSize()) {
+            caminoValido = false;
+        }
+    }
+    if (!caminoValido || pila.isEmpty() || 
+        !pila.peek().getNombre().equals(origen.getNombre())) {
         return new ListaEnlazada();
     }
+
+    // 6. Construir el camino final
     while (!pila.isEmpty()) {
-        Nodo n1 = (Nodo) pila.pop();
-        n1.setSiguiente(null);
-        caminoList.agregarNodo2(n1);
+        Nodo nodo = pila.pop();
+        nodo.setSiguiente(null);
+        caminoList.agregarNodo2(nodo);
     }
-        
+    
     return caminoList;
 }
 }

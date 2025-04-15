@@ -12,6 +12,12 @@ public class Stack {
     private Nodo cima;
     private int tam;
 
+    public Stack() {
+        this.tam = 0;
+    }
+    
+    
+
     public Nodo peek() {
         return cima;
     }
@@ -33,13 +39,14 @@ public class Stack {
         }
         Nodo temp = cima;
         cima = cima.getSiguiente();
+        tam--;
         return temp;
     }
     public boolean isEmpty(){
         if(tam == 0 || cima == null){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
     public void push(Nodo nuevo){
         if(cima == null){
@@ -49,6 +56,7 @@ public class Stack {
             nuevo.setSiguiente(cima);
             cima = nuevo;
         }
+        tam++;
     }
     
     

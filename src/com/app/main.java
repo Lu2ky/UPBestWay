@@ -47,38 +47,40 @@ public class main {
         
         
         
-        grafo.agregarArista(new Arista(P1,C,77));
-        grafo.agregarArista(new Arista(P1,J,60));
-        grafo.agregarArista(new Arista(C,B,19));
-        grafo.agregarArista(new Arista(C,D,71));
-        grafo.agregarArista(new Arista(B,FR,22));
-        grafo.agregarArista(new Arista(B,A,13));
-        grafo.agregarArista(new Arista(FR,A,25));
-        grafo.agregarArista(new Arista(FR,D,42));
-        grafo.agregarArista(new Arista(D,J,55));
-        grafo.agregarArista(new Arista(D,P2,136));
-        grafo.agregarArista(new Arista(P2,E,145));
-        grafo.agregarArista(new Arista(D,E,66));
-        grafo.agregarArista(new Arista(D,P2,136));
-        grafo.agregarArista(new Arista(P2,D,222));
-        grafo.agregarArista(new Arista(K,J,218));
-        grafo.agregarArista(new Arista(K,E,139));
-        grafo.agregarArista(new Arista(J,E,104));
-        grafo.agregarArista(new Arista(J,F,104));
-        grafo.agregarArista(new Arista(E,F,25));
-        grafo.agregarArista(new Arista(E,H,31));
-        grafo.agregarArista(new Arista(H,ZV,40));
-        grafo.agregarArista(new Arista(ZV,F,35));
-        grafo.agregarArista(new Arista(G,ZV,30));
-        grafo.agregarArista(new Arista(G,H,46));
-        grafo.agregarArista(new Arista(F,H,40));
-        grafo.agregarArista(new Arista(G,F,21));
-        grafo.agregarArista(new Arista(J,G,88));
-        grafo.agregarArista(new Arista(E,I,144));
-        grafo.agregarArista(new Arista(I,L,50));
-        grafo.agregarArista(new Arista(L,K,183));
-        grafo.agregarArista(new Arista(I,K,152));
-        grafo.agregarArista(new Arista(D,K,142));
+        grafo.agregarArista(new Arista(P1,C,77,false));
+        grafo.agregarArista(new Arista(P1,J,60,false));
+        grafo.agregarArista(new Arista(C,B,19,false));
+        grafo.agregarArista(new Arista(C,D,71,true));
+        grafo.agregarArista(new Arista(B,FR,22,true));
+        grafo.agregarArista(new Arista(B,A,13,false));
+        grafo.agregarArista(new Arista(FR,A,25,true));
+        grafo.agregarArista(new Arista(FR,D,42,true));
+        grafo.agregarArista(new Arista(D,J,55,false));
+        grafo.agregarArista(new Arista(D,P2,136,true));
+        grafo.agregarArista(new Arista(P2,E,145,true));
+        grafo.agregarArista(new Arista(D,E,66,true));
+        grafo.agregarArista(new Arista(D,P2,136,false));
+        grafo.agregarArista(new Arista(P2,K,222,true));
+        grafo.agregarArista(new Arista(K,J,218,true));
+        grafo.agregarArista(new Arista(K,E,139,true));
+        grafo.agregarArista(new Arista(J,E,104,true));
+        grafo.agregarArista(new Arista(J,F,104,true));
+        grafo.agregarArista(new Arista(E,F,25,false));
+        grafo.agregarArista(new Arista(E,H,31,false));
+        grafo.agregarArista(new Arista(H,ZV,40,false));
+        grafo.agregarArista(new Arista(ZV,F,35,false));
+        grafo.agregarArista(new Arista(G,ZV,30,false));
+        grafo.agregarArista(new Arista(G,H,46,false));
+        grafo.agregarArista(new Arista(F,H,40,false));
+        grafo.agregarArista(new Arista(G,F,21,false));
+        grafo.agregarArista(new Arista(J,G,88,false));
+        grafo.agregarArista(new Arista(E,I,144,true));
+        grafo.agregarArista(new Arista(I,L,50,false));
+        grafo.agregarArista(new Arista(L,K,183,false));
+        grafo.agregarArista(new Arista(I,K,152,true));
+        grafo.agregarArista(new Arista(D,K,142,true));
+        grafo.agregarArista(new Arista(H,L,141,false));
+        grafo.agregarArista(new Arista(H,I,84,true));
         
         
         
@@ -87,7 +89,7 @@ public class main {
         
         
         
-        ListaEnlazada camino = grafo.Dijkstra(A, K);
+        ListaEnlazada camino = grafo.Dijkstra(A, K, true);
         
         System.out.println("Camino mas corto de A a K: ");
         camino.MostrarLista();

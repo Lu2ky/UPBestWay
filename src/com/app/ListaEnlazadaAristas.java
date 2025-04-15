@@ -55,7 +55,7 @@ public class ListaEnlazadaAristas {
         Arista temp = cabeza;
         while(temp != null){
             if(nombre.equals(temp.getInicio().getNombre()) && temp.getInicio() != null){
-                Arista temp2 = new Arista(temp.getInicio(),temp.getFin(),temp.getPeso());
+                Arista temp2 = new Arista(temp.getInicio(),temp.getFin(),temp.getPeso(),temp.isEscaleras());
                 vecinos.agregarArista(temp2);
             }
             temp = temp.getSiguiente();

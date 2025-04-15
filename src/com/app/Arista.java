@@ -13,14 +13,24 @@ public class Arista{
     public Nodo fin;
     public int peso;
     public Arista siguiente;
+    public boolean escaleras;
 
     public Arista() {
     }
-    public Arista(Nodo inicio, Nodo fin, int peso) {
+    public Arista(Nodo inicio, Nodo fin, int peso,boolean escaleras) {
         this.inicio=inicio;
         this.fin=fin;
         this.peso=peso;
+        this.escaleras = escaleras;
         
+    }
+
+    public boolean isEscaleras() {
+        return escaleras;
+    }
+
+    public void setEscaleras(boolean escaleras) {
+        this.escaleras = escaleras;
     }
     
 
