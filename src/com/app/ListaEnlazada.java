@@ -85,7 +85,7 @@ public class ListaEnlazada {
     public void MostrarLista(){
         Nodo temp=cabeza;
         while(temp!=null){
-            System.out.println(temp.getNombre());
+            System.out.print(temp.getNombre() + ",");
             temp = temp.getSiguiente();
         }
         return;
@@ -103,4 +103,14 @@ public class ListaEnlazada {
         }
         return false;
     }
+
+    public Nodo getCabeza() {
+        return cabeza;
+    }
+
+    public void setCabeza(Nodo cabeza) {
+        this.cabeza = cabeza;
+    }
+    
+    
 }

@@ -19,6 +19,13 @@ public class Nodo{
         this.siguiente = null;
     }
 
+    public Nodo(int id, String nombre, Nodo siguiente) {
+        this.id = id;
+        this.nombre = nombre;
+        this.siguiente = siguiente;
+    }
+    
+
     public Nodo getSiguiente() {
         return siguiente;
     }

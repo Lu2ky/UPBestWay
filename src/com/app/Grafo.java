@@ -46,8 +46,9 @@ public class Grafo {
         if (visitados.NodoPresente(act1.getNombre())) {
             continue;
         }
-        act1.setSiguiente(null);
-        visitados.agregarNodo2(act1);
+        Nodo act2 = new Nodo( act1.getId(),act1.getNombre() , act1.getSiguiente());
+        act2.setSiguiente(null);
+        visitados.agregarNodo2(act2);
         
         vecinos = Aristas.obtenerPorInicio(act1.getNombre());
         Arista vec = vecinos.getCabeza();
@@ -72,6 +73,7 @@ public class Grafo {
     }
     
     System.out.println("Ponderado: " + distancias[fn.getId()] );
+        System.out.println(Nodos.getCabeza().getSiguiente().getNombre());
     return rCamino(ini, fn, padres);
 }
     public ListaEnlazada rCamino(Nodo origen, Nodo destino, int[] padres) {
@@ -95,7 +97,7 @@ public class Grafo {
     int actualId = destino.getId();
     boolean caminoValido = true;
     
-    // Rastrear predecesores
+   
     while (actualId != -1 && caminoValido) {
         Nodo nodo = Nodos.obtenerNodo(actualId);
         if (nodo == null) {
@@ -118,7 +120,6 @@ public class Grafo {
         return new ListaEnlazada();
     }
 
-    // 6. Construir el camino final
     while (!pila.isEmpty()) {
         Nodo nodo = pila.pop();
         nodo.setSiguiente(null);
@@ -127,4 +128,21 @@ public class Grafo {
     
     return caminoList;
 }
+
+    public ListaEnlazadaAristas getAristas() {
+        return Aristas;
+    }
+
+    public void setAristas(ListaEnlazadaAristas Aristas) {
+        this.Aristas = Aristas;
+    }
+
+    public ListaEnlazada getNodos() {
+        return Nodos;
+    }
+
+    public void setNodos(ListaEnlazada Nodos) {
+        this.Nodos = Nodos;
+    }
+    
 }

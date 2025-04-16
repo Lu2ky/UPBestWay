@@ -93,6 +93,8 @@ public class main {
         
         System.out.println("Camino mas corto de A a K: ");
         camino.MostrarLista();
+        System.out.println("");
+        grafo.getNodos().MostrarLista();
         
     }
     
