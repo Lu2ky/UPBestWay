@@ -2,8 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.app;
+package com.app.manejodatos;
 
+import com.app.manejodatos.Arista;
+import com.app.manejodatos.PriorityQueue;
+import com.app.manejodatos.Stack;
+import com.app.manejodatos.Nodo;
+import com.app.manejodatos.ListaEnlazadaAristas;
+import com.app.manejodatos.ListaEnlazada;
 import java.util.Arrays;
 
 /**
