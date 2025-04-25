@@ -62,6 +62,14 @@ public class ListaEnlazadaAristas {
         }
         return vecinos;
     }
+    public void MostrarLista(){
+        Arista temp=cabeza;
+        while(temp!=null){
+            System.out.println(temp.getInicio().getNombre()+ "->" + temp.getFin().getNombre() + "; " + temp.getPeso());
+            temp = temp.getSiguiente();
+        }
+        return;
+    }
 
     public Arista getCabeza() {
         return cabeza;
