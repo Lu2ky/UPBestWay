@@ -60,12 +60,12 @@ public class interfaz extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Ruta.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        Ruta.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         Ruta.setForeground(new java.awt.Color(0, 0, 0));
         Ruta.setText("Ruta a seguir ");
         jPanel1.add(Ruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 140, 40));
 
-        dndviene.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        dndviene.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         dndviene.setForeground(new java.awt.Color(0, 0, 0));
         dndviene.setText("De donde viene");
         jPanel1.add(dndviene, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, 40));
@@ -106,7 +106,7 @@ public class interfaz extends javax.swing.JFrame {
         universida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/interfaz/imagen_2025-04-13_002438034.png"))); // NOI18N
         universida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Buscar ruta");
 
@@ -136,7 +136,7 @@ public class interfaz extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 110));
 
-        dndva1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        dndva1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         dndva1.setForeground(new java.awt.Color(0, 0, 0));
         dndva1.setText("A donde va");
         jPanel1.add(dndva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 140, 40));
