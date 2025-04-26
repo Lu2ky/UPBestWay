@@ -28,15 +28,19 @@ public class interfaz extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        busqueda = new javax.swing.JLabel();
+        Ruta = new javax.swing.JLabel();
         dndviene = new javax.swing.JLabel();
-        dndva = new javax.swing.JLabel();
-        ruta = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         InDndVa = new javax.swing.JList<>();
-        OutRuta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         InDndViene1 = new javax.swing.JList<>();
+        jPanel3 = new javax.swing.JPanel();
+        universida = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        dndva1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        runner = new javax.swing.JButton();
         Runner = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -56,18 +60,23 @@ public class interfaz extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        busqueda.setText("Busqueda");
-        jPanel1.add(busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 6, -1, -1));
+        Ruta.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        Ruta.setForeground(new java.awt.Color(0, 0, 0));
+        Ruta.setText("Ruta a seguir ");
+        jPanel1.add(Ruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 140, 40));
 
+        dndviene.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        dndviene.setForeground(new java.awt.Color(0, 0, 0));
         dndviene.setText("De donde viene");
-        jPanel1.add(dndviene, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 34, -1, -1));
+        jPanel1.add(dndviene, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, 40));
 
-        dndva.setText("A donde va");
-        jPanel1.add(dndva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 134, -1, -1));
+        jScrollPane1.setBackground(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setForeground(new java.awt.Color(153, 153, 153));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        ruta.setText("Ruta a seguir ");
-        jPanel1.add(ruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, -1));
-
+        InDndVa.setBackground(new java.awt.Color(255, 255, 255));
         InDndVa.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "A", "B", "C", "D", "E","F","G","H","I","J","K","L" };
             public int getSize() { return strings.length; }
@@ -75,15 +84,14 @@ public class interfaz extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(InDndVa);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 160, 260, 72));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 260, 110));
 
-        OutRuta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OutRutaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(OutRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 240, 62));
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        InDndViene1.setBackground(new java.awt.Color(255, 255, 255));
+        InDndViene1.setBorder(null);
         InDndViene1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "A", "B", "C", "D", "E","F","G","H","I","J","K","L" };
             public int getSize() { return strings.length; }
@@ -91,9 +99,68 @@ public class interfaz extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(InDndViene1);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 256, 72));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 256, 130));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 670, 500));
+        jPanel3.setBackground(new java.awt.Color(153, 0, 0));
+
+        universida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/interfaz/imagen_2025-04-13_002438034.png"))); // NOI18N
+        universida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Buscar ruta");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(universida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(252, 252, 252)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(601, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(universida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 110));
+
+        dndva1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        dndva1.setForeground(new java.awt.Color(0, 0, 0));
+        dndva1.setText("A donde va");
+        jPanel1.add(dndva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 140, 40));
+
+        jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setFocusable(false);
+        jTextArea1.setKeymap(null);
+        jScrollPane3.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 290, 100));
+
+        runner.setBackground(new java.awt.Color(204, 204, 204));
+        runner.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
+        runner.setForeground(new java.awt.Color(0, 0, 0));
+        runner.setText("Buscar");
+        jPanel1.add(runner, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 650, 100, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 690));
 
         Runner.setText("jButton1");
         Runner.addActionListener(new java.awt.event.ActionListener() {
@@ -155,15 +222,19 @@ public class interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> InDndVa;
     private javax.swing.JList<String> InDndViene1;
-    private javax.swing.JTextField OutRuta;
     private javax.swing.JButton Runner;
-    private javax.swing.JLabel busqueda;
-    private javax.swing.JLabel dndva;
+    private javax.swing.JLabel Ruta;
+    private javax.swing.JLabel dndva1;
     private javax.swing.JLabel dndviene;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel ruta;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton runner;
+    private javax.swing.JLabel universida;
     // End of variables declaration//GEN-END:variables
 }
