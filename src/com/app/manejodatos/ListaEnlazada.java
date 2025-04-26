@@ -22,7 +22,7 @@ public class ListaEnlazada {
     public ListaEnlazada(Nodo cabeza) {
         this.cabeza = cabeza;
         cabeza.setId(0);
-        size=1;
+        size++;
     }
 
     public int getSize() {
@@ -82,10 +82,20 @@ public class ListaEnlazada {
         }
         return temp;
     }
+    public Nodo obtenerNodo(String nombre){
+        Nodo temp=cabeza;
+        while (temp != null) {
+            if (temp.getNombre().equals(nombre)){
+                break;
+            }
+            temp =temp.getSiguiente();
+        }
+        return temp;
+    }
     public void MostrarLista(){
         Nodo temp=cabeza;
         while(temp!=null){
-            System.out.print(temp.getNombre() + ",");
+            System.out.print(temp.getNombre() + " ");
             temp = temp.getSiguiente();
         }
         return;
