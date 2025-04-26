@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.app.manejodatos.Nodo;
 import com.app.conexion.data.enumData;
+import java.awt.Color;
 
 public class Conexion{
        private Connection conexion;
@@ -33,7 +34,7 @@ public class Conexion{
         return conexion;
     }
     
-    public void addTotableUsers(String nickname,String password){
+    public boolean addTotableUsers(String nickname,String password,javax.swing.JLabel Label){
         String sql = "INSERT INTO usuarios (Nickname, Password) VALUES (?, ?)";
         try(PreparedStatement ps = conexion.prepareStatement(sql)){
             String sqlCount = "SELECT COUNT(*) FROM usuarios WHERE Nickname = ?";
@@ -44,13 +45,17 @@ public class Conexion{
             if (rsCount.next()) {
             int count = rsCount.getInt(1);
             if(count == 1){
-                System.out.println("Usuario ya existente");
+                Label.setText("Cuenta con el mismo usuario ya existe");
+                Label.setForeground(Color.RED);
+                return false;
             }else{
                 ps.setString(1, nickname);
                 ps.setString(2, password);
-                int filas = ps.executeUpdate();
-                System.out.println("Filas insertadas: " + filas);
-            }
+                ps.executeUpdate();
+                Label.setText("Cuenta creada con exito");
+                Label.setForeground(Color.GREEN);
+                return true;
+            } 
         }
     }       catch (SQLException e) {
                 System.out.println("Error al contar duplicados");
@@ -60,7 +65,8 @@ public class Conexion{
         }catch (SQLException e){
             System.out.println("Error al introducir datos");
             e.printStackTrace();
-        }  
+        }
+        return false;
     }
     
     public void addTotableNodos(String Nombre){
