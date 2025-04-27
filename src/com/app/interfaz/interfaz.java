@@ -41,6 +41,21 @@ public class interfaz extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         runner = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        EdI = new javax.swing.JButton();
+        EdC = new javax.swing.JButton();
+        EdF = new javax.swing.JButton();
+        EdB = new javax.swing.JButton();
+        EdA = new javax.swing.JButton();
+        EdD = new javax.swing.JButton();
+        EdJ = new javax.swing.JButton();
+        EdG = new javax.swing.JButton();
+        EdE = new javax.swing.JButton();
+        Edk = new javax.swing.JButton();
+        EdH = new javax.swing.JButton();
+        EdL = new javax.swing.JButton();
+        EdA1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         Runner = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -160,6 +175,156 @@ public class interfaz extends javax.swing.JFrame {
         runner.setText("Buscar");
         jPanel1.add(runner, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 650, 100, -1));
 
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EdI.setBackground(new java.awt.Color(11, 50, 93));
+        EdI.setForeground(new java.awt.Color(255, 255, 255));
+        EdI.setText("I");
+        EdI.setBorder(null);
+        EdI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdIActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdI, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 30, 30));
+
+        EdC.setBackground(new java.awt.Color(241, 177, 53));
+        EdC.setForeground(new java.awt.Color(255, 255, 255));
+        EdC.setText("C");
+        EdC.setBorder(null);
+        EdC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdCActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdC, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 30, 30));
+
+        EdF.setBackground(new java.awt.Color(191, 28, 9));
+        EdF.setForeground(new java.awt.Color(255, 255, 255));
+        EdF.setText("F");
+        EdF.setBorder(null);
+        EdF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdFActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdF, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 30, 30));
+
+        EdB.setBackground(new java.awt.Color(241, 177, 53));
+        EdB.setForeground(new java.awt.Color(255, 255, 255));
+        EdB.setText("B");
+        EdB.setBorder(null);
+        EdB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdBActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdB, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 30, 30));
+
+        EdA.setBackground(new java.awt.Color(241, 177, 53));
+        EdA.setForeground(new java.awt.Color(255, 255, 255));
+        EdA.setText("A");
+        EdA.setBorder(null);
+        EdA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdAActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdA, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 30, 30));
+
+        EdD.setBackground(new java.awt.Color(241, 177, 53));
+        EdD.setForeground(new java.awt.Color(255, 255, 255));
+        EdD.setText("D");
+        EdD.setBorder(null);
+        EdD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdDActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdD, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 30, 30));
+
+        EdJ.setBackground(new java.awt.Color(157, 204, 212));
+        EdJ.setForeground(new java.awt.Color(0, 0, 0));
+        EdJ.setText("J");
+        EdJ.setBorder(null);
+        EdJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdJActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 30, 30));
+
+        EdG.setBackground(new java.awt.Color(191, 28, 9));
+        EdG.setForeground(new java.awt.Color(255, 255, 255));
+        EdG.setText("G");
+        EdG.setBorder(null);
+        EdG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdGActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdG, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 270, 30, 30));
+
+        EdE.setBackground(new java.awt.Color(191, 28, 9));
+        EdE.setForeground(new java.awt.Color(255, 255, 255));
+        EdE.setText("E");
+        EdE.setBorder(null);
+        EdE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdEActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdE, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 30, 30));
+
+        Edk.setBackground(new java.awt.Color(216, 120, 34));
+        Edk.setForeground(new java.awt.Color(255, 255, 255));
+        Edk.setText("K");
+        Edk.setBorder(null);
+        Edk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdkActionPerformed(evt);
+            }
+        });
+        jPanel4.add(Edk, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 30, 30));
+
+        EdH.setBackground(new java.awt.Color(191, 28, 9));
+        EdH.setForeground(new java.awt.Color(255, 255, 255));
+        EdH.setText("H");
+        EdH.setBorder(null);
+        EdH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdHActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdH, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 30, 30));
+
+        EdL.setBackground(new java.awt.Color(103, 140, 62));
+        EdL.setForeground(new java.awt.Color(255, 255, 255));
+        EdL.setText("L");
+        EdL.setBorder(null);
+        EdL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdLActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdL, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 30, 30));
+
+        EdA1.setBackground(new java.awt.Color(113, 49, 133));
+        EdA1.setForeground(new java.awt.Color(255, 255, 255));
+        EdA1.setText("TEMPLO");
+        EdA1.setBorder(null);
+        EdA1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdA1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(EdA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 90, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/interfaz/INTERNA PLANTA FISICA.jpg"))); // NOI18N
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 710, 480));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 690));
 
         Runner.setText("jButton1");
@@ -176,6 +341,58 @@ public class interfaz extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void EdCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdCActionPerformed
+
+    private void EdFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdFActionPerformed
+
+    private void EdBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdBActionPerformed
+
+    private void EdAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdAActionPerformed
+
+    private void EdDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdDActionPerformed
+
+    private void EdJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdJActionPerformed
+
+    private void EdGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdGActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdGActionPerformed
+
+    private void EdEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdEActionPerformed
+
+    private void EdIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdIActionPerformed
+
+    private void EdkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdkActionPerformed
+
+    private void EdHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdHActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdHActionPerformed
+
+    private void EdLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdLActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdLActionPerformed
+
+    private void EdA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdA1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdA1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,6 +437,19 @@ public class interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EdA;
+    private javax.swing.JButton EdA1;
+    private javax.swing.JButton EdB;
+    private javax.swing.JButton EdC;
+    private javax.swing.JButton EdD;
+    private javax.swing.JButton EdE;
+    private javax.swing.JButton EdF;
+    private javax.swing.JButton EdG;
+    private javax.swing.JButton EdH;
+    private javax.swing.JButton EdI;
+    private javax.swing.JButton EdJ;
+    private javax.swing.JButton EdL;
+    private javax.swing.JButton Edk;
     private javax.swing.JList<String> InDndVa;
     private javax.swing.JList<String> InDndViene1;
     private javax.swing.JButton Runner;
@@ -227,9 +457,11 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel dndva1;
     private javax.swing.JLabel dndviene;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
