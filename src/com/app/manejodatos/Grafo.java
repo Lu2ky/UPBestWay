@@ -67,7 +67,7 @@ public class Grafo {
         Arista vec = vecinos.getCabeza();
         
         while (vec != null) {
-            if(vec.isEscaleras() == escaleras){
+            if(vec.isEscaleras() && escaleras){
                 vec = vec.getSiguiente();
                 continue;
             }

@@ -13,6 +13,7 @@ import com.app.manejodatos.Nodo;
 import com.app.conexion.data.enumData;
 import java.awt.Color;
 import javax.swing.JLabel;
+import com.app.manejodatos.ListaEnlazada;
 
 public class Conexion{
        private Connection conexion;
@@ -303,6 +304,25 @@ public class Conexion{
             e.printStackTrace();
         }
         return nodo;
+    }
+    public ListaEnlazada getNodos(){
+        String sql = "SELECT Nombre FROM nodos";
+        ListaEnlazada ret = new ListaEnlazada();
+        try(PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            if(!rs.next()){
+                return ret;
+            }
+            else{
+                do{
+                ret.agregarNodo2(new Nodo(rs.getString("Nombre")));
+                }while(rs.next());
+            }
+            return ret;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return ret;
     }
 }
 

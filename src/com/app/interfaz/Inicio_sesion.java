@@ -24,7 +24,7 @@ import javax.swing.JFrame;
 public class Inicio_sesion extends javax.swing.JFrame {
     
     int indice = 0;
-    Sesion sesion = new Sesion();
+    public Sesion sesion = new Sesion();
     boolean ver = false;
     private static final Conexion cox = new Conexion();
 
@@ -343,7 +343,17 @@ public class Inicio_sesion extends javax.swing.JFrame {
                 //Aqui a la interfaz de usuario con permisos tomar de referencia la linea 291 para el cambio de form
             }
             else{
-                //Aqui a la interfaz de usuario sin permisos
+                JFrame frame = this;
+                interfaz inte = new interfaz(sesion);
+                inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                inte.setVisible(true);
+                Timer timer = new Timer(1, new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    frame.setVisible(false);
+                    }
+                });
+                timer.start();
+                
             }
         }
         else{
@@ -374,6 +384,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
     public static void main(String args[]) {    
         FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Inicio_sesion().setVisible(true);
             }

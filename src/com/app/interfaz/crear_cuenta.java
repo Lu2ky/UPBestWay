@@ -24,6 +24,8 @@ public class crear_cuenta extends javax.swing.JFrame {
     Boolean ver1 = false;
     Boolean ver2 = false;
     private static final Conexion cox = new Conexion();
+    
+    
 
     /**
      * Creates new form Inicio_sesion

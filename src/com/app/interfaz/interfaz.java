@@ -8,13 +8,38 @@ package com.app.interfaz;
  *
  * @author ADMIN
  */
+
+import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
+import com.app.manejodatos.Grafo;
+import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.Nodo;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.ImageIcon;
 public class interfaz extends javax.swing.JFrame {
 
     /**
      * Creates new form intrefas
      */
-    public interfaz() {
+    
+    private static final Conexion cox = new Conexion();
+    ListaEnlazada cargar = cox.getNodos();
+    private static final Grafo grafo = new Grafo(cox);
+    boolean check = false;
+    
+    public interfaz(Sesion sesion) {    
+        FlatLightLaf.setup();
         initComponents();
+        Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+        NodoA.addItem("Biblioteca");
+        NodoA.addItem("Auditorio menor");
+        NodoA.addItem("Auditorio mayor");
+        NodoB.addItem("Biblioteca");
+        NodoB.addItem("Auditorio menor");
+        NodoB.addItem("Auditorio mayor");
+        poblarComponentes();
+        
     }
 
     /**
@@ -27,35 +52,29 @@ public class interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        comboSuggestionUI1 = new combo_suggestion.ComboSuggestionUI();
+        comboSuggestionUI2 = new combo_suggestion.ComboSuggestionUI();
+        comboSuggestionUI3 = new combo_suggestion.ComboSuggestionUI();
         jPanel1 = new javax.swing.JPanel();
-        Ruta = new javax.swing.JLabel();
-        dndviene = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        InDndVa = new javax.swing.JList<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        InDndViene1 = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
-        universida = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        Check = new javax.swing.JLabel();
+        Logo1 = new javax.swing.JLabel();
+        LogoN3 = new javax.swing.JLabel();
+        LogoN4 = new javax.swing.JLabel();
+        dndviene = new javax.swing.JLabel();
         dndva1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        runner = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        EdI = new javax.swing.JButton();
-        EdC = new javax.swing.JButton();
-        EdF = new javax.swing.JButton();
-        EdB = new javax.swing.JButton();
-        EdA = new javax.swing.JButton();
-        EdD = new javax.swing.JButton();
-        EdJ = new javax.swing.JButton();
-        EdG = new javax.swing.JButton();
-        EdE = new javax.swing.JButton();
-        Edk = new javax.swing.JButton();
-        EdH = new javax.swing.JButton();
-        EdL = new javax.swing.JButton();
-        EdA1 = new javax.swing.JButton();
+        Camino = new javax.swing.JTextArea();
+        Ruta = new javax.swing.JLabel();
+        NodoB = new combo_suggestion.ComboBoxSuggestion();
+        NodoA = new combo_suggestion.ComboBoxSuggestion();
+        Buscar = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        dndviene1 = new javax.swing.JLabel();
+        CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        Bienvenida = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         Runner = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -70,262 +89,130 @@ public class interfaz extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Ruta.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        Ruta.setForeground(new java.awt.Color(0, 0, 0));
-        Ruta.setText("Ruta a seguir ");
-        jPanel1.add(Ruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 140, 40));
+        jPanel3.setBackground(new java.awt.Color(255, 190, 15));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        dndviene.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        dndviene.setForeground(new java.awt.Color(0, 0, 0));
-        dndviene.setText("De donde viene");
-        jPanel1.add(dndviene, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, 40));
-
-        jScrollPane1.setBackground(new java.awt.Color(153, 153, 153));
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setForeground(new java.awt.Color(153, 153, 153));
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-
-        InDndVa.setBackground(new java.awt.Color(255, 255, 255));
-        InDndVa.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "A", "B", "C", "D", "E","F","G","H","I","J","K","L" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        Check.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png"))); // NOI18N
+        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Check.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CheckMousePressed(evt);
+            }
         });
-        jScrollPane1.setViewportView(InDndVa);
+        jPanel3.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 50, 50));
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 260, 110));
+        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
+        jPanel3.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
 
-        jScrollPane2.setBorder(null);
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
+        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
+        jPanel3.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
 
-        InDndViene1.setBackground(new java.awt.Color(255, 255, 255));
-        InDndViene1.setBorder(null);
-        InDndViene1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "A", "B", "C", "D", "E","F","G","H","I","J","K","L" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(InDndViene1);
+        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
+        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 256, 130));
+        dndviene.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        dndviene.setText("Escaleras");
+        jPanel3.add(dndviene, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 150, 40));
 
-        jPanel3.setBackground(new java.awt.Color(153, 0, 0));
-
-        universida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/interfaz/imagen_2025-04-13_002438034.png"))); // NOI18N
-        universida.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Buscar ruta");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(universida, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(252, 252, 252)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(601, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(universida, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 110));
-
-        dndva1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        dndva1.setForeground(new java.awt.Color(0, 0, 0));
-        dndva1.setText("A donde va");
-        jPanel1.add(dndva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 140, 40));
+        dndva1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        dndva1.setText("Edificio final");
+        jPanel3.add(dndva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 190, 40));
 
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setFocusable(false);
-        jTextArea1.setKeymap(null);
-        jScrollPane3.setViewportView(jTextArea1);
+        Camino.setColumns(20);
+        Camino.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
+        Camino.setRows(5);
+        Camino.setFocusable(false);
+        Camino.setKeymap(null);
+        jScrollPane3.setViewportView(Camino);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 290, 100));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 620, 660, 90));
 
-        runner.setBackground(new java.awt.Color(204, 204, 204));
-        runner.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 14)); // NOI18N
-        runner.setForeground(new java.awt.Color(0, 0, 0));
-        runner.setText("Buscar");
-        jPanel1.add(runner, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 650, 100, -1));
+        Ruta.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
+        Ruta.setText("Ruta a seguir ");
+        jPanel3.add(Ruta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 570, 200, 40));
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        NodoB.setBackground(new java.awt.Color(140, 0, 0));
+        NodoB.setBorder(null);
+        NodoB.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jPanel3.add(NodoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
 
-        EdI.setBackground(new java.awt.Color(11, 50, 93));
-        EdI.setForeground(new java.awt.Color(255, 255, 255));
-        EdI.setText("I");
-        EdI.setBorder(null);
-        EdI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdIActionPerformed(evt);
+        NodoA.setBackground(new java.awt.Color(140, 0, 0));
+        NodoA.setBorder(null);
+        NodoA.setFocusCycleRoot(true);
+        NodoA.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jPanel3.add(NodoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
+
+        Buscar.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BuscarMousePressed(evt);
             }
         });
-        jPanel4.add(EdI, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 110, 30, 30));
+        Buscar.setLayout(new java.awt.GridBagLayout());
 
-        EdC.setBackground(new java.awt.Color(241, 177, 53));
-        EdC.setForeground(new java.awt.Color(255, 255, 255));
-        EdC.setText("C");
-        EdC.setBorder(null);
-        EdC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdCActionPerformed(evt);
+        jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Buscar");
+        Buscar.add(jLabel1, new java.awt.GridBagConstraints());
+
+        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 720, 170, 70));
+
+        dndviene1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        dndviene1.setText("Edificio Inicial ");
+        jPanel3.add(dndviene1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 40));
+
+        CerrarSesion.setBackground(new java.awt.Color(140, 0, 0));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CerrarSesionMousePressed(evt);
             }
         });
-        jPanel4.add(EdC, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 30, 30));
+        CerrarSesion.setLayout(new java.awt.GridBagLayout());
 
-        EdF.setBackground(new java.awt.Color(191, 28, 9));
-        EdF.setForeground(new java.awt.Color(255, 255, 255));
-        EdF.setText("F");
-        EdF.setBorder(null);
-        EdF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdFActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdF, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 30, 30));
+        jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Cerrar Sesion");
+        CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
 
-        EdB.setBackground(new java.awt.Color(241, 177, 53));
-        EdB.setForeground(new java.awt.Color(255, 255, 255));
-        EdB.setText("B");
-        EdB.setBorder(null);
-        EdB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdBActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdB, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 30, 30));
+        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
 
-        EdA.setBackground(new java.awt.Color(241, 177, 53));
-        EdA.setForeground(new java.awt.Color(255, 255, 255));
-        EdA.setText("A");
-        EdA.setBorder(null);
-        EdA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdAActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdA, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 30, 30));
+        Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        Bienvenida.setText("¡Bienvenido(a)!");
+        jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
-        EdD.setBackground(new java.awt.Color(241, 177, 53));
-        EdD.setForeground(new java.awt.Color(255, 255, 255));
-        EdD.setText("D");
-        EdD.setBorder(null);
-        EdD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdDActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdD, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 30, 30));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 830, 1080));
 
-        EdJ.setBackground(new java.awt.Color(157, 204, 212));
-        EdJ.setForeground(new java.awt.Color(0, 0, 0));
-        EdJ.setText("J");
-        EdJ.setBorder(null);
-        EdJ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdJActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdJ, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 30, 30));
+        jPanel4.setBackground(new java.awt.Color(140, 0, 0));
 
-        EdG.setBackground(new java.awt.Color(191, 28, 9));
-        EdG.setForeground(new java.awt.Color(255, 255, 255));
-        EdG.setText("G");
-        EdG.setBorder(null);
-        EdG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdGActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdG, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 270, 30, 30));
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1090, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
 
-        EdE.setBackground(new java.awt.Color(191, 28, 9));
-        EdE.setForeground(new java.awt.Color(255, 255, 255));
-        EdE.setText("E");
-        EdE.setBorder(null);
-        EdE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdEActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdE, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, 30, 30));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, 1090, 1080));
 
-        Edk.setBackground(new java.awt.Color(216, 120, 34));
-        Edk.setForeground(new java.awt.Color(255, 255, 255));
-        Edk.setText("K");
-        Edk.setBorder(null);
-        Edk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdkActionPerformed(evt);
-            }
-        });
-        jPanel4.add(Edk, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 30, 30));
-
-        EdH.setBackground(new java.awt.Color(191, 28, 9));
-        EdH.setForeground(new java.awt.Color(255, 255, 255));
-        EdH.setText("H");
-        EdH.setBorder(null);
-        EdH.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdHActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdH, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, 30, 30));
-
-        EdL.setBackground(new java.awt.Color(103, 140, 62));
-        EdL.setForeground(new java.awt.Color(255, 255, 255));
-        EdL.setText("L");
-        EdL.setBorder(null);
-        EdL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdLActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdL, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 30, 30));
-
-        EdA1.setBackground(new java.awt.Color(113, 49, 133));
-        EdA1.setForeground(new java.awt.Color(255, 255, 255));
-        EdA1.setText("TEMPLO");
-        EdA1.setBorder(null);
-        EdA1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EdA1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(EdA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 90, 30));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/interfaz/INTERNA PLANTA FISICA.jpg"))); // NOI18N
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 480));
-
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 120, 710, 480));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1250, 690));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1920, 1110));
 
         Runner.setText("jButton1");
         Runner.addActionListener(new java.awt.event.ActionListener() {
@@ -342,131 +229,113 @@ public class interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void EdCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdCActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdCActionPerformed
+    private void BuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMousePressed
+        Camino.setText("");
+        String nodoINI = "";
+        String nodoFIN = "";
+        
+        if(NodoA.getSelectedItem().equals("Biblioteca")){
+            nodoINI = "J";
+        }
+        if(NodoB.getSelectedItem().equals("Biblioteca")){
+            nodoFIN = "J";
+        }
+        if(NodoA.getSelectedItem().equals("Portería principal")){
+            nodoINI = "P1";
+        }
+        if(NodoB.getSelectedItem().equals("Portería principal")){
+            nodoFIN = "P1";
+        }
+        if(NodoA.getSelectedItem().equals("Portería parqueadero")){
+            nodoINI = "P2";
+        }
+        if(NodoB.getSelectedItem().equals("Portería parqueadero")){
+            nodoFIN = "P2";
+        }
+        if(NodoA.getSelectedItem().equals("Zona de ventas")){
+            nodoINI = "ZV";
+        }
+        if(NodoB.getSelectedItem().equals("Zona de ventas")){
+            nodoFIN = "ZV";
+        }
+        if(NodoA.getSelectedItem().equals("Frutalia")){
+            nodoINI = "FR";
+        }
+        if(NodoB.getSelectedItem().equals("Frutalia")){
+            nodoFIN = "FR";
+        }
+        nodoINI = (String) NodoA.getSelectedItem();
+        nodoFIN = (String) NodoB.getSelectedItem();
+        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check);
+        Nodo temp = camino.getCabeza();
+        String temp2 = "";
+        while(temp != null){
+            temp2 = temp2 + temp.getNombre();
+            
+            temp = temp.getSiguiente();
+            if(temp != null){
+                temp2 = temp2 + "->";
+            }
+        }
+        Camino.setText(temp2);
+        
+        
+        
+        
+    }//GEN-LAST:event_BuscarMousePressed
 
-    private void EdFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdFActionPerformed
+    private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
+        if(check == false){
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));   
+            check = true;
+        }
+        else {
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Checked-removebg-preview.png")));
+            check = false;
+        }
+    }//GEN-LAST:event_CheckMousePressed
 
-    private void EdBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdBActionPerformed
+    private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EdBActionPerformed
+    }//GEN-LAST:event_CerrarSesionMousePressed
 
-    private void EdAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdAActionPerformed
-
-    private void EdDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdDActionPerformed
-
-    private void EdJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdJActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdJActionPerformed
-
-    private void EdGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdGActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdGActionPerformed
-
-    private void EdEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdEActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdEActionPerformed
-
-    private void EdIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdIActionPerformed
-
-    private void EdkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdkActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdkActionPerformed
-
-    private void EdHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdHActionPerformed
-
-    private void EdLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdLActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdLActionPerformed
-
-    private void EdA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdA1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EdA1ActionPerformed
-
+    private void poblarComponentes() {
+    Nodo temp = cargar.getCabeza();
+    while(temp != null) {
+        NodoA.addItem(temp.getNombre());
+        NodoB.addItem(temp.getNombre());
+        temp = temp.getSiguiente();
+        }
+    }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new interfaz().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton EdA;
-    private javax.swing.JButton EdA1;
-    private javax.swing.JButton EdB;
-    private javax.swing.JButton EdC;
-    private javax.swing.JButton EdD;
-    private javax.swing.JButton EdE;
-    private javax.swing.JButton EdF;
-    private javax.swing.JButton EdG;
-    private javax.swing.JButton EdH;
-    private javax.swing.JButton EdI;
-    private javax.swing.JButton EdJ;
-    private javax.swing.JButton EdL;
-    private javax.swing.JButton Edk;
-    private javax.swing.JList<String> InDndVa;
-    private javax.swing.JList<String> InDndViene1;
+    private javax.swing.JLabel Bienvenida;
+    private javax.swing.JPanel Buscar;
+    private javax.swing.JTextArea Camino;
+    private javax.swing.JPanel CerrarSesion;
+    private javax.swing.JLabel Check;
+    private javax.swing.JLabel Logo1;
+    private javax.swing.JLabel LogoN3;
+    private javax.swing.JLabel LogoN4;
+    private combo_suggestion.ComboBoxSuggestion NodoA;
+    private combo_suggestion.ComboBoxSuggestion NodoB;
     private javax.swing.JButton Runner;
     private javax.swing.JLabel Ruta;
+    private combo_suggestion.ComboSuggestionUI comboSuggestionUI1;
+    private combo_suggestion.ComboSuggestionUI comboSuggestionUI2;
+    private combo_suggestion.ComboSuggestionUI comboSuggestionUI3;
     private javax.swing.JLabel dndva1;
     private javax.swing.JLabel dndviene;
+    private javax.swing.JLabel dndviene1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JButton runner;
-    private javax.swing.JLabel universida;
     // End of variables declaration//GEN-END:variables
 }
