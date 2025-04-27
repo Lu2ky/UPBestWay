@@ -10,6 +10,12 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import com.app.conexion.data.Sesion;
+import com.app.conexion.Conexion;
+import com.app.manejodatos.Grafo;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,6 +24,9 @@ import javax.swing.Timer;
 public class Inicio_sesion extends javax.swing.JFrame {
     
     int indice = 0;
+    Sesion sesion = new Sesion();
+    boolean ver = false;
+    private static final Conexion cox = new Conexion();
 
     /**
      * Creates new form Inicio_sesion
@@ -25,6 +34,12 @@ public class Inicio_sesion extends javax.swing.JFrame {
     public Inicio_sesion() {
         initComponents();
         carrusel();
+        this.dispose();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.getRootPane().requestFocusInWindow();
+        User1.setCaretPosition(User1.getText().length());
+        User1.moveCaretPosition(User1.getText().length()); 
+        
     }
 
     /**
@@ -36,17 +51,13 @@ public class Inicio_sesion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
         Fondo2 = new javax.swing.JPanel();
-        Fondo = new javax.swing.JPanel();
-        Logo = new javax.swing.JLabel();
-        LogoN2 = new javax.swing.JLabel();
-        IniciarSesionTexto = new javax.swing.JLabel();
-        LogoN1 = new javax.swing.JLabel();
         Fondo1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         Logo1 = new javax.swing.JLabel();
         User1 = new javax.swing.JTextField();
-        Password = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         LogoN3 = new javax.swing.JLabel();
         IniciarSesionTexto1 = new javax.swing.JLabel();
@@ -54,44 +65,59 @@ public class Inicio_sesion extends javax.swing.JFrame {
         SeparadorUser = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         SeparadorPass = new javax.swing.JPanel();
+        Inicio = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        Password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        User2 = new javax.swing.JTextField();
+        Mensaje = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Carrusel = new javax.swing.JLabel();
-
-        jMenu1.setText("jMenu1");
+        Fondo = new javax.swing.JPanel();
+        Logo = new javax.swing.JLabel();
+        LogoN2 = new javax.swing.JLabel();
+        LogoN1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 60, 67));
+        setMinimumSize(new java.awt.Dimension(1920, 1080));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Fondo2.setBackground(new java.awt.Color(140, 0, 0));
         Fondo2.setForeground(new java.awt.Color(0, 60, 67));
         Fondo2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Fondo.setBackground(new java.awt.Color(255, 190, 15));
-        Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        Fondo.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
-
-        LogoN2.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN2.setText("Bolivariana");
-        Fondo.add(LogoN2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
-
-        IniciarSesionTexto.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
-        IniciarSesionTexto.setText("Iniciar sesión");
-        Fondo.add(IniciarSesionTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 270, -1));
-
-        LogoN1.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN1.setText("Universidad Pontificia");
-        Fondo.add(LogoN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
-
         Fondo1.setBackground(new java.awt.Color(255, 190, 15));
         Fondo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(189, 32, 0));
+        jPanel1.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
+        jLabel1.setText(bundle.getString("Inicio_sesion.jLabel1.text")); // NOI18N
+        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
+
+        jPanel4.setBackground(new java.awt.Color(189, 32, 0));
+        jPanel4.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+        jPanel1.add(jPanel4, new java.awt.GridBagConstraints());
+
+        Fondo1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 600, 160, 70));
 
         Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
         Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
@@ -99,8 +125,8 @@ public class Inicio_sesion extends javax.swing.JFrame {
         User1.setBackground(new java.awt.Color(255, 190, 15));
         User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         User1.setForeground(java.awt.Color.gray);
-        User1.setText("Ingrese su nombre de usuario");
-        User1.setToolTipText("");
+        User1.setText(bundle.getString("Inicio_sesion.User1.text")); // NOI18N
+        User1.setToolTipText(bundle.getString("Inicio_sesion.User1.toolTipText")); // NOI18N
         User1.setBorder(null);
         User1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -114,12 +140,69 @@ public class Inicio_sesion extends javax.swing.JFrame {
         });
         Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
 
+        jLabel3.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel3.setText(bundle.getString("Inicio_sesion.jLabel3.text")); // NOI18N
+        Fondo1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+
+        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
+        Fondo1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
+
+        IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
+        IniciarSesionTexto1.setText(bundle.getString("Inicio_sesion.IniciarSesionTexto1.text")); // NOI18N
+        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 270, -1));
+
+        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
+        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
+
+        SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        SeparadorUser.add(jPanel3);
+
+        Fondo1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 500, 1));
+
+        jLabel2.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel2.setText(bundle.getString("Inicio_sesion.jLabel2.text")); // NOI18N
+        Fondo1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, -1));
+
+        SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
+        Fondo1.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 500, 1));
+
+        Inicio.setBackground(new java.awt.Color(189, 32, 0));
+        Inicio.setForeground(new java.awt.Color(140, 0, 0));
+        Inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Inicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                InicioMousePressed(evt);
+            }
+        });
+        Inicio.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText(bundle.getString("Inicio_sesion.jLabel6.text")); // NOI18N
+        Inicio.add(jLabel6, new java.awt.GridBagConstraints());
+
+        jPanel6.setBackground(new java.awt.Color(189, 32, 0));
+        jPanel6.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel6.setLayout(new java.awt.GridBagLayout());
+        Inicio.add(jPanel6, new java.awt.GridBagConstraints());
+
+        Fondo1.add(Inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 160, 70));
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(140, 140, 140));
+        jLabel5.setText(bundle.getString("Inicio_sesion.jLabel5.text")); // NOI18N
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel5.setDoubleBuffered(true);
+        Fondo1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
+
         Password.setBackground(new java.awt.Color(255, 190, 15));
         Password.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        Password.setForeground(java.awt.Color.gray);
-        Password.setText("***********************");
-        Password.setToolTipText("");
-        Password.setActionCommand("<Not Set>");
+        Password.setForeground(new java.awt.Color(140, 140, 140));
+        Password.setText(bundle.getString("Inicio_sesion.Password.text")); // NOI18N
         Password.setBorder(null);
         Password.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -131,119 +214,144 @@ public class Inicio_sesion extends javax.swing.JFrame {
                 PasswordActionPerformed(evt);
             }
         });
-        Fondo1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 500, 30));
-        Password.getAccessibleContext().setAccessibleName("");
+        Fondo1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 470, 40));
 
-        jLabel3.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        jLabel3.setText("Usuario");
-        Fondo1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, -1, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setText("Bolivariana");
-        Fondo1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
-
-        IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
-        IniciarSesionTexto1.setText("Iniciar sesión");
-        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 270, -1));
-
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN4.setText("Universidad Pontificia");
-        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
-
-        SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
-
-        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
-        SeparadorUser.add(jPanel3);
-
-        Fondo1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 500, 1));
-
-        jLabel2.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        jLabel2.setText("Contraseña");
-        Fondo1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(189, 32, 0));
-        jPanel1.setForeground(new java.awt.Color(140, 0, 0));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ENTRAR");
-        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
-
-        Fondo1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 610, 160, 70));
-
-        SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
-        Fondo1.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 500, 1));
-
-        Fondo.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 1090));
-
-        jLabel4.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        jLabel4.setText("Usuario");
-        Fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, -1, -1));
-
-        User2.setBackground(new java.awt.Color(255, 190, 15));
-        User2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        User2.setForeground(new java.awt.Color(80, 80, 80));
-        User2.setText("Ingrese su nombre de usuario");
-        User2.setToolTipText("");
-        User2.setBorder(null);
-        User2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png"))); // NOI18N
+        jLabel4.setText(bundle.getString("Inicio_sesion.jLabel4.text")); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                User2MousePressed(evt);
+                jLabel4MousePressed(evt);
             }
         });
-        User2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                User2ActionPerformed(evt);
-            }
-        });
-        Fondo.add(User2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
+        Fondo1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, -1, 30));
 
-        Fondo2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 1090));
+        Mensaje.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        Mensaje.setForeground(new java.awt.Color(204, 255, 204));
+        Mensaje.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Mensaje.setText(bundle.getString("Inicio_sesion.Mensaje.text")); // NOI18N
+        Mensaje.setName("dwdawdad"); // NOI18N
+        Fondo1.add(Mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 670, 20));
+
+        Fondo2.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1090));
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(Carrusel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 930, 820));
+        jPanel2.add(Carrusel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 930));
 
-        Fondo2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 0, 930, 1080));
+        Fondo2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 840, 1080));
 
-        getContentPane().add(Fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1930, 1080));
+        Fondo.setBackground(new java.awt.Color(255, 190, 15));
+        Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
+        Fondo.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
+
+        LogoN2.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        LogoN2.setText(bundle.getString("Inicio_sesion.LogoN2.text")); // NOI18N
+        Fondo.add(LogoN2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
+
+        LogoN1.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        LogoN1.setText(bundle.getString("Inicio_sesion.LogoN1.text")); // NOI18N
+        Fondo.add(LogoN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
+
+        Fondo2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 1080));
+
+        getContentPane().add(Fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordActionPerformed
-
-    private void PasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMousePressed
-            User1.setText("Ingrese su nombre de usuario");
-            User1.setForeground(Color.gray);
-            Password.setText("");
-            Password.setForeground(Color.black);  
-    }//GEN-LAST:event_PasswordMousePressed
-
     private void User1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User1MousePressed
         User1.setText("");
         User1.setForeground(Color.black);
-        Password.setText("***********************");
-        Password.setForeground(Color.gray);
+        if(Password.getText().equals("")){
+                jLabel5.setText("Ingrese su contraseña");
+        }
+        if(Password.getText().equals("Ingrese su contraseña")){
+            Password.setText("");
+            jLabel5.setText("Ingrese su contraseña");
+        }
+        
+            
+        
+        
+        
+        
     }//GEN-LAST:event_User1MousePressed
 
     private void User1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_User1ActionPerformed
 
-    private void User2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_User2MousePressed
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        
+    }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void User2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User2ActionPerformed
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        JFrame frame = this;
+        crear_cuenta cc = new crear_cuenta();
+        cc.setVisible(true); 
+        cc.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_User2ActionPerformed
+    }//GEN-LAST:event_PasswordActionPerformed
+
+    private void PasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMousePressed
+        
+        if(User1.getText().equals("")){
+            User1.setText("Ingrese su nombre de usuario");
+            User1.setForeground(Color.gray);
+        }
+        if(!User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.gray){
+            User1.setForeground(Color.BLACK);
+        }
+        if(User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.BLACK){
+            User1.setForeground(Color.gray);
+        }
+        jLabel5.setText("");
+        Password.setForeground(Color.black);
+    }//GEN-LAST:event_PasswordMousePressed
+
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        if(ver == false){
+            Password.setEchoChar((char) 0);
+            jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
+            ver = true;
+        }
+        else{
+            Password.setEchoChar('\u2022');
+            jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
+            ver = false;
+        }
+    }//GEN-LAST:event_jLabel4MousePressed
+
+    private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
+        if(cox.searchUser(User1.getText(), Password.getText(), Mensaje)){
+            sesion.setNombre(User1.getText());
+            Mensaje.setText("Se inicio sesion");
+            Mensaje.setForeground(Color.blue);
+            if(cox.verificarPermisos(User1.getText(), Password.getText())){
+                //Aqui a la interfaz de usuario con permisos tomar de referencia la linea 291 para el cambio de form
+            }
+            else{
+                //Aqui a la interfaz de usuario sin permisos
+            }
+        }
+        else{
+            Mensaje.setText("Usuario no encontrado");
+            Mensaje.setForeground(Color.blue);
+        }
+    }//GEN-LAST:event_InicioMousePressed
     private void carrusel(){
-        
-        
         ImageIcon[] imagenes = new ImageIcon[]{
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG1.jpg")),
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG2.jpg")),
@@ -264,31 +372,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {    
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio_sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio_sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio_sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio_sesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-     
+        FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Inicio_sesion().setVisible(true);
@@ -301,26 +385,29 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private javax.swing.JPanel Fondo;
     private javax.swing.JPanel Fondo1;
     private javax.swing.JPanel Fondo2;
-    private javax.swing.JLabel IniciarSesionTexto;
     private javax.swing.JLabel IniciarSesionTexto1;
+    private javax.swing.JPanel Inicio;
     private javax.swing.JLabel Logo;
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN1;
     private javax.swing.JLabel LogoN2;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
-    private javax.swing.JTextField Password;
+    private javax.swing.JLabel Mensaje;
+    private javax.swing.JPasswordField Password;
     private javax.swing.JPanel SeparadorPass;
     private javax.swing.JPanel SeparadorUser;
     private javax.swing.JTextField User1;
-    private javax.swing.JTextField User2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }
