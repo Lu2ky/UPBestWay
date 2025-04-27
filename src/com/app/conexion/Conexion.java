@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import com.app.manejodatos.Nodo;
 import com.app.conexion.data.enumData;
 import java.awt.Color;
+import javax.swing.JLabel;
 
 public class Conexion{
        private Connection conexion;
@@ -35,7 +36,7 @@ public class Conexion{
     }
     
     public boolean addTotableUsers(String nickname,String password,javax.swing.JLabel Label){
-        String sql = "INSERT INTO usuarios (Nickname, Password) VALUES (?, ?)";
+        String sql = "INSERT INTO usuarios (Nickname, Password, Permisos) VALUES (?, ?, 0)";
         try(PreparedStatement ps = conexion.prepareStatement(sql)){
             String sqlCount = "SELECT COUNT(*) FROM usuarios WHERE Nickname = ?";
             try (PreparedStatement psCount = conexion.prepareStatement(sqlCount)) {
@@ -220,6 +221,51 @@ public class Conexion{
         e.printStackTrace();
         }
     }
+    public boolean searchUser(String nickname, String passw, JLabel Text){
+        String sql = "SELECT * FROM usuarios WHERE  Nickname = ?";
+        String user = "";
+        String pass = "";
+        Boolean perm = false;
+        try(PreparedStatement ps =  conexion.prepareStatement(sql)){
+            ps.setString(1, nickname);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    user = rs.getString("Nickname");
+                    pass = rs.getString("Password");
+                    perm = rs.getBoolean("Permisos");
+                }
+                else{
+                    Text.setText("No hay un usuario existente");
+                    return false;
+                }
+                if(pass.equals(passw)){
+                    return true;
+                }
+            }
+        }catch(SQLException e){
+            System.out.println("Error al obtener el id del nodo");
+            e.printStackTrace();
+        }
+        
+        return false;
+    }
+    public boolean verificarPermisos(String nickname, String passw){
+        String sql = "SELECT * FROM usuarios WHERE Nickname = ? AND Password = ?";
+        try(PreparedStatement ps = conexion.prepareStatement(sql)){
+            ps.setString(1, nickname);
+            ps.setString(2, passw);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return rs.getBoolean("Permisos");
+                }
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     public Nodo searchNodo(int id){
         String sql = "SELECT * FROM nodos WHERE idNodo = ?";
         Nodo nodo = null;

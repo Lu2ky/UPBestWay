@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import com.app.conexion.data.Sesion;
+import javax.swing.JFrame;
 
 /**
  *
@@ -20,7 +21,8 @@ import com.app.conexion.data.Sesion;
 public class crear_cuenta extends javax.swing.JFrame {
     
     int indice = 0;
-    
+    Boolean ver1 = false;
+    Boolean ver2 = false;
     private static final Conexion cox = new Conexion();
 
     /**
@@ -29,6 +31,11 @@ public class crear_cuenta extends javax.swing.JFrame {
     public crear_cuenta() {
         initComponents();
         carrusel();
+        this.dispose();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        this.getRootPane().requestFocusInWindow();
+        User1.setCaretPosition(User1.getText().length());
+        User1.moveCaretPosition(User1.getText().length()); 
     }
 
     /**
@@ -42,9 +49,11 @@ public class crear_cuenta extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         Fondo1 = new javax.swing.JPanel();
+        Password2Text = new javax.swing.JLabel();
+        Password2 = new javax.swing.JPasswordField();
+        Password1Text = new javax.swing.JLabel();
+        Password1 = new javax.swing.JPasswordField();
         User1 = new javax.swing.JTextField();
-        Password2 = new javax.swing.JTextField();
-        Password = new javax.swing.JTextField();
         Logo1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         LogoN3 = new javax.swing.JLabel();
@@ -56,16 +65,13 @@ public class crear_cuenta extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
         SeparadorPass = new javax.swing.JPanel();
-        SeparadorPass2 = new javax.swing.JPanel();
-        SeparadorPass3 = new javax.swing.JPanel();
-        Password3 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
         Mensaje = new javax.swing.JLabel();
+        Password1See = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        Password2See = new javax.swing.JLabel();
         Fondo2 = new javax.swing.JPanel();
         Carrusel = new javax.swing.JLabel();
 
@@ -81,6 +87,49 @@ public class crear_cuenta extends javax.swing.JFrame {
         Fondo1.setBackground(new java.awt.Color(255, 190, 15));
         Fondo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        Password2Text.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Password2Text.setForeground(new java.awt.Color(140, 140, 140));
+        Password2Text.setText(bundle.getString("crear_cuenta.Password2Text.text")); // NOI18N
+        Password2Text.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        Password2Text.setDoubleBuffered(true);
+        Fondo1.add(Password2Text, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 670, -1, -1));
+
+        Password2.setBackground(new java.awt.Color(255, 190, 15));
+        Password2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Password2.setForeground(new java.awt.Color(140, 140, 140));
+        Password2.setText(bundle.getString("crear_cuenta.Password2.text")); // NOI18N
+        Password2.setBorder(null);
+        Password2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Password2MousePressed(evt);
+            }
+        });
+        Password2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Password2ActionPerformed(evt);
+            }
+        });
+        Fondo1.add(Password2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 660, 460, 40));
+
+        Password1Text.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Password1Text.setForeground(new java.awt.Color(140, 140, 140));
+        Password1Text.setText(bundle.getString("crear_cuenta.Password1Text.text")); // NOI18N
+        Password1Text.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        Password1Text.setDoubleBuffered(true);
+        Fondo1.add(Password1Text, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
+
+        Password1.setBackground(new java.awt.Color(255, 190, 15));
+        Password1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Password1.setForeground(new java.awt.Color(140, 140, 140));
+        Password1.setText(bundle.getString("crear_cuenta.Password1.text")); // NOI18N
+        Password1.setBorder(null);
+        Password1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Password1MousePressed(evt);
+            }
+        });
+        Fondo1.add(Password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 470, 40));
+
         User1.setBackground(new java.awt.Color(255, 190, 15));
         User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         User1.setForeground(java.awt.Color.gray);
@@ -92,36 +141,12 @@ public class crear_cuenta extends javax.swing.JFrame {
                 User1MousePressed(evt);
             }
         });
-        Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 500, 30));
-
-        Password2.setBackground(new java.awt.Color(255, 190, 15));
-        Password2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        Password2.setForeground(java.awt.Color.gray);
-        Password2.setText(bundle.getString("crear_cuenta.Password2.text")); // NOI18N
-        Password2.setToolTipText(bundle.getString("crear_cuenta.Password2.toolTipText")); // NOI18N
-        Password2.setActionCommand(bundle.getString("crear_cuenta.Password2.actionCommand")); // NOI18N
-        Password2.setBorder(null);
-        Password2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                Password2MousePressed(evt);
+        User1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                User1ActionPerformed(evt);
             }
         });
-        Fondo1.add(Password2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 500, 30));
-
-        Password.setBackground(new java.awt.Color(255, 190, 15));
-        Password.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        Password.setForeground(java.awt.Color.gray);
-        Password.setText(bundle.getString("crear_cuenta.Password.text")); // NOI18N
-        Password.setToolTipText(bundle.getString("crear_cuenta.Password.toolTipText")); // NOI18N
-        Password.setActionCommand(bundle.getString("crear_cuenta.Password.actionCommand")); // NOI18N
-        Password.setBorder(null);
-        Password.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                PasswordMousePressed(evt);
-            }
-        });
-        Fondo1.add(Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 670, 500, 30));
-        Password.getAccessibleContext().setAccessibleName(bundle.getString("crear_cuenta.Password.AccessibleContext.accessibleName")); // NOI18N
+        Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
 
         Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
         Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
@@ -158,6 +183,7 @@ public class crear_cuenta extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(189, 32, 0));
         jPanel1.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -166,62 +192,25 @@ public class crear_cuenta extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel1MouseEntered(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
         });
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(bundle.getString("crear_cuenta.jLabel1.text")); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel1MousePressed(evt);
-            }
-        });
         jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
-
-        jPanel4.setBackground(new java.awt.Color(189, 32, 0));
-        jPanel4.setForeground(new java.awt.Color(140, 0, 0));
-        jPanel4.setLayout(new java.awt.GridBagLayout());
-        jPanel1.add(jPanel4, new java.awt.GridBagConstraints());
 
         Fondo1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 750, 160, 70));
 
         SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
-
-        SeparadorPass2.setBackground(new java.awt.Color(0, 0, 0));
-
-        SeparadorPass3.setBackground(new java.awt.Color(0, 0, 0));
-        SeparadorPass2.add(SeparadorPass3);
-
-        Password3.setBackground(new java.awt.Color(255, 190, 15));
-        Password3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        Password3.setForeground(java.awt.Color.gray);
-        Password3.setText(bundle.getString("crear_cuenta.Password3.text")); // NOI18N
-        Password3.setToolTipText(bundle.getString("crear_cuenta.Password3.toolTipText")); // NOI18N
-        Password3.setActionCommand(bundle.getString("crear_cuenta.Password3.actionCommand")); // NOI18N
-        Password3.setBorder(null);
-        Password3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                Password3MousePressed(evt);
-            }
-        });
-        Password3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Password3ActionPerformed(evt);
-            }
-        });
-        SeparadorPass2.add(Password3);
-
-        jLabel8.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        jLabel8.setText(bundle.getString("crear_cuenta.jLabel8.text")); // NOI18N
-        SeparadorPass2.add(jLabel8);
-
-        SeparadorPass.add(SeparadorPass2);
-
         Fondo1.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 500, 1));
 
         jPanel5.setBackground(new java.awt.Color(189, 32, 0));
         jPanel5.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPanel5MousePressed(evt);
@@ -234,19 +223,42 @@ public class crear_cuenta extends javax.swing.JFrame {
         jLabel6.setText(bundle.getString("crear_cuenta.jLabel6.text")); // NOI18N
         jPanel5.add(jLabel6, new java.awt.GridBagConstraints());
 
-        jPanel6.setBackground(new java.awt.Color(189, 32, 0));
-        jPanel6.setForeground(new java.awt.Color(140, 0, 0));
-        jPanel6.setLayout(new java.awt.GridBagLayout());
-        jPanel5.add(jPanel6, new java.awt.GridBagConstraints());
-
         Fondo1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 750, 160, 70));
 
+        Mensaje.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Mensaje.setForeground(new java.awt.Color(204, 255, 204));
         Mensaje.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Mensaje.setText(bundle.getString("crear_cuenta.dwdawdad.text")); // NOI18N
         Mensaje.setName("dwdawdad"); // NOI18N
-        Fondo1.add(Mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 830, 270, 20));
+        Fondo1.add(Mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 830, 670, 20));
         Mensaje.getAccessibleContext().setAccessibleName(bundle.getString("crear_cuenta.dwdawdad.AccessibleContext.accessibleName")); // NOI18N
+
+        Password1See.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png"))); // NOI18N
+        Password1See.setText(bundle.getString("crear_cuenta.Password1See.text")); // NOI18N
+        Password1See.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Password1See.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Password1SeeMousePressed(evt);
+            }
+        });
+        Fondo1.add(Password1See, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, -1, 30));
+
+        jLabel9.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(140, 140, 140));
+        jLabel9.setText(bundle.getString("crear_cuenta.jLabel9.text")); // NOI18N
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel9.setDoubleBuffered(true);
+        Fondo1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
+
+        Password2See.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png"))); // NOI18N
+        Password2See.setText(bundle.getString("crear_cuenta.Password2See.text")); // NOI18N
+        Password2See.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Password2See.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Password2SeeMousePressed(evt);
+            }
+        });
+        Fondo1.add(Password2See, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, -1, 30));
 
         getContentPane().add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
 
@@ -264,92 +276,165 @@ public class crear_cuenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1MouseClicked
 
-    private void PasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMousePressed
-        if(User1.getText().equals("")){
-            User1.setText("Ingrese el nombre de usuario");
-            User1.setForeground(Color.gray);
-        }
-        if(Password2.getText().equals("")){
-            Password2.setText("Ingrese su contraseña");
-            Password2.setForeground(Color.gray);
-        }
-        if(!Password.getText().equals("Ingrese nuevamente su contraseña")){
-            return;
-        }
-        else{
-            Password.setText("");
-            Password.setForeground(Color.black);
-        }
-
-    }//GEN-LAST:event_PasswordMousePressed
-
     private void User1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User1MousePressed
         if(Password2.getText().equals("")){
-                Password2.setText("Ingrese su contraseña");
-                Password2.setForeground(Color.gray);
+                Password2Text.setText("Ingrese nuevamente su contraseña");
         }
-        if(Password.getText().equals("")){
-                Password.setText("Ingrese nuevamente su contraseña");
-                Password.setForeground(Color.gray);
+        if(Password1.getText().equals("")){
+                Password1Text.setText("Ingrese su contraseña");
         }
         if(!User1.getText().equals("Ingrese el nombre de usuario")){
             return;
         }
         else{
             User1.setText("");
-        User1.setForeground(Color.black);
+            User1.setForeground(Color.black);
         }
         
 
     }//GEN-LAST:event_User1MousePressed
 
-    private void Password2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password2MousePressed
-        if(Password.getText().equals("")){
-                Password.setText("Ingrese nuevamente su contraseña");
-                Password.setForeground(Color.gray);
-        }
-        if(User1.getText().equals("")){
-                User1.setText("Ingrese su nombre de usuario");
-                User1.setForeground(Color.gray);
-        }
-        if(!Password2.getText().equals("Ingrese su contraseña")){
-            return;
-        }
-        
-        
-        Password2.setText("");
-        Password2.setForeground(Color.black);
-    }//GEN-LAST:event_Password2MousePressed
-
     private void jPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1MouseEntered
 
-    private void Password3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Password3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Password3ActionPerformed
-
-    private void Password3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password3MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Password3MousePressed
-
-    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        Inicio_sesion is = new Inicio_sesion();
-        this.setVisible(false);
-        is.setVisible(true);
-        
-        is.setExtendedState(is.MAXIMIZED_BOTH);
-    }//GEN-LAST:event_jLabel1MousePressed
-
     private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
-        if(!Password.getText().equals(Password2.getText())){
+        
+        if(User1.getText().contains(" ")){
+            Mensaje.setText("El usuario no puede tener espacios");
+            Mensaje.setForeground(Color.RED);
+            return;
+        }
+        if(User1.getText().equals("") || User1.getText().equals("Ingrese el nombre de usuario")){
+            Mensaje.setText("Ingrese un nombre de usuario");
+            Mensaje.setForeground(Color.RED);
+            return;
+        }
+        if(Password1.getText().equals("")){
+            Mensaje.setText("Ingrese la contraseña");
+            Mensaje.setForeground(Color.RED);
+            return;
+        }
+        if(Password2.getText().equals("")){
+            Mensaje.setText("Ingrese nuevamente la contraseña");
+            Mensaje.setForeground(Color.RED);
+            return;
+        }
+        if(!Password1.getText().equals(Password2.getText())){
             Mensaje.setText("Contraseñas no coinciden");
             Mensaje.setForeground(Color.RED);
+            return;
+        }
+        if(Password1.getText().length() < 8){
+            Mensaje.setText("La contraseña debe tener al menos 8 caracteres");
+            Mensaje.setForeground(Color.RED);
+            return;
+        }
+        if(Password1.getText().length() > 32){
+            Mensaje.setText("La contraseña puede tener maximo 32 caracteres");
+            Mensaje.setForeground(Color.RED);
+            return;
+        }
+        if ((Password1.getText().matches(".*[A-Z].*") && Password1.getText().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}.*") && !Password1.getText().contains(" "))){
+            cox.addTotableUsers(User1.getText(), Password1.getText(), Mensaje);
         }
         else{
-            cox.addTotableUsers(User1.getText(), Password.getText(), Mensaje);
+            Mensaje.setText("La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
+            Mensaje.setForeground(Color.RED);
+            return;
         }
+        if((!Password1.getText().matches(".*[A-Z].*") && !Password1.getText().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}.*") && Password1.getText().contains(" "))){
+            Mensaje.setText("La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
+            Mensaje.setForeground(Color.RED);
+            return;
+        }
+        
+        
     }//GEN-LAST:event_jPanel5MousePressed
+
+    private void User1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_User1ActionPerformed
+
+    private void Password1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password1MousePressed
+
+        if(User1.getText().equals("")){
+            User1.setText("Ingrese el nombre de usuario");
+            User1.setForeground(Color.gray);
+        }
+        if(!User1.getText().equals("Ingrese el nombre de usuario") && User1.getForeground() == Color.gray){
+            User1.setForeground(Color.BLACK);
+        }
+        if(User1.getText().equals("Ingrese el nombre de usuario") && User1.getForeground() == Color.BLACK){
+            User1.setForeground(Color.gray);
+        }
+        if(Password2.getText().equals("")){
+            Password2Text.setText("Ingrese nuevamente su contraseña");
+        }
+        Password1Text.setText("");
+        Password1.setForeground(Color.BLACK);
+    }//GEN-LAST:event_Password1MousePressed
+
+    private void Password1SeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password1SeeMousePressed
+        if(ver1 == false){
+            Password1.setEchoChar((char) 0);
+            Password1See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
+            ver1 = true;
+        }
+        else{
+            Password1.setEchoChar('\u2022');
+            Password1See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
+            ver1 = false;
+        }
+    }//GEN-LAST:event_Password1SeeMousePressed
+
+    private void Password2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password2MousePressed
+        if(User1.getText().equals("")){
+            User1.setText("Ingrese el nombre de usuario");
+            User1.setForeground(Color.gray);
+        }
+        if(!User1.getText().equals("Ingrese el nombre de usuario") && User1.getForeground() == Color.gray){
+            User1.setForeground(Color.BLACK);
+        }
+        if(User1.getText().equals("Ingrese el nombre de usuario") && User1.getForeground() == Color.BLACK){
+            User1.setForeground(Color.gray);
+        }
+        if(Password1.getText().equals("")){
+            Password1Text.setText("Ingrese su contraseña");
+        }
+        Password2Text.setText("");
+        Password2.setForeground(Color.BLACK);
+    }//GEN-LAST:event_Password2MousePressed
+
+    private void Password2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Password2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Password2ActionPerformed
+
+    private void Password2SeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password2SeeMousePressed
+        if(ver2 == false){
+            Password2.setEchoChar((char) 0);
+            Password2See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
+            ver2 = true;
+        }
+        else{
+            Password2.setEchoChar('\u2022');
+            Password2See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
+            ver2 = false;
+        }
+    }//GEN-LAST:event_Password2SeeMousePressed
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        JFrame frame = this;
+        Inicio_sesion is = new Inicio_sesion();
+        is.setVisible(true); 
+        is.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_jPanel1MousePressed
     private void carrusel(){
         
         
@@ -383,12 +468,13 @@ public class crear_cuenta extends javax.swing.JFrame {
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
     private javax.swing.JLabel Mensaje;
-    private javax.swing.JTextField Password;
-    private javax.swing.JTextField Password2;
-    private javax.swing.JTextField Password3;
+    private javax.swing.JPasswordField Password1;
+    private javax.swing.JLabel Password1See;
+    private javax.swing.JLabel Password1Text;
+    private javax.swing.JPasswordField Password2;
+    private javax.swing.JLabel Password2See;
+    private javax.swing.JLabel Password2Text;
     private javax.swing.JPanel SeparadorPass;
-    private javax.swing.JPanel SeparadorPass2;
-    private javax.swing.JPanel SeparadorPass3;
     private javax.swing.JPanel SeparadorPass4;
     private javax.swing.JPanel SeparadorUser;
     private javax.swing.JTextField User1;
@@ -397,11 +483,9 @@ public class crear_cuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }
