@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import com.app.conexion.data.Sesion;
+import java.util.Arrays;
 import javax.swing.JFrame;
 
 /**
@@ -21,8 +22,7 @@ import javax.swing.JFrame;
 public class crear_cuenta extends javax.swing.JFrame {
     
     int indice = 0;
-    Boolean ver1 = false;
-    Boolean ver2 = false;
+    Boolean[] ver = new Boolean[2];
     private static final Conexion cox = new Conexion();
     
     
@@ -31,6 +31,7 @@ public class crear_cuenta extends javax.swing.JFrame {
      * Creates new form Inicio_sesion
      */
     public crear_cuenta() {
+        Arrays.fill(ver, false);
         initComponents();
         carrusel();
         this.dispose();
@@ -378,15 +379,15 @@ public class crear_cuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_Password1MousePressed
 
     private void Password1SeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password1SeeMousePressed
-        if(ver1 == false){
+        if(ver[0] == false){
             Password1.setEchoChar((char) 0);
             Password1See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
-            ver1 = true;
+            ver[0] = true;
         }
         else{
             Password1.setEchoChar('\u2022');
             Password1See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
-            ver1 = false;
+            ver[0] = false;
         }
     }//GEN-LAST:event_Password1SeeMousePressed
 
@@ -413,15 +414,15 @@ public class crear_cuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_Password2ActionPerformed
 
     private void Password2SeeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password2SeeMousePressed
-        if(ver2 == false){
+        if(ver[1] == false){
             Password2.setEchoChar((char) 0);
             Password2See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
-            ver2 = true;
+            ver[1] = true;
         }
         else{
             Password2.setEchoChar('\u2022');
             Password2See.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
-            ver2 = false;
+            ver[1] = false;
         }
     }//GEN-LAST:event_Password2SeeMousePressed
 

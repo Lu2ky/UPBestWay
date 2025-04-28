@@ -22,7 +22,7 @@ public class Conexion{
          try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.conexion = DriverManager.getConnection(data.getUrl(), data.getUsusario(), data.getPass());
-
+             System.err.println("Conexion exitosa");
         } catch (ClassNotFoundException e) {
             System.out.println("Error al cargar el driver de MySQL");
             e.printStackTrace();

@@ -344,7 +344,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
             }
             else{
                 JFrame frame = this;
-                interfaz inte = new interfaz(sesion);
+                interfaz inte = new interfaz(sesion,cox);
                 inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 inte.setVisible(true);
                 Timer timer = new Timer(1, new ActionListener() {

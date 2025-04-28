@@ -23,13 +23,14 @@ public class interfaz extends javax.swing.JFrame {
      * Creates new form intrefas
      */
     
-    private static final Conexion cox = new Conexion();
-    ListaEnlazada cargar = cox.getNodos();
-    private static final Grafo grafo = new Grafo(cox);
-    boolean check = false;
+    ListaEnlazada cargar = null;
+    Grafo grafo = null;
+    boolean check = true;
     
-    public interfaz(Sesion sesion) {    
+    public interfaz(Sesion sesion,Conexion cox) {    
         FlatLightLaf.setup();
+        cargar = cox.getNodos();
+        grafo = new Grafo(cox);
         initComponents();
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
         NodoA.addItem("Biblioteca");
@@ -215,11 +216,6 @@ public class interfaz extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1920, 1110));
 
         Runner.setText("jButton1");
-        Runner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RunnerActionPerformed(evt);
-            }
-        });
         getContentPane().add(Runner, new org.netbeans.lib.awtextra.AbsoluteConstraints(743, 527, -1, -1));
 
         pack();
@@ -233,51 +229,119 @@ public class interfaz extends javax.swing.JFrame {
         Camino.setText("");
         String nodoINI = "";
         String nodoFIN = "";
-        
+        nodoINI = (String) NodoA.getSelectedItem();
+        nodoFIN = (String) NodoB.getSelectedItem();
+        Boolean iniesp = false;
+        Boolean finesp = false;
+        String temp3 = "";
+        String temp4 = "";
         if(NodoA.getSelectedItem().equals("Biblioteca")){
             nodoINI = "J";
+            iniesp = true;
+            temp3 = "Biblioteca -> ";
         }
         if(NodoB.getSelectedItem().equals("Biblioteca")){
             nodoFIN = "J";
+            finesp = true;
+            temp4 = "Biblioteca";
         }
-        if(NodoA.getSelectedItem().equals("Portería principal")){
-            nodoINI = "P1";
+        if(NodoA.getSelectedItem().equals("Auditorio menor")){
+            nodoINI = "J";
+            iniesp = true;
+            temp3 = "Auditorio menor ->";
         }
-        if(NodoB.getSelectedItem().equals("Portería principal")){
-            nodoFIN = "P1";
+        if(NodoB.getSelectedItem().equals("Auditorio menor")){
+            nodoFIN = "J";
+            finesp = true;
+            temp4 = "Auditorio menor";
         }
-        if(NodoA.getSelectedItem().equals("Portería parqueadero")){
-            nodoINI = "P2";
+        if(NodoA.getSelectedItem().equals("Auditorio mayor")){
+            nodoINI = "H";
+            iniesp = true;
+            temp3 = "Auditorio mayor ->";
         }
-        if(NodoB.getSelectedItem().equals("Portería parqueadero")){
-            nodoFIN = "P2";
+        if(NodoB.getSelectedItem().equals("Auditorio mayor")){
+            nodoFIN = "H";
+            finesp = true;
+            temp4 = "Auditorio mayor";
         }
-        if(NodoA.getSelectedItem().equals("Zona de ventas")){
-            nodoINI = "ZV";
+        if(nodoINI == nodoFIN){
+            temp3 = "";
         }
-        if(NodoB.getSelectedItem().equals("Zona de ventas")){
-            nodoFIN = "ZV";
+        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino);
+        
+        if(iniesp && !finesp){
+            Nodo temp = camino.getCabeza().getSiguiente();
+            
+            while(temp != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
+            
+                temp = temp.getSiguiente();
+                if(temp != null){
+                    temp3 = temp3 + "->";
+                }
+            }
         }
-        if(NodoA.getSelectedItem().equals("Frutalia")){
-            nodoINI = "FR";
+        if(finesp && !iniesp){
+            Nodo temp = camino.getCabeza();
+            while(temp.getSiguiente() != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
+                temp = temp.getSiguiente();
+                if(temp != null){
+                    temp3 = temp3 + "->";
+                }
+                if(temp.getSiguiente() == null){
+                    temp3 = temp3 + temp4;
+                    break;
+                }
+            }
         }
-        if(NodoB.getSelectedItem().equals("Frutalia")){
-            nodoFIN = "FR";
-        }
-        nodoINI = (String) NodoA.getSelectedItem();
-        nodoFIN = (String) NodoB.getSelectedItem();
-        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check);
-        Nodo temp = camino.getCabeza();
-        String temp2 = "";
-        while(temp != null){
-            temp2 = temp2 + temp.getNombre();
+        if(!iniesp && !finesp){
+             Nodo temp = camino.getCabeza();
+            
+            while(temp != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
             
             temp = temp.getSiguiente();
             if(temp != null){
-                temp2 = temp2 + "->";
+                temp3 = temp3 + "->";
+                }
             }
         }
-        Camino.setText(temp2);
+        if(iniesp && finesp){
+            Nodo temp = camino.getCabeza().getSiguiente();
+            while(temp.getSiguiente() != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
+                temp = temp.getSiguiente();
+                if(temp != null){
+                    temp3 = temp3 + "->";
+                }
+                if(temp.getSiguiente() == null){
+                    temp3 = temp3 + temp4;
+                    break;
+                }
+            }
+        }
+        if(camino.getSize() > 0){
+            Camino.append(temp3);
+        }
+        
         
         
         

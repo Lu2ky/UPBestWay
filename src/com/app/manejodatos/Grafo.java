@@ -15,7 +15,9 @@ import com.app.manejodatos.ListaEnlazadaAristas;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.conexion.Conexion;
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
+import java.awt.TextArea;
 import java.util.Arrays;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -36,7 +38,7 @@ public class Grafo {
         Aristas.agregarArista(new Arista(nuevo.getFin(),nuevo.getInicio(),nuevo.getPeso(),nuevo.isEscaleras()));
         Aristas.agregarArista(nuevo);
     }
-    public ListaEnlazada Dijkstra(String iniS, String finS, boolean escaleras) {
+    public ListaEnlazada Dijkstra(String iniS, String finS, boolean escaleras,JTextArea a) {
     Nodo ini = Nodos.obtenerNodo(iniS);
     Nodo fn = Nodos.obtenerNodo(finS);
     int[] distancias = new int[Nodos.getSize()];
@@ -85,7 +87,16 @@ public class Grafo {
         c1 = true;
     }
     
-    System.out.println("Ponderado: " + distancias[fn.getId()] );
+    if(distancias[fn.getId()] < Integer.MAX_VALUE){
+        a.append("Metros: " + distancias[fn.getId()] + ", Camino: ");
+        if(distancias[fn.getId()] == 0){
+            a.setText("Se encuentra sobre el mismo nodo");
+        }
+    }
+    
+    else{
+        a.append("La ruta entra " + iniS + " y " + finS + " no existe");
+    }
     return rCamino(ini, fn, padres);
 }
     public ListaEnlazada rCamino(Nodo origen, Nodo destino, int[] padres) {
