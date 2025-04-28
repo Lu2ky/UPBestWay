@@ -15,6 +15,7 @@ import com.app.conexion.Conexion;
 import com.app.manejodatos.Grafo;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.util.Random;
 import javax.swing.JFrame;
 
 /**
@@ -26,12 +27,15 @@ public class Inicio_sesion extends javax.swing.JFrame {
     int indice = 0;
     public Sesion sesion = new Sesion();
     boolean ver = false;
-    private static final Conexion cox = new Conexion();
+    static Conexion cox = new Conexion();
+    static Grafo grafo = null;
+    final boolean ini = true;
 
     /**
      * Creates new form Inicio_sesion
      */
-    public Inicio_sesion() {
+    public Inicio_sesion(Grafo grafoload) {
+        grafo = grafoload;
         initComponents();
         carrusel();
         this.dispose();
@@ -59,7 +63,6 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Logo1 = new javax.swing.JLabel();
         User1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
         IniciarSesionTexto1 = new javax.swing.JLabel();
         LogoN4 = new javax.swing.JLabel();
         SeparadorUser = new javax.swing.JPanel();
@@ -73,12 +76,14 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         Mensaje = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Carrusel = new javax.swing.JLabel();
         Fondo = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
         LogoN2 = new javax.swing.JLabel();
         LogoN1 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 60, 67));
@@ -120,7 +125,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Fondo1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 600, 160, 70));
 
         Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
+        Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, 200));
 
         User1.setBackground(new java.awt.Color(255, 190, 15));
         User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -144,17 +149,13 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel3.setText(bundle.getString("Inicio_sesion.jLabel3.text")); // NOI18N
         Fondo1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        Fondo1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
-
         IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
         IniciarSesionTexto1.setText(bundle.getString("Inicio_sesion.IniciarSesionTexto1.text")); // NOI18N
-        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 270, -1));
+        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 270, -1));
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
-        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
+        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 610, 90));
 
         SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -233,6 +234,10 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Mensaje.setName("dwdawdad"); // NOI18N
         Fondo1.add(Mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 670, 20));
 
+        jLabel7.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        jLabel7.setText(bundle.getString("Inicio_sesion.jLabel7.text")); // NOI18N
+        Fondo1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
+
         Fondo2.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1090));
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
@@ -240,6 +245,8 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jPanel2.add(Carrusel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 930));
 
         Fondo2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 840, 1080));
+
+        getContentPane().add(Fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         Fondo.setBackground(new java.awt.Color(255, 190, 15));
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -255,9 +262,8 @@ public class Inicio_sesion extends javax.swing.JFrame {
         LogoN1.setText(bundle.getString("Inicio_sesion.LogoN1.text")); // NOI18N
         Fondo.add(LogoN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
 
-        Fondo2.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 1080));
-
-        getContentPane().add(Fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 1080));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -290,7 +296,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         JFrame frame = this;
-        crear_cuenta cc = new crear_cuenta();
+        crear_cuenta cc = new crear_cuenta(cox,grafo);
         cc.setVisible(true); 
         cc.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -344,7 +350,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
             }
             else{
                 JFrame frame = this;
-                interfaz inte = new interfaz(sesion,cox);
+                interfaz inte = new interfaz(sesion,cox,grafo);
                 inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 inte.setVisible(true);
                 Timer timer = new Timer(1, new ActionListener() {
@@ -369,7 +375,8 @@ public class Inicio_sesion extends javax.swing.JFrame {
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG4.jpg"))
         };
         Carrusel.setIcon(imagenes[0]);
-        Timer timer = new Timer(1750, new ActionListener() {
+        Timer timer = new Timer(2000, new ActionListener() {
+            Random r = new Random();
             public void actionPerformed(ActionEvent e) {
                 indice = (indice + 1) % imagenes.length;
                 Carrusel.setIcon(imagenes[indice]);
@@ -383,10 +390,11 @@ public class Inicio_sesion extends javax.swing.JFrame {
      */
     public static void main(String args[]) {    
         FlatLightLaf.setup();
+        grafo = new Grafo(cox);
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Inicio_sesion().setVisible(true);
+                new Inicio_sesion(grafo).setVisible(true);
             }
         });
     }
@@ -402,7 +410,6 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN1;
     private javax.swing.JLabel LogoN2;
-    private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
     private javax.swing.JLabel Mensaje;
     private javax.swing.JPasswordField Password;
@@ -415,10 +422,12 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }

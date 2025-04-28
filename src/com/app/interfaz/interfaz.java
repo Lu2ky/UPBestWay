@@ -16,7 +16,11 @@ import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.Timer;
 public class interfaz extends javax.swing.JFrame {
 
     /**
@@ -26,12 +30,16 @@ public class interfaz extends javax.swing.JFrame {
     ListaEnlazada cargar = null;
     Grafo grafo = null;
     boolean check = true;
+    Sesion sesion = null;
+    Conexion cox = null;
     
-    public interfaz(Sesion sesion,Conexion cox) {    
+    public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload) {    
         FlatLightLaf.setup();
-        cargar = cox.getNodos();
-        grafo = new Grafo(cox);
+        cox = coxload;
+        cargar = coxload.getNodos();
+        grafo = grafoload;
         initComponents();
+        this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
         NodoA.addItem("Biblioteca");
         NodoA.addItem("Auditorio menor");
@@ -109,16 +117,16 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 50, 50));
 
         Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel3.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
+        jPanel3.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, -1));
 
         LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
         LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel3.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
+        jPanel3.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
-        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
+        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 610, 90));
 
         dndviene.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene.setText("Escaleras");
@@ -147,11 +155,13 @@ public class interfaz extends javax.swing.JFrame {
 
         NodoB.setBackground(new java.awt.Color(140, 0, 0));
         NodoB.setBorder(null);
+        NodoB.setMaximumRowCount(5);
         NodoB.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel3.add(NodoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
 
         NodoA.setBackground(new java.awt.Color(140, 0, 0));
         NodoA.setBorder(null);
+        NodoA.setMaximumRowCount(5);
         NodoA.setFocusCycleRoot(true);
         NodoA.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel3.add(NodoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
@@ -192,11 +202,11 @@ public class interfaz extends javax.swing.JFrame {
 
         jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
 
-        Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida.setText("¡Bienvenido(a)!");
-        jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+        jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 830, 1080));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 1080));
 
         jPanel4.setBackground(new java.awt.Color(140, 0, 0));
 
@@ -360,7 +370,17 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_CheckMousePressed
 
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
-        // TODO add your handling code here:
+        sesion = null;
+        JFrame frame = this;
+        Inicio_sesion inis = new Inicio_sesion(grafo);
+        inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        inis.setVisible(true);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                    frame.setVisible(false);
+            }
+       });
+        timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
 
     private void poblarComponentes() {

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import com.app.conexion.data.Sesion;
+import com.app.manejodatos.Grafo;
 import java.util.Arrays;
 import javax.swing.JFrame;
 
@@ -23,14 +24,16 @@ public class crear_cuenta extends javax.swing.JFrame {
     
     int indice = 0;
     Boolean[] ver = new Boolean[2];
-    private static final Conexion cox = new Conexion();
-    
+    Conexion cox = null;
+    Grafo grafo = null;
     
 
     /**
      * Creates new form Inicio_sesion
      */
-    public crear_cuenta() {
+    public crear_cuenta(Conexion coxload,Grafo Grafoload) {
+        cox = coxload;
+        grafo = Grafoload;
         Arrays.fill(ver, false);
         initComponents();
         carrusel();
@@ -152,7 +155,7 @@ public class crear_cuenta extends javax.swing.JFrame {
         Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
 
         Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
+        Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, 200));
 
         jLabel3.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel3.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
@@ -160,11 +163,11 @@ public class crear_cuenta extends javax.swing.JFrame {
 
         LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN3.setText(bundle.getString("crear_cuenta.LogoN3.text")); // NOI18N
-        Fondo1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
+        Fondo1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
 
         IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
         IniciarSesionTexto1.setText(bundle.getString("crear_cuenta.IniciarSesionTexto1.text")); // NOI18N
-        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, 270, -1));
+        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 270, -1));
 
         jLabel7.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel7.setText(bundle.getString("crear_cuenta.jLabel7.text")); // NOI18N
@@ -172,7 +175,7 @@ public class crear_cuenta extends javax.swing.JFrame {
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
+        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 660, 90));
 
         SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
         Fondo1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 500, 1));
@@ -428,7 +431,7 @@ public class crear_cuenta extends javax.swing.JFrame {
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         JFrame frame = this;
-        Inicio_sesion is = new Inicio_sesion();
+        Inicio_sesion is = new Inicio_sesion(grafo);
         is.setVisible(true); 
         is.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -448,7 +451,7 @@ public class crear_cuenta extends javax.swing.JFrame {
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG4.jpg"))
         };
         Carrusel.setIcon(imagenes[0]);
-        Timer timer = new Timer(1750, new ActionListener() {
+        Timer timer = new Timer(2000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 indice = (indice + 1) % imagenes.length;
                 Carrusel.setIcon(imagenes[indice]);
