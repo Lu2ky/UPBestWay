@@ -248,7 +248,7 @@ public class interfaz extends javax.swing.JFrame {
         if(NodoA.getSelectedItem().equals("Biblioteca")){
             nodoINI = "J";
             iniesp = true;
-            temp3 = "Biblioteca -> ";
+            temp3 = "Biblioteca->";
         }
         if(NodoB.getSelectedItem().equals("Biblioteca")){
             nodoFIN = "J";
@@ -258,7 +258,7 @@ public class interfaz extends javax.swing.JFrame {
         if(NodoA.getSelectedItem().equals("Auditorio menor")){
             nodoINI = "J";
             iniesp = true;
-            temp3 = "Auditorio menor ->";
+            temp3 = "Auditorio menor->";
         }
         if(NodoB.getSelectedItem().equals("Auditorio menor")){
             nodoFIN = "J";
@@ -268,7 +268,7 @@ public class interfaz extends javax.swing.JFrame {
         if(NodoA.getSelectedItem().equals("Auditorio mayor")){
             nodoINI = "H";
             iniesp = true;
-            temp3 = "Auditorio mayor ->";
+            temp3 = "Auditorio mayor->";
         }
         if(NodoB.getSelectedItem().equals("Auditorio mayor")){
             nodoFIN = "H";
@@ -375,7 +375,7 @@ public class interfaz extends javax.swing.JFrame {
         Inicio_sesion inis = new Inicio_sesion(grafo);
         inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
         inis.setVisible(true);
-        Timer timer = new Timer(1, new ActionListener() {
+        Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                     frame.setVisible(false);
             }

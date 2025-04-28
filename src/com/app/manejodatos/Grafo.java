@@ -190,21 +190,33 @@ public class Grafo {
         
     }
     private void loadAristas(Conexion conexion){
-        String sql = "SELECT idNodoA, idNodoB, Ponderado, Stairs FROM aristas";
+        String sql = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoA = n.idNodo";
+        String sql1 = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoB = n.idNodo";       
         try(PreparedStatement ps = conexion.getConexion().prepareStatement(sql)){
-            ResultSet rs = ps.executeQuery();
-            if(!rs.next()){
-                System.out.println("No se encontraron aristas para cargar");
-            }
+            try(PreparedStatement ps1 = conexion.getConexion().prepareStatement(sql1)){
+                ResultSet rs = ps.executeQuery();
+                ResultSet rs1 = ps1.executeQuery();
+                if(!rs.next()){
+                    System.out.println("No se encontraron aristas para cargar");
+                    return;
+                }
+                if(!rs1.next()){
+                    System.out.println("No se encontraron aristas para cargar");
+                    return;
+                }
             do{
-                Nodo nodo1 = conexion.searchNodo(rs.getInt("idNodoA"));
-                nodo1.setId(nodo1.getId() - 1);
-                Nodo nodo2 = conexion.searchNodo(rs.getInt("idNodoB"));
-                nodo2.setId(nodo2.getId() - 1);
-                Aristas.agregarArista(new Arista(nodo1,nodo2,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));
-                
+                Nodo nodo1 = Nodos.obtenerNodo(rs.getString("Nombre"));
+                Nodo nodo2 = Nodos.obtenerNodo(rs1.getString("Nombre"));
+                nodo1.setId(nodo1.getId());
+                nodo2.setId(nodo2.getId());
+                Aristas.agregarArista(new Arista(nodo1,nodo2,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));   
                 Aristas.agregarArista(new Arista(nodo2,nodo1,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));
-            }while(rs.next());
+                System.out.println(rs.getInt("idArista"));
+                
+            }while(rs.next() && rs1.next());  
+            }
+            
+            
         }catch(SQLException e){
             System.out.println("Error al cargar la tabla de aristas");
             e.printStackTrace();
