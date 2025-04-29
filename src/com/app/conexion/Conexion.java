@@ -306,7 +306,7 @@ public class Conexion{
         return nodo;
     }
     public ListaEnlazada getNodos(){
-        String sql = "SELECT Nombre FROM nodos";
+        String sql = "SELECT * FROM nodos";
         ListaEnlazada ret = new ListaEnlazada();
         try(PreparedStatement ps = conexion.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
@@ -315,7 +315,10 @@ public class Conexion{
             }
             else{
                 do{
-                ret.agregarNodo2(new Nodo(rs.getString("Nombre")));
+                Nodo temp = new Nodo(rs.getString("Nombre")); 
+                temp.setX(rs.getInt("X"));
+                temp.setY(rs.getInt("Y"));
+                ret.agregarNodo2(temp);
                 }while(rs.next());
             }
             return ret;

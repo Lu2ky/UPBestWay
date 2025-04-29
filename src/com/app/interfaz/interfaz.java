@@ -45,7 +45,7 @@ public class interfaz extends javax.swing.JFrame {
         grafo = grafoload;
         this.perm = perm;
         initComponents();
-        draw = new Drawer(perm,cox,null);
+        draw = new Drawer(perm,cox,null,cargar);
         jPanel5.setLayout(new BorderLayout());
         jPanel5.add(draw,BorderLayout.CENTER);
         jPanel5.setVisible(true);

@@ -9,43 +9,27 @@ import java.sql.SQLException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import static java.lang.Math.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Drawer extends JPanel {
-    private final ArrayList<Point> nodos = new ArrayList<>();
+    private ListaEnlazada nodos = new ListaEnlazada();
     private ArrayList<Arista> aristas = new ArrayList<>();
     private Point nodoTemporal = null;
     private ListaEnlazada camino = null;
 
-    public Drawer(Boolean privilegios,Conexion cox,ListaEnlazada camino) {
+    public Drawer(Boolean privilegios,Conexion cox,ListaEnlazada camino,ListaEnlazada nodos) {
         setPreferredSize(new Dimension(831, 940));
         setBackground(Color.BLACK);
-        String sql = "SELECT * FROM nodos ";
-        try(PreparedStatement ps = cox.getConexion().prepareStatement(sql)){
-            ResultSet rs = ps.executeQuery();
-            if(!rs.next()){
-                System.out.println("Error al cargar tabla");
-            }
-            do{
-                rs.getInt("X");
-                nodos.add(new Point(rs.getInt("X"),rs.getInt("Y")));
-                JLabel text = new JLabel();
-                text.setBounds(rs.getInt("X"),rs.getInt("Y"), 90, 90);
-                text.setForeground(Color.WHITE);
-                this.add(text);
-            }while(rs.next());
+        this.nodos = nodos;
         
-        
-       }catch(SQLException e){
-           e.printStackTrace(); 
-       }
-        repaint();
         if(privilegios){
+            //Privilegios de administrador
             this.addMouseListener(new MouseAdapter() { 
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    nodos.add(e.getPoint());
+                    nodos.agregarNodo(e.getPoint());
                     System.out.println(e.getX() + " " + e.getY());
                     repaint();
                 } else if (SwingUtilities.isRightMouseButton(e)) {
@@ -73,7 +57,7 @@ public class Drawer extends JPanel {
             }
         });
         }
-        
+    repaint();    
     }
     public void setCamino(ListaEnlazada camino) {
         this.camino = camino;
@@ -97,12 +81,26 @@ public class Drawer extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.RED);
         for (Arista arista : aristas) {
-            g.drawLine(arista.inicio.x, arista.inicio.y, arista.fin.x, arista.fin.y);
+            Point puntoA, puntoB, puntoC = new Point();
+            int iniX,iniY,finX,finY;
+            iniX = (int) arista.getInicio().getX(); iniY = (int) arista.getInicio().getY();
+            finX = (int) arista.getInicio().getX(); finY = (int) arista.getInicio().getY();      
+            double distanciaAB = sqrt(pow(finX-iniX, 2) + pow(finY-finX,2));
+            double distanciaAC = sqrt(pow(iniX ,2) + pow(finY, 3));
+            double tetha = acos(distanciaAC/distanciaAB);
+            double distanciaCB = distanciaAC/tan(tetha);
+            g.drawLine(finX/10, finY, finX, finY);
+            g.drawLine( (int) arista.getInicio().getX(),(int) arista.getInicio().getY(), (int) arista.getFin().getX(), (int) arista.getFin().getY());
+            
         }
         g.setColor(Color.WHITE);
-        for (Point nodo : nodos) {
-            g.fillOval(nodo.x - 15, nodo.y - 15, 30, 30);
+        Nodo temp = nodos.getCabeza();
+        while(temp != null){
+            g.fillOval(temp.getX() - 15, temp.getY() - 15, 21, 21);
+            temp = temp.getSiguiente();
         }
+        
+        
     }
 
     private static class Arista {
@@ -112,5 +110,22 @@ public class Drawer extends JPanel {
             this.inicio = inicio;
             this.fin = fin;
         }
+
+        public Point getInicio() {
+            return inicio;
+        }
+
+        public void setInicio(Point inicio) {
+            this.inicio = inicio;
+        }
+
+        public Point getFin() {
+            return fin;
+        }
+
+        public void setFin(Point fin) {
+            this.fin = fin;
+        }
+        
     }
 }
