@@ -26,9 +26,14 @@ import javax.swing.JTextArea;
 public class Grafo {
     private ListaEnlazadaAristas Aristas = new ListaEnlazadaAristas();
     private ListaEnlazada Nodos = new ListaEnlazada();;
+    private Conexion cox = null;
     
     public Grafo(Conexion conexion){
+        cox = conexion;
         loadDB(conexion);
+    }
+    public Grafo(){
+        loadDB(cox);
     }
     
     public void agregarNodo(Nodo nuevo){
@@ -129,6 +134,8 @@ public class Grafo {
         }
 
         Nodo copiaNodo = new Nodo(nodo.getNombre());
+        copiaNodo.setX(nodo.getX());
+        copiaNodo.setY(nodo.getY());
         copiaNodo.setId(nodo.getId());
         pila.push(copiaNodo);
         
@@ -172,7 +179,7 @@ public class Grafo {
         loadAristas(conexion);
     }
     private void loadNodos(Conexion conexion){
-        String sql = "SELECT Nombre FROM nodos";
+        String sql = "SELECT * FROM nodos";
         try(PreparedStatement ps = conexion.getConexion().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             if(!rs.next()){
@@ -180,6 +187,8 @@ public class Grafo {
             }
             do{
                 Nodo nodo = new Nodo(rs.getString("Nombre"));
+                nodo.setX(rs.getInt("X"));
+                nodo.setY(rs.getInt("Y"));
                 Nodos.agregarNodo(nodo);
             }while(rs.next());
             
@@ -190,8 +199,8 @@ public class Grafo {
         
     }
     private void loadAristas(Conexion conexion){
-        String sql = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoA = n.idNodo";
-        String sql1 = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoB = n.idNodo";       
+        String sql = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoA = n.idNodo ORDER BY idArista DESC";
+        String sql1 = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoB = n.idNodo ORDER BY idArista DESC";       
         try(PreparedStatement ps = conexion.getConexion().prepareStatement(sql)){
             try(PreparedStatement ps1 = conexion.getConexion().prepareStatement(sql1)){
                 ResultSet rs = ps.executeQuery();
@@ -207,8 +216,6 @@ public class Grafo {
             do{
                 Nodo nodo1 = Nodos.obtenerNodo(rs.getString("Nombre"));
                 Nodo nodo2 = Nodos.obtenerNodo(rs1.getString("Nombre"));
-                nodo1.setId(nodo1.getId());
-                nodo2.setId(nodo2.getId());
                 Aristas.agregarArista(new Arista(nodo1,nodo2,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));   
                 Aristas.agregarArista(new Arista(nodo2,nodo1,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));
                 System.out.println(rs.getInt("idArista"));

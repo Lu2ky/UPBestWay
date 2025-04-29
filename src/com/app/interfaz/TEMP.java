@@ -26,6 +26,20 @@ public class TEMP extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
+        EdE1 = new javax.swing.JButton();
+        EdF1 = new javax.swing.JButton();
+        EdG1 = new javax.swing.JButton();
+        EdH1 = new javax.swing.JButton();
+        EdI1 = new javax.swing.JButton();
+        EdL1 = new javax.swing.JButton();
+        Edk1 = new javax.swing.JButton();
+        EdD1 = new javax.swing.JButton();
+        EdJ1 = new javax.swing.JButton();
+        EdC1 = new javax.swing.JButton();
+        EdB1 = new javax.swing.JButton();
+        EdA2 = new javax.swing.JButton();
+        EdA3 = new javax.swing.JButton();
         EdE = new javax.swing.JButton();
         EdF = new javax.swing.JButton();
         EdG = new javax.swing.JButton();
@@ -39,6 +53,216 @@ public class TEMP extends javax.swing.JFrame {
         EdB = new javax.swing.JButton();
         EdA = new javax.swing.JButton();
         EdA1 = new javax.swing.JButton();
+
+        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        EdE1.setBackground(new java.awt.Color(191, 28, 9));
+        EdE1.setForeground(new java.awt.Color(255, 255, 255));
+        EdE1.setText("E");
+        EdE1.setBorder(null);
+        EdE1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdE1ActionPerformed(evt);
+            }
+        });
+
+        EdF1.setBackground(new java.awt.Color(191, 28, 9));
+        EdF1.setForeground(new java.awt.Color(255, 255, 255));
+        EdF1.setText("F");
+        EdF1.setBorder(null);
+        EdF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdF1ActionPerformed(evt);
+            }
+        });
+
+        EdG1.setBackground(new java.awt.Color(191, 28, 9));
+        EdG1.setForeground(new java.awt.Color(255, 255, 255));
+        EdG1.setText("G");
+        EdG1.setBorder(null);
+        EdG1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdG1ActionPerformed(evt);
+            }
+        });
+
+        EdH1.setBackground(new java.awt.Color(191, 28, 9));
+        EdH1.setForeground(new java.awt.Color(255, 255, 255));
+        EdH1.setText("H");
+        EdH1.setBorder(null);
+        EdH1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdH1ActionPerformed(evt);
+            }
+        });
+
+        EdI1.setBackground(new java.awt.Color(11, 50, 93));
+        EdI1.setForeground(new java.awt.Color(255, 255, 255));
+        EdI1.setText("I");
+        EdI1.setBorder(null);
+        EdI1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdI1ActionPerformed(evt);
+            }
+        });
+
+        EdL1.setBackground(new java.awt.Color(103, 140, 62));
+        EdL1.setForeground(new java.awt.Color(255, 255, 255));
+        EdL1.setText("L");
+        EdL1.setBorder(null);
+        EdL1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdL1ActionPerformed(evt);
+            }
+        });
+
+        Edk1.setBackground(new java.awt.Color(216, 120, 34));
+        Edk1.setForeground(new java.awt.Color(255, 255, 255));
+        Edk1.setText("K");
+        Edk1.setBorder(null);
+        Edk1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Edk1ActionPerformed(evt);
+            }
+        });
+
+        EdD1.setBackground(new java.awt.Color(241, 177, 53));
+        EdD1.setForeground(new java.awt.Color(255, 255, 255));
+        EdD1.setText("D");
+        EdD1.setBorder(null);
+        EdD1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdD1ActionPerformed(evt);
+            }
+        });
+
+        EdJ1.setBackground(new java.awt.Color(157, 204, 212));
+        EdJ1.setText("J");
+        EdJ1.setBorder(null);
+        EdJ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdJ1ActionPerformed(evt);
+            }
+        });
+
+        EdC1.setBackground(new java.awt.Color(241, 177, 53));
+        EdC1.setForeground(new java.awt.Color(255, 255, 255));
+        EdC1.setText("C");
+        EdC1.setBorder(null);
+        EdC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdC1ActionPerformed(evt);
+            }
+        });
+
+        EdB1.setBackground(new java.awt.Color(241, 177, 53));
+        EdB1.setForeground(new java.awt.Color(255, 255, 255));
+        EdB1.setText("B");
+        EdB1.setBorder(null);
+        EdB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdB1ActionPerformed(evt);
+            }
+        });
+
+        EdA2.setBackground(new java.awt.Color(241, 177, 53));
+        EdA2.setForeground(new java.awt.Color(255, 255, 255));
+        EdA2.setText("A");
+        EdA2.setBorder(null);
+        EdA2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdA2ActionPerformed(evt);
+            }
+        });
+
+        EdA3.setBackground(new java.awt.Color(113, 49, 133));
+        EdA3.setForeground(new java.awt.Color(255, 255, 255));
+        EdA3.setText("TEMPLO");
+        EdA3.setBorder(null);
+        EdA3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdA3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jFrame1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(360, 360, 360)
+                            .addComponent(Edk1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(610, 610, 610)
+                            .addComponent(EdL1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(530, 530, 530)
+                            .addComponent(EdI1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(460, 460, 460)
+                            .addComponent(EdE1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(90, 90, 90)
+                            .addComponent(EdH1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(350, 350, 350)
+                            .addComponent(EdD1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(130, 130, 130)
+                            .addComponent(EdF1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)
+                            .addComponent(EdG1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addComponent(EdA3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(80, 80, 80)
+                            .addComponent(EdA2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(EdB1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(EdC1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(EdJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+            .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jFrame1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Edk1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(10, 10, 10)
+                    .addComponent(EdL1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(20, 20, 20)
+                    .addComponent(EdI1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(80, 80, 80)
+                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(EdE1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EdH1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(EdD1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EdF1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(EdG1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(30, 30, 30)
+                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(EdA3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EdA2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(EdB1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(EdC1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jFrame1Layout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addComponent(EdJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -305,6 +529,58 @@ public class TEMP extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EdA1ActionPerformed
 
+    private void EdE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdE1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdE1ActionPerformed
+
+    private void EdF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdF1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdF1ActionPerformed
+
+    private void EdG1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdG1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdG1ActionPerformed
+
+    private void EdH1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdH1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdH1ActionPerformed
+
+    private void EdI1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdI1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdI1ActionPerformed
+
+    private void EdL1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdL1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdL1ActionPerformed
+
+    private void Edk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Edk1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Edk1ActionPerformed
+
+    private void EdD1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdD1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdD1ActionPerformed
+
+    private void EdJ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdJ1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdJ1ActionPerformed
+
+    private void EdC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdC1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdC1ActionPerformed
+
+    private void EdB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdB1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdB1ActionPerformed
+
+    private void EdA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdA2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdA2ActionPerformed
+
+    private void EdA3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdA3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EdA3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,16 +619,30 @@ public class TEMP extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EdA;
     private javax.swing.JButton EdA1;
+    private javax.swing.JButton EdA2;
+    private javax.swing.JButton EdA3;
     private javax.swing.JButton EdB;
+    private javax.swing.JButton EdB1;
     private javax.swing.JButton EdC;
+    private javax.swing.JButton EdC1;
     private javax.swing.JButton EdD;
+    private javax.swing.JButton EdD1;
     private javax.swing.JButton EdE;
+    private javax.swing.JButton EdE1;
     private javax.swing.JButton EdF;
+    private javax.swing.JButton EdF1;
     private javax.swing.JButton EdG;
+    private javax.swing.JButton EdG1;
     private javax.swing.JButton EdH;
+    private javax.swing.JButton EdH1;
     private javax.swing.JButton EdI;
+    private javax.swing.JButton EdI1;
     private javax.swing.JButton EdJ;
+    private javax.swing.JButton EdJ1;
     private javax.swing.JButton EdL;
+    private javax.swing.JButton EdL1;
     private javax.swing.JButton Edk;
+    private javax.swing.JButton Edk1;
+    private javax.swing.JFrame jFrame1;
     // End of variables declaration//GEN-END:variables
 }

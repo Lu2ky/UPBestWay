@@ -345,22 +345,17 @@ public class Inicio_sesion extends javax.swing.JFrame {
             sesion.setNombre(User1.getText());
             Mensaje.setText("Se inicio sesion");
             Mensaje.setForeground(Color.blue);
-            if(cox.verificarPermisos(User1.getText(), Password.getText())){
-                //Aqui a la interfaz de usuario con permisos tomar de referencia la linea 291 para el cambio de form
-            }
-            else{
-                JFrame frame = this;
-                interfaz inte = new interfaz(sesion,cox,grafo);
-                inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                inte.setVisible(true);
-                Timer timer = new Timer(1, new ActionListener() {
-                public void actionPerformed(ActionEvent ae) {
-                    frame.setVisible(false);
-                    }
-                });
-                timer.start();
-                
-            }
+            Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
+            JFrame frame = this;
+            interfaz inte = new interfaz(sesion,cox,grafo,verificarPer);
+            inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            inte.setVisible(true);
+            Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+                }
+            });
+            timer.start();
         }
         else{
             Mensaje.setText("Usuario no encontrado");
@@ -390,6 +385,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
      */
     public static void main(String args[]) {    
         FlatLightLaf.setup();
+        
         grafo = new Grafo(cox);
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

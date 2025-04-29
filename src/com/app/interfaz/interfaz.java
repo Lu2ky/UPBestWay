@@ -16,29 +16,41 @@ import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 public class interfaz extends javax.swing.JFrame {
 
     /**
      * Creates new form intrefas
      */
+    //831x940
     
     ListaEnlazada cargar = null;
     Grafo grafo = null;
     boolean check = true;
     Sesion sesion = null;
     Conexion cox = null;
+    Boolean perm = false;
+    Drawer draw = null;
     
-    public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload) {    
+    public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {    
         FlatLightLaf.setup();
         cox = coxload;
         cargar = coxload.getNodos();
         grafo = grafoload;
+        this.perm = perm;
         initComponents();
+        draw = new Drawer(perm,cox,null);
+        jPanel5.setLayout(new BorderLayout());
+        jPanel5.add(draw,BorderLayout.CENTER);
+        jPanel5.setVisible(true);
+                
+        
         this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
         NodoA.addItem("Biblioteca");
@@ -84,6 +96,7 @@ public class interfaz extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         Runner = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -108,7 +121,7 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Check.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png"))); // NOI18N
-        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Check.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CheckMousePressed(evt);
@@ -167,7 +180,7 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.add(NodoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BuscarMousePressed(evt);
@@ -187,7 +200,7 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.add(dndviene1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 40));
 
         CerrarSesion.setBackground(new java.awt.Color(140, 0, 0));
-        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CerrarSesionMousePressed(evt);
@@ -209,17 +222,14 @@ public class interfaz extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 1080));
 
         jPanel4.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel5.setEnabled(false);
+        jPanel5.setFocusable(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 830, 900));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, 1090, 1080));
 
@@ -279,7 +289,8 @@ public class interfaz extends javax.swing.JFrame {
             temp3 = "";
         }
         ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino);
-        
+        draw.setCamino(camino);
+        draw.ponerCamino();
         if(iniesp && !finesp){
             Nodo temp = camino.getCabeza().getSiguiente();
             
@@ -420,6 +431,7 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
