@@ -170,6 +170,11 @@ public class interfaz extends javax.swing.JFrame {
         NodoB.setBorder(null);
         NodoB.setMaximumRowCount(5);
         NodoB.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        NodoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NodoBActionPerformed(evt);
+            }
+        });
         jPanel3.add(NodoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
 
         NodoA.setBackground(new java.awt.Color(140, 0, 0));
@@ -393,6 +398,10 @@ public class interfaz extends javax.swing.JFrame {
        });
         timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
+
+    private void NodoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NodoBActionPerformed
 
     private void poblarComponentes() {
     Nodo temp = cargar.getCabeza();
