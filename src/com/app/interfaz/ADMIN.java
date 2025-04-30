@@ -26,6 +26,7 @@ public class ADMIN extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         LogoN4 = new javax.swing.JLabel();
         Logo1 = new javax.swing.JLabel();
@@ -43,6 +44,12 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel2.setFocusable(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 150, 870));
 
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,7 +93,12 @@ public class ADMIN extends javax.swing.JFrame {
         Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Buscar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                a(evt);
+                Agregarnodo(evt);
+            }
+        });
+        Buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                popup(evt);
             }
         });
         Buscar2.setLayout(new java.awt.GridBagLayout());
@@ -120,27 +132,18 @@ public class ADMIN extends javax.swing.JFrame {
 
         jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 170, 70));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 888, 850));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void a(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_a
+    private void Agregarnodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Agregarnodo
         // TODO add your handling code here:
-    }//GEN-LAST:event_a
+    }//GEN-LAST:event_Agregarnodo
+
+    private void popup(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popup
+        // TODO add your handling code here:
+    }//GEN-LAST:event_popup
 
     /**
      * @param args the command line arguments
@@ -193,5 +196,6 @@ public class ADMIN extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

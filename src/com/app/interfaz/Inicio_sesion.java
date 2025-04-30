@@ -100,7 +100,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(189, 32, 0));
         jPanel1.setForeground(new java.awt.Color(140, 0, 0));
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
@@ -173,7 +173,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
 
         Inicio.setBackground(new java.awt.Color(189, 32, 0));
         Inicio.setForeground(new java.awt.Color(140, 0, 0));
-        Inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Inicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 InicioMousePressed(evt);
@@ -196,7 +196,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(140, 140, 140));
         jLabel5.setText(bundle.getString("Inicio_sesion.jLabel5.text")); // NOI18N
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel5.setDoubleBuffered(true);
         Fondo1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
 
@@ -219,7 +219,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png"))); // NOI18N
         jLabel4.setText(bundle.getString("Inicio_sesion.jLabel4.text")); // NOI18N
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel4MousePressed(evt);
