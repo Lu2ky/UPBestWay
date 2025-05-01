@@ -4,6 +4,11 @@
  */
 package com.app.interfaz;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.Timer;
+
 /**
  *
  * @author ADMIN
@@ -55,6 +60,7 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        LogoN4.setForeground(new java.awt.Color(0, 0, 0));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
         LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
         jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 660, 90));
@@ -63,10 +69,12 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, -1));
 
         LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
+        LogoN3.setForeground(new java.awt.Color(0, 0, 0));
         LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
         jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
 
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
+        Bienvenida.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida.setText("Aristas");
         jPanel1.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
 
@@ -82,10 +90,12 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 600, 170, 70));
 
         Bienvenida1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
+        Bienvenida1.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida1.setText("¡Bienvenido(a)!");
         jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
+        Bienvenida2.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida2.setText("Nodos");
         jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
 
@@ -93,7 +103,7 @@ public class ADMIN extends javax.swing.JFrame {
         Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Buscar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Agregarnodo(evt);
+                cambarp1(evt);
             }
         });
         Buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -137,13 +147,21 @@ public class ADMIN extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Agregarnodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Agregarnodo
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Agregarnodo
-
     private void popup(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popup
         // TODO add your handling code here:
     }//GEN-LAST:event_popup
+
+    private void cambarp1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambarp1
+        JFrame este = this;
+        AgregarNodos aa = new AgregarNodos();
+        aa.setVisible(true);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_cambarp1
 
     /**
      * @param args the command line arguments
