@@ -139,11 +139,6 @@ public class AgregarNodos extends javax.swing.JFrame {
                 User2MousePressed(evt);
             }
         });
-        User2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                User2ActionPerformed(evt);
-            }
-        });
         jPanel1.add(User2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 540, 30));
 
         User3.setBackground(new java.awt.Color(255, 190, 15));
@@ -198,20 +193,6 @@ public class AgregarNodos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void User1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User1MousePressed
-        if(Password2.getText().equals("")){
-            Password2Text.setText("Ingrese nuevamente su contraseña");
-        }
-        if(Password1.getText().equals("")){
-            Password1Text.setText("Ingrese su contraseña");
-        }
-        if(!User1.getText().equals("Ingrese el nombre de usuario")){
-            return;
-        }
-        else{
-            User1.setText("");
-            User1.setForeground(Color.black);
-        }
-
     }//GEN-LAST:event_User1MousePressed
 
     private void User1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User1ActionPerformed
@@ -229,10 +210,6 @@ public class AgregarNodos extends javax.swing.JFrame {
     private void User2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User2MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_User2MousePressed
-
-    private void User2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_User2ActionPerformed
 
     private void User3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User3MousePressed
         // TODO add your handling code here:
