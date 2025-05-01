@@ -113,7 +113,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="combo_suggestion.ComboBoxSuggestion" name="NodoB1">
+        <Component class="combo_suggestion.ComboBoxSuggestion" name="NodoFinal">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="8c" type="rgb"/>
@@ -127,7 +127,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NodoB1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NodoFinalActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -135,7 +135,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="combo_suggestion.ComboBoxSuggestion" name="NodoA1">
+        <Component class="combo_suggestion.ComboBoxSuggestion" name="NodoInicial">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="8c" type="rgb"/>
