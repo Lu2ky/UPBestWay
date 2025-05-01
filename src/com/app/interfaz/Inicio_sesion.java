@@ -23,7 +23,7 @@ import javax.swing.JFrame;
  * @author bohor
  */
 public class Inicio_sesion extends javax.swing.JFrame {
-    
+
     int indice = 0;
     public Sesion sesion = new Sesion();
     boolean ver = false;
@@ -42,7 +42,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.getRootPane().requestFocusInWindow();
         User1.setCaretPosition(User1.getText().length());
-        User1.moveCaretPosition(User1.getText().length()); 
+        User1.moveCaretPosition(User1.getText().length());
         grafo.getAristas().MostrarLista();
     }
 
@@ -271,19 +271,15 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private void User1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User1MousePressed
         User1.setText("");
         User1.setForeground(Color.black);
-        if(Password.getText().equals("")){
-                jLabel5.setText("Ingrese su contraseña");
+        if (Password.getText().equals("")) {
+            jLabel5.setText("Ingrese su contraseña");
         }
-        if(Password.getText().equals("Ingrese su contraseña")){
+        if (Password.getText().equals("Ingrese su contraseña")) {
             Password.setText("");
             jLabel5.setText("Ingrese su contraseña");
         }
-        
-            
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_User1MousePressed
 
     private void User1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User1ActionPerformed
@@ -291,13 +287,13 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_User1ActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        
+
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         JFrame frame = this;
-        crear_cuenta cc = new crear_cuenta(cox,grafo);
-        cc.setVisible(true); 
+        crear_cuenta cc = new crear_cuenta(cox, grafo);
+        cc.setVisible(true);
         cc.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -312,15 +308,15 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordActionPerformed
 
     private void PasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMousePressed
-        
-        if(User1.getText().equals("")){
+
+        if (User1.getText().equals("")) {
             User1.setText("Ingrese su nombre de usuario");
             User1.setForeground(Color.gray);
         }
-        if(!User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.gray){
+        if (!User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.gray) {
             User1.setForeground(Color.BLACK);
         }
-        if(User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.BLACK){
+        if (User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.BLACK) {
             User1.setForeground(Color.gray);
         }
         jLabel5.setText("");
@@ -328,12 +324,11 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordMousePressed
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-        if(ver == false){
+        if (ver == false) {
             Password.setEchoChar((char) 0);
             jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
             ver = true;
-        }
-        else{
+        } else {
             Password.setEchoChar('\u2022');
             jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
             ver = false;
@@ -341,28 +336,27 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
-        if(cox.searchUser(User1.getText(), Password.getText(), Mensaje)){
+        if (cox.searchUser(User1.getText(), Password.getText(), Mensaje)) {
             sesion.setNombre(User1.getText());
             Mensaje.setText("Se inicio sesion");
             Mensaje.setForeground(Color.blue);
             Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
             JFrame frame = this;
-            interfaz inte = new interfaz(sesion,cox,grafo,verificarPer);
+            interfaz inte = new interfaz(sesion, cox, grafo, verificarPer);
             inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
             inte.setVisible(true);
             Timer timer = new Timer(1, new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
+                public void actionPerformed(ActionEvent ae) {
+                    frame.setVisible(false);
                 }
             });
             timer.start();
-        }
-        else{
+        } else {
             Mensaje.setText("Usuario no encontrado");
             Mensaje.setForeground(Color.blue);
         }
     }//GEN-LAST:event_InicioMousePressed
-    private void carrusel(){
+    private void carrusel() {
         ImageIcon[] imagenes = new ImageIcon[]{
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG1.jpg")),
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG2.jpg")),
@@ -372,20 +366,22 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Carrusel.setIcon(imagenes[0]);
         Timer timer = new Timer(2000, new ActionListener() {
             Random r = new Random();
+
             public void actionPerformed(ActionEvent e) {
                 indice = (indice + 1) % imagenes.length;
                 Carrusel.setIcon(imagenes[indice]);
             }
         });
         timer.start();
-        
+
     }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {    
+    public static void main(String args[]) {
         FlatLightLaf.setup();
-        
+
         grafo = new Grafo(cox);
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
