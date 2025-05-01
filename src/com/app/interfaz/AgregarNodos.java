@@ -26,16 +26,40 @@ public class AgregarNodos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        SeparadorUser3 = new javax.swing.JPanel();
+        SeparadorUser4 = new javax.swing.JPanel();
+        SeparadorUser5 = new javax.swing.JPanel();
+        SeparadorUser6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         LogoN4 = new javax.swing.JLabel();
         Logo1 = new javax.swing.JLabel();
         LogoN3 = new javax.swing.JLabel();
         Bienvenida1 = new javax.swing.JLabel();
         SeparadorUser = new javax.swing.JPanel();
+        SeparadorUser2 = new javax.swing.JPanel();
         User1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        Buscar2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        Buscar4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        Bienvenida2 = new javax.swing.JLabel();
+        Bienvenida3 = new javax.swing.JLabel();
+        User2 = new javax.swing.JTextField();
+        User3 = new javax.swing.JTextField();
+        Buscar3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+
+        SeparadorUser3.setBackground(new java.awt.Color(0, 0, 0));
+
+        SeparadorUser4.setBackground(new java.awt.Color(0, 0, 0));
+        SeparadorUser3.add(SeparadorUser4);
+
+        SeparadorUser5.setBackground(new java.awt.Color(0, 0, 0));
+
+        SeparadorUser6.setBackground(new java.awt.Color(0, 0, 0));
+        SeparadorUser5.add(SeparadorUser6);
+
+        SeparadorUser3.add(SeparadorUser5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,11 +79,15 @@ public class AgregarNodos extends javax.swing.JFrame {
         LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
         jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
 
-        Bienvenida1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
-        Bienvenida1.setText("¡Bienvenido(a)!");
-        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        Bienvenida1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        Bienvenida1.setText("Y");
+        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, 40));
 
         SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
+
+        SeparadorUser2.setBackground(new java.awt.Color(0, 0, 0));
+        SeparadorUser.add(SeparadorUser2);
+
         jPanel1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 500, 1));
 
         User1.setBackground(new java.awt.Color(255, 190, 15));
@@ -78,29 +106,93 @@ public class AgregarNodos extends javax.swing.JFrame {
                 User1ActionPerformed(evt);
             }
         });
-        jPanel1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 540, 30));
+        jPanel1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 560, 120, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel4.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, -1));
 
-        Buscar2.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Buscar2popup(evt);
+        Buscar4.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar4.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Agregar ");
+        Buscar4.add(jLabel6, new java.awt.GridBagConstraints());
+
+        jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 680, 170, 70));
+
+        jLabel7.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel7.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
+
+        Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
+        Bienvenida2.setText("¡Bienvenido(a)!");
+        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+
+        Bienvenida3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        Bienvenida3.setText("X");
+        jPanel1.add(Bienvenida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, -1, 50));
+
+        User2.setBackground(new java.awt.Color(255, 190, 15));
+        User2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        User2.setForeground(java.awt.Color.gray);
+        User2.setText(bundle.getString("crear_cuenta.User1.text")); // NOI18N
+        User2.setToolTipText(bundle.getString("crear_cuenta.User1.toolTipText")); // NOI18N
+        User2.setBorder(null);
+        User2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                User2MousePressed(evt);
             }
         });
-        Buscar2.setLayout(new java.awt.GridBagLayout());
+        User2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                User2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(User2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 540, 30));
 
-        jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Agregar ");
-        Buscar2.add(jLabel3, new java.awt.GridBagConstraints());
+        User3.setBackground(new java.awt.Color(255, 190, 15));
+        User3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        User3.setForeground(java.awt.Color.gray);
+        User3.setText(bundle.getString("crear_cuenta.User1.text")); // NOI18N
+        User3.setToolTipText(bundle.getString("crear_cuenta.User1.toolTipText")); // NOI18N
+        User3.setBorder(null);
+        User3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                User3MousePressed(evt);
+            }
+        });
+        User3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                User3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(User3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 120, 30));
 
-        jPanel1.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 710, 170, 70));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 800));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 720));
+        Buscar3.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar3Agregarnodo(evt);
+            }
+        });
+        Buscar3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Buscar3popup(evt);
+            }
+        });
+        Buscar3.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Agregar ");
+        Buscar3.add(jLabel5, new java.awt.GridBagConstraints());
+
+        getContentPane().add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 170, 70));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,9 +218,29 @@ public class AgregarNodos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_User1ActionPerformed
 
-    private void Buscar2popup(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Buscar2popup
+    private void Buscar3Agregarnodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar3Agregarnodo
         // TODO add your handling code here:
-    }//GEN-LAST:event_Buscar2popup
+    }//GEN-LAST:event_Buscar3Agregarnodo
+
+    private void Buscar3popup(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Buscar3popup
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar3popup
+
+    private void User2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User2MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_User2MousePressed
+
+    private void User2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_User2ActionPerformed
+
+    private void User3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_User3MousePressed
+
+    private void User3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_User3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,14 +279,26 @@ public class AgregarNodos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida1;
-    private javax.swing.JPanel Buscar2;
+    private javax.swing.JLabel Bienvenida2;
+    private javax.swing.JLabel Bienvenida3;
+    private javax.swing.JPanel Buscar3;
+    private javax.swing.JPanel Buscar4;
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
     private javax.swing.JPanel SeparadorUser;
+    private javax.swing.JPanel SeparadorUser2;
+    private javax.swing.JPanel SeparadorUser3;
+    private javax.swing.JPanel SeparadorUser4;
+    private javax.swing.JPanel SeparadorUser5;
+    private javax.swing.JPanel SeparadorUser6;
     private javax.swing.JTextField User1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField User2;
+    private javax.swing.JTextField User3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
