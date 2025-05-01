@@ -46,6 +46,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         User3 = new javax.swing.JTextField();
         SeparadorUser1 = new javax.swing.JPanel();
         SeparadorUser7 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         Buscar3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -166,6 +167,11 @@ public class AgregarNodos extends javax.swing.JFrame {
 
         jPanel1.add(SeparadorUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 500, 1));
 
+        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel2.setFocusable(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 150, 870));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 800));
 
         Buscar3.setBackground(new java.awt.Color(140, 0, 0));
@@ -277,5 +283,6 @@ public class AgregarNodos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
