@@ -35,8 +35,6 @@ public class AgregarNodos extends javax.swing.JFrame {
         Logo1 = new javax.swing.JLabel();
         LogoN3 = new javax.swing.JLabel();
         Bienvenida1 = new javax.swing.JLabel();
-        SeparadorUser = new javax.swing.JPanel();
-        SeparadorUser2 = new javax.swing.JPanel();
         User1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         Buscar4 = new javax.swing.JPanel();
@@ -46,6 +44,8 @@ public class AgregarNodos extends javax.swing.JFrame {
         Bienvenida3 = new javax.swing.JLabel();
         User2 = new javax.swing.JTextField();
         User3 = new javax.swing.JTextField();
+        SeparadorUser1 = new javax.swing.JPanel();
+        SeparadorUser7 = new javax.swing.JPanel();
         Buscar3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -81,14 +81,7 @@ public class AgregarNodos extends javax.swing.JFrame {
 
         Bienvenida1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         Bienvenida1.setText("Y");
-        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, 40));
-
-        SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
-
-        SeparadorUser2.setBackground(new java.awt.Color(0, 0, 0));
-        SeparadorUser.add(SeparadorUser2);
-
-        jPanel1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 500, 1));
+        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 560, -1, 30));
 
         User1.setBackground(new java.awt.Color(255, 190, 15));
         User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -133,7 +126,7 @@ public class AgregarNodos extends javax.swing.JFrame {
 
         Bienvenida3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         Bienvenida3.setText("X");
-        jPanel1.add(Bienvenida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, -1, 50));
+        jPanel1.add(Bienvenida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 560, -1, 30));
 
         User2.setBackground(new java.awt.Color(255, 190, 15));
         User2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -170,6 +163,13 @@ public class AgregarNodos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(User3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 120, 30));
+
+        SeparadorUser1.setBackground(new java.awt.Color(0, 0, 0));
+
+        SeparadorUser7.setBackground(new java.awt.Color(0, 0, 0));
+        SeparadorUser1.add(SeparadorUser7);
+
+        jPanel1.add(SeparadorUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 500, 1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 800));
 
@@ -286,12 +286,12 @@ public class AgregarNodos extends javax.swing.JFrame {
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
-    private javax.swing.JPanel SeparadorUser;
-    private javax.swing.JPanel SeparadorUser2;
+    private javax.swing.JPanel SeparadorUser1;
     private javax.swing.JPanel SeparadorUser3;
     private javax.swing.JPanel SeparadorUser4;
     private javax.swing.JPanel SeparadorUser5;
     private javax.swing.JPanel SeparadorUser6;
+    private javax.swing.JPanel SeparadorUser7;
     private javax.swing.JTextField User1;
     private javax.swing.JTextField User2;
     private javax.swing.JTextField User3;
