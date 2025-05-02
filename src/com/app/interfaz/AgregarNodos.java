@@ -119,7 +119,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         jLabel6.setText("Agregar ");
         Buscar4.add(jLabel6, new java.awt.GridBagConstraints());
 
-        jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 680, 170, 70));
+        jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 750, 170, 70));
 
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida2.setText("¡Bienvenido(a)!");
@@ -175,7 +175,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 1050, 1100));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, -20, 970, 1100));
 
         jLabel8.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel8.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N

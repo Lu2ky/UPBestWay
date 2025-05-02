@@ -41,10 +41,6 @@ public class AgregarArista extends javax.swing.JFrame {
         CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
-        Buscar1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,7 +48,7 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(140, 0, 0));
         jPanel4.setFocusable(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 150, 870));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 1350, 1180));
 
         jPanel3.setBackground(new java.awt.Color(255, 190, 15));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,30 +127,6 @@ public class AgregarArista extends javax.swing.JFrame {
         Bienvenida.setText("¡Bienvenido(a)!");
         jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
-        Buscar1.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                Buscar1MousePressed(evt);
-            }
-        });
-        Buscar1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Agregar");
-        Buscar1.add(jLabel3, new java.awt.GridBagConstraints());
-
-        jPanel5.setBackground(new java.awt.Color(140, 0, 0));
-        jPanel5.setFocusable(false);
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Buscar1.add(jPanel5, new java.awt.GridBagConstraints());
-
-        jPanel3.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 620, 170, 70));
-
-        jTextField1.setText("jTextField1");
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 190, 60));
-
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 1080));
 
         pack();
@@ -167,10 +139,6 @@ public class AgregarArista extends javax.swing.JFrame {
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
  
     }//GEN-LAST:event_CerrarSesionMousePressed
-
-    private void Buscar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Buscar1MousePressed
 
     /**
      * @param args the command line arguments
@@ -210,7 +178,6 @@ public class AgregarArista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida;
     private javax.swing.JPanel Buscar;
-    private javax.swing.JPanel Buscar1;
     private javax.swing.JPanel CerrarSesion;
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
@@ -221,11 +188,8 @@ public class AgregarArista extends javax.swing.JFrame {
     private javax.swing.JLabel dndviene2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
