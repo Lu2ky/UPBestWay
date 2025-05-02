@@ -14,9 +14,11 @@ import com.app.manejodatos.Nodo;
 import com.app.manejodatos.ListaEnlazadaAristas;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.conexion.Conexion;
+import com.app.interfaz.Drawer;
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.awt.TextArea;
 import java.util.Arrays;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
@@ -26,46 +28,48 @@ import javax.swing.JTextArea;
 public class Grafo {
     private ListaEnlazadaAristas Aristas = new ListaEnlazadaAristas();
     private ListaEnlazada Nodos = new ListaEnlazada();;
+    private Conexion cox = null;
     
     public Grafo(Conexion conexion){
+        cox = conexion;
         loadDB(conexion);
     }
+    public Grafo(){
+        loadDB(cox);
+    }
     
-    public void agregarNodo(Nodo nuevo){
+    public  void agregarNodo(Nodo nuevo){
         Nodos.agregarNodo(nuevo);
     }
     public void agregarArista(Arista nuevo){
         Aristas.agregarArista(new Arista(nuevo.getFin(),nuevo.getInicio(),nuevo.getPeso(),nuevo.isEscaleras()));
         Aristas.agregarArista(nuevo);
     }
-    public ListaEnlazada Dijkstra(String iniS, String finS, boolean escaleras,JTextArea a) {
-    Nodo ini = Nodos.obtenerNodo(iniS);
-    Nodo fn = Nodos.obtenerNodo(finS);
-    int[] distancias = new int[Nodos.getSize()];
-    ListaEnlazada visitados = new ListaEnlazada();
-    int[] padres = new int[Nodos.getSize()];
-    Arrays.fill(padres, -1);
-    Arrays.fill(distancias, Integer.MAX_VALUE);
-    distancias[ini.getId()] = 0;
+    public ListaEnlazada Dijkstra(String iniS, String finS, boolean escaleras,JTextArea a, Drawer drawerGrafo) {
+        Nodo ini = Nodos.obtenerNodo(iniS);
+        Nodo fn = Nodos.obtenerNodo(finS);
+        int[] distancias = new int[Nodos.getSize()];
+        ListaEnlazada visitados = new ListaEnlazada();
+        int[] padres = new int[Nodos.getSize()];
+        Arrays.fill(padres, -1);
+        Arrays.fill(distancias, Integer.MAX_VALUE);
+        distancias[ini.getId()] = 0;
     
-    PriorityQueue pq = new PriorityQueue();
-    ListaEnlazadaAristas vecinos = Aristas.obtenerPorInicio(ini.getNombre());
-    pq.push(new Arista(null, ini, 0,!escaleras));
-    boolean c1 = false;
+        PriorityQueue pq = new PriorityQueue();
+        ListaEnlazadaAristas vecinos = Aristas.obtenerPorInicio(ini.getNombre());
+        pq.push(new Arista(null, ini, 0,!escaleras));   
 
-    while (visitados.getSize() < Nodos.getSize() && !pq.isEmpty()) {
-        Arista act = pq.pop();
-        Nodo act1 = act.getFin();
+        while (visitados.getSize() < Nodos.getSize() && !pq.isEmpty()) {
+            Arista act = pq.pop();
+            Nodo act1 = act.getFin();
+            if (visitados.NodoPresente(act1.getNombre())) {
+                continue;
+            }
+            Nodo act2 = new Nodo( act1.getId(),act1.getNombre() , act1.getSiguiente());
+            act2.setSiguiente(null);
+            visitados.agregarNodo2(act2);
         
-        
-        if (visitados.NodoPresente(act1.getNombre())) {
-            continue;
-        }
-        Nodo act2 = new Nodo( act1.getId(),act1.getNombre() , act1.getSiguiente());
-        act2.setSiguiente(null);
-        visitados.agregarNodo2(act2);
-        
-        vecinos = Aristas.obtenerPorInicio(act1.getNombre());
+            vecinos = Aristas.obtenerPorInicio(act1.getNombre());
         Arista vec = vecinos.getCabeza();
         
         while (vec != null) {
@@ -84,18 +88,19 @@ public class Grafo {
             
             vec = vec.getSiguiente();
         }
-        c1 = true;
     }
     
     if(distancias[fn.getId()] < Integer.MAX_VALUE){
         a.append("Metros: " + distancias[fn.getId()] + ", Camino: ");
         if(distancias[fn.getId()] == 0){
             a.setText("Se encuentra sobre el mismo nodo");
+            drawerGrafo.reiniciarAristas(Aristas);
         }
     }
     
     else{
         a.append("La ruta entra " + iniS + " y " + finS + " no existe");
+        drawerGrafo.reiniciarAristas(Aristas);
     }
     return rCamino(ini, fn, padres);
 }
@@ -129,6 +134,8 @@ public class Grafo {
         }
 
         Nodo copiaNodo = new Nodo(nodo.getNombre());
+        copiaNodo.setX(nodo.getX());
+        copiaNodo.setY(nodo.getY());
         copiaNodo.setId(nodo.getId());
         pila.push(copiaNodo);
         
@@ -172,7 +179,7 @@ public class Grafo {
         loadAristas(conexion);
     }
     private void loadNodos(Conexion conexion){
-        String sql = "SELECT Nombre FROM nodos";
+        String sql = "SELECT * FROM nodos";
         try(PreparedStatement ps = conexion.getConexion().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             if(!rs.next()){
@@ -180,6 +187,8 @@ public class Grafo {
             }
             do{
                 Nodo nodo = new Nodo(rs.getString("Nombre"));
+                nodo.setX(rs.getInt("X"));
+                nodo.setY(rs.getInt("Y"));
                 Nodos.agregarNodo(nodo);
             }while(rs.next());
             
@@ -190,21 +199,31 @@ public class Grafo {
         
     }
     private void loadAristas(Conexion conexion){
-        String sql = "SELECT idNodoA, idNodoB, Ponderado, Stairs FROM aristas";
+        String sql = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoA = n.idNodo ORDER BY idArista DESC";
+        String sql1 = "SELECT * FROM aristas AS a RIGHT JOIN nodos AS n ON a.idNodoB = n.idNodo ORDER BY idArista DESC";       
         try(PreparedStatement ps = conexion.getConexion().prepareStatement(sql)){
-            ResultSet rs = ps.executeQuery();
-            if(!rs.next()){
-                System.out.println("No se encontraron aristas para cargar");
-            }
+            try(PreparedStatement ps1 = conexion.getConexion().prepareStatement(sql1)){
+                ResultSet rs = ps.executeQuery();
+                ResultSet rs1 = ps1.executeQuery();
+                if(!rs.next()){
+                    System.out.println("No se encontraron aristas para cargar");
+                    return;
+                }
+                if(!rs1.next()){
+                    System.out.println("No se encontraron aristas para cargar");
+                    return;
+                }
             do{
-                Nodo nodo1 = conexion.searchNodo(rs.getInt("idNodoA"));
-                nodo1.setId(nodo1.getId() - 1);
-                Nodo nodo2 = conexion.searchNodo(rs.getInt("idNodoB"));
-                nodo2.setId(nodo2.getId() - 1);
-                Aristas.agregarArista(new Arista(nodo1,nodo2,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));
-                
+                Nodo nodo1 = Nodos.obtenerNodo(rs.getString("Nombre"));
+                Nodo nodo2 = Nodos.obtenerNodo(rs1.getString("Nombre"));
+                Aristas.agregarArista(new Arista(nodo1,nodo2,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));   
                 Aristas.agregarArista(new Arista(nodo2,nodo1,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));
-            }while(rs.next());
+                System.out.println(rs.getInt("idArista"));
+                
+            }while(rs.next() && rs1.next());  
+            }
+            
+            
         }catch(SQLException e){
             System.out.println("Error al cargar la tabla de aristas");
             e.printStackTrace();

@@ -16,22 +16,48 @@ import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 public class interfaz extends javax.swing.JFrame {
 
     /**
      * Creates new form intrefas
      */
-    
-    ListaEnlazada cargar = null;
+    //831x940
+
     Grafo grafo = null;
     boolean check = true;
+    Sesion sesion = null;
+    Conexion cox = null;
+    Boolean perm = false;
+    Drawer draw = null;
+    ListaEnlazada cargar = null;
     
-    public interfaz(Sesion sesion,Conexion cox) {    
+    public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {    
         FlatLightLaf.setup();
-        cargar = cox.getNodos();
-        grafo = new Grafo(cox);
+        cox = coxload;
+        
+        grafo = grafoload;
+        cargar = grafo.getNodos();
+        this.perm = perm;
         initComponents();
+        draw = new Drawer(perm,cox,null,grafo.getNodos(),grafo.getAristas());
+        jPanel5.setLayout(new BorderLayout());
+        jPanel5.add(draw,BorderLayout.CENTER);
+        jPanel5.setVisible(true);
+        if(perm){
+            Admin.setBackground(new java.awt.Color(144,0,0));
+            AdminText.setForeground(Color.WHITE);
+        }
+                
+        
+        this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
         NodoA.addItem("Biblioteca");
         NodoA.addItem("Auditorio menor");
@@ -69,13 +95,18 @@ public class interfaz extends javax.swing.JFrame {
         Ruta = new javax.swing.JLabel();
         NodoB = new combo_suggestion.ComboBoxSuggestion();
         NodoA = new combo_suggestion.ComboBoxSuggestion();
-        Buscar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Admin = new javax.swing.JPanel();
+        AdminText = new javax.swing.JLabel();
+        Buscar1 = new javax.swing.JPanel();
         dndviene1 = new javax.swing.JLabel();
         CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
+        Buscar2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        Buscar3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         Runner = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -100,7 +131,7 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Check.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png"))); // NOI18N
-        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Check.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CheckMousePressed(evt);
@@ -109,16 +140,16 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 50, 50));
 
         Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel3.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 140, -1));
+        jPanel3.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, -1));
 
         LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
         LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel3.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 310, -1));
+        jPanel3.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
-        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
+        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 610, 90));
 
         dndviene.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene.setText("Escaleras");
@@ -147,37 +178,55 @@ public class interfaz extends javax.swing.JFrame {
 
         NodoB.setBackground(new java.awt.Color(140, 0, 0));
         NodoB.setBorder(null);
+        NodoB.setMaximumRowCount(5);
         NodoB.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        NodoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NodoBActionPerformed(evt);
+            }
+        });
         jPanel3.add(NodoB, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
 
         NodoA.setBackground(new java.awt.Color(140, 0, 0));
         NodoA.setBorder(null);
+        NodoA.setMaximumRowCount(5);
         NodoA.setFocusCycleRoot(true);
         NodoA.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel3.add(NodoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
-        Buscar.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        Admin.setBackground(new java.awt.Color(255, 190, 15));
+        Admin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Admin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BuscarMousePressed(evt);
+                AdminMousePressed(evt);
             }
         });
-        Buscar.setLayout(new java.awt.GridBagLayout());
+        Admin.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Buscar");
-        Buscar.add(jLabel1, new java.awt.GridBagConstraints());
+        AdminText.setBackground(new java.awt.Color(255, 190, 15));
+        AdminText.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        AdminText.setForeground(new java.awt.Color(255, 190, 15));
+        AdminText.setText("Modificar");
+        Admin.add(AdminText, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 720, 170, 70));
+        Buscar1.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar1MousePressed(evt);
+            }
+        });
+        Buscar1.setLayout(new java.awt.GridBagLayout());
+        Admin.add(Buscar1, new java.awt.GridBagConstraints());
+
+        jPanel3.add(Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 740, 170, 70));
 
         dndviene1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene1.setText("Edificio Inicial ");
         jPanel3.add(dndviene1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 40));
 
         CerrarSesion.setBackground(new java.awt.Color(140, 0, 0));
-        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CerrarSesionMousePressed(evt);
@@ -192,24 +241,47 @@ public class interfaz extends javax.swing.JFrame {
 
         jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
 
-        Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida.setText("¡Bienvenido(a)!");
-        jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+        jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 830, 1080));
+        Buscar2.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar2MousePressed(evt);
+            }
+        });
+        Buscar2.setLayout(new java.awt.GridBagLayout());
+
+        jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Buscar");
+        Buscar2.add(jLabel3, new java.awt.GridBagConstraints());
+
+        Buscar3.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar3MousePressed(evt);
+            }
+        });
+        Buscar3.setLayout(new java.awt.GridBagLayout());
+        Buscar2.add(Buscar3, new java.awt.GridBagConstraints());
+
+        jPanel3.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 740, 170, 70));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 1080));
 
         jPanel4.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel5.setEnabled(false);
+        jPanel5.setFocusable(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 830, 900));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, 1090, 1080));
 
@@ -225,7 +297,45 @@ public class interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void BuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMousePressed
+    private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
+        if(check == false){
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));   
+            check = true;
+        }
+        else {
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Checked-removebg-preview.png")));
+            check = false;
+        }
+    }//GEN-LAST:event_CheckMousePressed
+
+    private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
+        sesion = null;
+        JFrame frame = this;
+        Inicio_sesion inis = new Inicio_sesion(grafo);
+        inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        inis.setVisible(true);
+        Timer timer = new Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                    frame.setVisible(false);
+            }
+       });
+        timer.start();
+    }//GEN-LAST:event_CerrarSesionMousePressed
+
+    private void NodoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NodoBActionPerformed
+
+    private void Buscar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar1MousePressed
+
+    private void Buscar3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar3MousePressed
+
+    private void Buscar2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar2MousePressed
+
         Camino.setText("");
         String nodoINI = "";
         String nodoFIN = "";
@@ -238,7 +348,7 @@ public class interfaz extends javax.swing.JFrame {
         if(NodoA.getSelectedItem().equals("Biblioteca")){
             nodoINI = "J";
             iniesp = true;
-            temp3 = "Biblioteca -> ";
+            temp3 = "Biblioteca->";
         }
         if(NodoB.getSelectedItem().equals("Biblioteca")){
             nodoFIN = "J";
@@ -248,7 +358,7 @@ public class interfaz extends javax.swing.JFrame {
         if(NodoA.getSelectedItem().equals("Auditorio menor")){
             nodoINI = "J";
             iniesp = true;
-            temp3 = "Auditorio menor ->";
+            temp3 = "Auditorio menor->";
         }
         if(NodoB.getSelectedItem().equals("Auditorio menor")){
             nodoFIN = "J";
@@ -258,7 +368,7 @@ public class interfaz extends javax.swing.JFrame {
         if(NodoA.getSelectedItem().equals("Auditorio mayor")){
             nodoINI = "H";
             iniesp = true;
-            temp3 = "Auditorio mayor ->";
+            temp3 = "Auditorio mayor->";
         }
         if(NodoB.getSelectedItem().equals("Auditorio mayor")){
             nodoFIN = "H";
@@ -268,8 +378,9 @@ public class interfaz extends javax.swing.JFrame {
         if(nodoINI == nodoFIN){
             temp3 = "";
         }
-        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino);
-        
+        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino,draw);
+        draw.setCamino(camino);
+        draw.ponerCamino();
         if(iniesp && !finesp){
             Nodo temp = camino.getCabeza().getSiguiente();
             
@@ -346,22 +457,23 @@ public class interfaz extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_BuscarMousePressed
+    }//GEN-LAST:event_Buscar2MousePressed
 
-    private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
-        if(check == false){
-            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));   
-            check = true;
+    private void AdminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdminMousePressed
+        if(perm){
+            sesion = null;
+            JFrame frame = this;
+            ADMIN adminventana = new ADMIN(grafo);
+            adminventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            adminventana.setVisible(true);
+            Timer timer = new Timer(10, new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    frame.setVisible(false);
+                }
+            });
+            timer.start();
         }
-        else {
-            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Checked-removebg-preview.png")));
-            check = false;
-        }
-    }//GEN-LAST:event_CheckMousePressed
-
-    private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CerrarSesionMousePressed
+    }//GEN-LAST:event_AdminMousePressed
 
     private void poblarComponentes() {
     Nodo temp = cargar.getCabeza();
@@ -376,8 +488,12 @@ public class interfaz extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Admin;
+    private javax.swing.JLabel AdminText;
     private javax.swing.JLabel Bienvenida;
-    private javax.swing.JPanel Buscar;
+    private javax.swing.JPanel Buscar1;
+    private javax.swing.JPanel Buscar2;
+    private javax.swing.JPanel Buscar3;
     private javax.swing.JTextArea Camino;
     private javax.swing.JPanel CerrarSesion;
     private javax.swing.JLabel Check;
@@ -394,12 +510,13 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel dndva1;
     private javax.swing.JLabel dndviene;
     private javax.swing.JLabel dndviene1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }

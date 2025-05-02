@@ -24,7 +24,6 @@ public class Arista{
         this.fin=fin;
         this.peso=peso;
         this.escaleras = escaleras;
-        
     }
 
     public boolean isEscaleras() {

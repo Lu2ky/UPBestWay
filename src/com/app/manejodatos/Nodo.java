@@ -13,6 +13,8 @@ public class Nodo{
     private int id;
     private String nombre;
     private Nodo siguiente;
+    private int x;
+    private int y;
 
     public Nodo(String nombre) {
         this.nombre = nombre;
@@ -48,4 +50,21 @@ public class Nodo{
     public String getNombre() {
         return nombre;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    
 }

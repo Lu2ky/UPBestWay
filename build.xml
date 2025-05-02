@@ -73,9 +73,9 @@
     
     
 <target name="-post-jar">
-    <property name="store.jar.name" value="GrafosProyecto"/>
+    <property name="store.jar.name" value="UPBestWay"/>
  
-    <property name="store.dir" value="GrafosProyecto"/>
+    <property name="store.dir" value="Lib"/>
     <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>
  
     <echo message="Packaging ${application.title} into a single JAR at ${store.jar}"/>
