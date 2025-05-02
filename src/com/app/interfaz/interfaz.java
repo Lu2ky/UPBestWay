@@ -39,7 +39,8 @@ public class interfaz extends javax.swing.JFrame {
     Drawer draw = null;
     ListaEnlazada cargar = null;
     
-    public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {    
+    public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {  
+        
         FlatLightLaf.setup();
         cox = coxload;
         
@@ -47,7 +48,7 @@ public class interfaz extends javax.swing.JFrame {
         cargar = grafo.getNodos();
         this.perm = perm;
         initComponents();
-        draw = new Drawer(perm,cox,null,grafo.getNodos(),grafo.getAristas());
+        draw = new Drawer(false,cox,null,grafo.getNodos(),grafo.getAristas());
         jPanel5.setLayout(new BorderLayout());
         jPanel5.add(draw,BorderLayout.CENTER);
         jPanel5.setVisible(true);
@@ -149,7 +150,7 @@ public class interfaz extends javax.swing.JFrame {
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
-        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 610, 90));
+        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 660, 90));
 
         dndviene.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene.setText("Escaleras");
@@ -281,9 +282,9 @@ public class interfaz extends javax.swing.JFrame {
         jPanel5.setEnabled(false);
         jPanel5.setFocusable(false);
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 830, 900));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 30, 1090, 1080));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 30, 830, 1080));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1920, 1110));
 
@@ -463,7 +464,7 @@ public class interfaz extends javax.swing.JFrame {
         if(perm){
             sesion = null;
             JFrame frame = this;
-            ADMIN adminventana = new ADMIN(grafo);
+            ADMIN adminventana = new ADMIN(grafo,cox);
             adminventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
             adminventana.setVisible(true);
             Timer timer = new Timer(10, new ActionListener() {

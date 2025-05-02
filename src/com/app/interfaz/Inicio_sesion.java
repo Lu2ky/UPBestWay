@@ -151,7 +151,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
 
         IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
         IniciarSesionTexto1.setText(bundle.getString("Inicio_sesion.IniciarSesionTexto1.text")); // NOI18N
-        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 270, -1));
+        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
