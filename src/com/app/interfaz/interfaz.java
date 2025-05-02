@@ -269,7 +269,7 @@ public class interfaz extends javax.swing.JFrame {
         Buscar3.setLayout(new java.awt.GridBagLayout());
         Buscar2.add(Buscar3, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 740, 170, 70));
+        jPanel3.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 740, 170, 70));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 1080));
 
@@ -335,7 +335,128 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_Buscar3MousePressed
 
     private void Buscar2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar2MousePressed
-        // TODO add your handling code here:
+
+        Camino.setText("");
+        String nodoINI = "";
+        String nodoFIN = "";
+        nodoINI = (String) NodoA.getSelectedItem();
+        nodoFIN = (String) NodoB.getSelectedItem();
+        Boolean iniesp = false;
+        Boolean finesp = false;
+        String temp3 = "";
+        String temp4 = "";
+        if(NodoA.getSelectedItem().equals("Biblioteca")){
+            nodoINI = "J";
+            iniesp = true;
+            temp3 = "Biblioteca->";
+        }
+        if(NodoB.getSelectedItem().equals("Biblioteca")){
+            nodoFIN = "J";
+            finesp = true;
+            temp4 = "Biblioteca";
+        }
+        if(NodoA.getSelectedItem().equals("Auditorio menor")){
+            nodoINI = "J";
+            iniesp = true;
+            temp3 = "Auditorio menor->";
+        }
+        if(NodoB.getSelectedItem().equals("Auditorio menor")){
+            nodoFIN = "J";
+            finesp = true;
+            temp4 = "Auditorio menor";
+        }
+        if(NodoA.getSelectedItem().equals("Auditorio mayor")){
+            nodoINI = "H";
+            iniesp = true;
+            temp3 = "Auditorio mayor->";
+        }
+        if(NodoB.getSelectedItem().equals("Auditorio mayor")){
+            nodoFIN = "H";
+            finesp = true;
+            temp4 = "Auditorio mayor";
+        }
+        if(nodoINI == nodoFIN){
+            temp3 = "";
+        }
+        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino,draw);
+        draw.setCamino(camino);
+        draw.ponerCamino();
+        if(iniesp && !finesp){
+            Nodo temp = camino.getCabeza().getSiguiente();
+            
+            while(temp != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
+            
+                temp = temp.getSiguiente();
+                if(temp != null){
+                    temp3 = temp3 + "->";
+                }
+            }
+        }
+        if(finesp && !iniesp){
+            Nodo temp = camino.getCabeza();
+            while(temp.getSiguiente() != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
+                temp = temp.getSiguiente();
+                if(temp != null){
+                    temp3 = temp3 + "->";
+                }
+                if(temp.getSiguiente() == null){
+                    temp3 = temp3 + temp4;
+                    break;
+                }
+            }
+        }
+        if(!iniesp && !finesp){
+             Nodo temp = camino.getCabeza();
+            
+            while(temp != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
+            
+            temp = temp.getSiguiente();
+            if(temp != null){
+                temp3 = temp3 + "->";
+                }
+            }
+        }
+        if(iniesp && finesp){
+            Nodo temp = camino.getCabeza().getSiguiente();
+            while(temp.getSiguiente() != null){
+                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+                    Camino.setText("Se encuentra sobre el mismo nodo");
+                    break;
+                }
+                temp3 = temp3 + temp.getNombre();
+                temp = temp.getSiguiente();
+                if(temp != null){
+                    temp3 = temp3 + "->";
+                }
+                if(temp.getSiguiente() == null){
+                    temp3 = temp3 + temp4;
+                    break;
+                }
+            }
+        }
+        if(camino.getSize() > 0){
+            Camino.append(temp3);
+        }
+        
+        
+        
+        
+        
     }//GEN-LAST:event_Buscar2MousePressed
 
     private void AdminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdminMousePressed

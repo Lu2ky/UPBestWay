@@ -4,6 +4,7 @@
  */
 package com.app.interfaz;
 
+import com.app.manejodatos.Grafo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -13,12 +14,19 @@ import javax.swing.Timer;
  *
  * @author ADMIN
  */
+
+    
+        
+        
 public class ADMIN extends javax.swing.JFrame {
 
     /**
      * Creates new form ADMIN
      */
-    public ADMIN() {
+    private Grafo grafoload;
+    
+    public ADMIN(Grafo grafo) {
+        grafoload= grafo;
         initComponents();
     }
 
