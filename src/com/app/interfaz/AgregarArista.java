@@ -32,8 +32,8 @@ public class AgregarArista extends javax.swing.JFrame {
         LogoN3 = new javax.swing.JLabel();
         LogoN4 = new javax.swing.JLabel();
         dndva2 = new javax.swing.JLabel();
-        NodoB1 = new combo_suggestion.ComboBoxSuggestion();
-        NodoA1 = new combo_suggestion.ComboBoxSuggestion();
+        NodoFinal = new combo_suggestion.ComboBoxSuggestion();
+        NodoInicial = new combo_suggestion.ComboBoxSuggestion();
         Buscar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -44,6 +44,7 @@ public class AgregarArista extends javax.swing.JFrame {
         Buscar1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,23 +73,23 @@ public class AgregarArista extends javax.swing.JFrame {
         dndva2.setText("Edificio final");
         jPanel3.add(dndva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 190, 40));
 
-        NodoB1.setBackground(new java.awt.Color(140, 0, 0));
-        NodoB1.setBorder(null);
-        NodoB1.setMaximumRowCount(5);
-        NodoB1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        NodoB1.addActionListener(new java.awt.event.ActionListener() {
+        NodoFinal.setBackground(new java.awt.Color(140, 0, 0));
+        NodoFinal.setBorder(null);
+        NodoFinal.setMaximumRowCount(5);
+        NodoFinal.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        NodoFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NodoB1ActionPerformed(evt);
+                NodoFinalActionPerformed(evt);
             }
         });
-        jPanel3.add(NodoB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
+        jPanel3.add(NodoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
 
-        NodoA1.setBackground(new java.awt.Color(140, 0, 0));
-        NodoA1.setBorder(null);
-        NodoA1.setMaximumRowCount(5);
-        NodoA1.setFocusCycleRoot(true);
-        NodoA1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jPanel3.add(NodoA1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
+        NodoInicial.setBackground(new java.awt.Color(140, 0, 0));
+        NodoInicial.setBorder(null);
+        NodoInicial.setMaximumRowCount(5);
+        NodoInicial.setFocusCycleRoot(true);
+        NodoInicial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jPanel3.add(NodoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
         Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -104,7 +105,7 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Buscar.add(jPanel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 610, 170, 70));
+        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 170, 70));
 
         dndviene2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene2.setText("Edificio Inicial ");
@@ -149,16 +150,19 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Buscar1.add(jPanel5, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 170, 70));
+        jPanel3.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 620, 170, 70));
+
+        jTextField1.setText("jTextField1");
+        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 190, 60));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NodoB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoB1ActionPerformed
+    private void NodoFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoFinalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NodoB1ActionPerformed
+    }//GEN-LAST:event_NodoFinalActionPerformed
 
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
  
@@ -211,8 +215,8 @@ public class AgregarArista extends javax.swing.JFrame {
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
-    private combo_suggestion.ComboBoxSuggestion NodoA1;
-    private combo_suggestion.ComboBoxSuggestion NodoB1;
+    private combo_suggestion.ComboBoxSuggestion NodoFinal;
+    private combo_suggestion.ComboBoxSuggestion NodoInicial;
     private javax.swing.JLabel dndva2;
     private javax.swing.JLabel dndviene2;
     private javax.swing.JLabel jLabel1;
@@ -222,5 +226,6 @@ public class AgregarArista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

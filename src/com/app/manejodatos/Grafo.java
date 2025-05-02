@@ -38,7 +38,7 @@ public class Grafo {
         loadDB(cox);
     }
     
-    public void agregarNodo(Nodo nuevo){
+    public  void agregarNodo(Nodo nuevo){
         Nodos.agregarNodo(nuevo);
     }
     public void agregarArista(Arista nuevo){
