@@ -41,7 +41,6 @@ public class AgregarNodos extends javax.swing.JFrame {
         User1 = new javax.swing.JTextField();
         Buscar4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        label = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
         Bienvenida3 = new javax.swing.JLabel();
         Nombre_texto = new javax.swing.JTextField();
@@ -50,6 +49,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         SeparadorUser7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         Buscar3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -121,10 +121,6 @@ public class AgregarNodos extends javax.swing.JFrame {
 
         jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 680, 170, 70));
 
-        label.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        label.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
-        jPanel1.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, -1));
-
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida2.setText("¡Bienvenido(a)!");
         jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
@@ -167,7 +163,7 @@ public class AgregarNodos extends javax.swing.JFrame {
                 User3ActionPerformed(evt);
             }
         });
-        jPanel1.add(User3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 120, 30));
+        jPanel1.add(User3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 120, 30));
 
         SeparadorUser1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -179,13 +175,18 @@ public class AgregarNodos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 150, 870));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 1050, 1100));
 
         jLabel8.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel8.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 800));
+        jLabel1.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Ingrese la Posicion");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 510, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         Buscar3.setBackground(new java.awt.Color(140, 0, 0));
         Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -241,7 +242,7 @@ public class AgregarNodos extends javax.swing.JFrame {
     private void Agergar_Nodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Agergar_Nodo
        String nombrenodo = Nombre_texto.getText() ;
        Nodo nodonuevo = new Nodo(01,nombrenodo,null);
-       Grafo.agregarNodo(nodonuevo); 
+     
     }//GEN-LAST:event_Agergar_Nodo
 
     private void Nombre_textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nombre_textoActionPerformed
@@ -301,11 +302,11 @@ public class AgregarNodos extends javax.swing.JFrame {
     private javax.swing.JPanel SeparadorUser7;
     private javax.swing.JTextField User1;
     private javax.swing.JTextField User3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel label;
     // End of variables declaration//GEN-END:variables
 }
