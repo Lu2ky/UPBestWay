@@ -385,7 +385,6 @@ public class Inicio_sesion extends javax.swing.JFrame {
      */
     public static void main(String args[]) {    
         FlatLightLaf.setup();
-        
         grafo = new Grafo(cox);
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

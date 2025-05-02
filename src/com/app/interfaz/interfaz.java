@@ -17,6 +17,7 @@ import com.app.manejodatos.Nodo;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -29,26 +30,31 @@ public class interfaz extends javax.swing.JFrame {
      * Creates new form intrefas
      */
     //831x940
-    
-    ListaEnlazada cargar = null;
+
     Grafo grafo = null;
     boolean check = true;
     Sesion sesion = null;
     Conexion cox = null;
     Boolean perm = false;
     Drawer draw = null;
+    ListaEnlazada cargar = null;
     
     public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {    
         FlatLightLaf.setup();
         cox = coxload;
-        cargar = coxload.getNodos();
+        
         grafo = grafoload;
+        cargar = grafo.getNodos();
         this.perm = perm;
         initComponents();
-        draw = new Drawer(perm,cox,null,cargar);
+        draw = new Drawer(perm,cox,null,grafo.getNodos(),grafo.getAristas());
         jPanel5.setLayout(new BorderLayout());
         jPanel5.add(draw,BorderLayout.CENTER);
         jPanel5.setVisible(true);
+        if(perm){
+            Admin.setBackground(new java.awt.Color(144,0,0));
+            AdminText.setForeground(Color.WHITE);
+        }
                 
         
         this.sesion = sesion;
@@ -89,12 +95,16 @@ public class interfaz extends javax.swing.JFrame {
         Ruta = new javax.swing.JLabel();
         NodoB = new combo_suggestion.ComboBoxSuggestion();
         NodoA = new combo_suggestion.ComboBoxSuggestion();
-        Buscar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Admin = new javax.swing.JPanel();
+        AdminText = new javax.swing.JLabel();
+        Buscar1 = new javax.swing.JPanel();
         dndviene1 = new javax.swing.JLabel();
         CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
+        Buscar2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        Buscar3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         Runner = new javax.swing.JButton();
@@ -184,21 +194,32 @@ public class interfaz extends javax.swing.JFrame {
         NodoA.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel3.add(NodoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
-        Buscar.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+        Admin.setBackground(new java.awt.Color(255, 190, 15));
+        Admin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Admin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BuscarMousePressed(evt);
+                AdminMousePressed(evt);
             }
         });
-        Buscar.setLayout(new java.awt.GridBagLayout());
+        Admin.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Buscar");
-        Buscar.add(jLabel1, new java.awt.GridBagConstraints());
+        AdminText.setBackground(new java.awt.Color(255, 190, 15));
+        AdminText.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        AdminText.setForeground(new java.awt.Color(255, 190, 15));
+        AdminText.setText("Modificar");
+        Admin.add(AdminText, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 720, 170, 70));
+        Buscar1.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar1MousePressed(evt);
+            }
+        });
+        Buscar1.setLayout(new java.awt.GridBagLayout());
+        Admin.add(Buscar1, new java.awt.GridBagConstraints());
+
+        jPanel3.add(Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 740, 170, 70));
 
         dndviene1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene1.setText("Edificio Inicial ");
@@ -223,6 +244,32 @@ public class interfaz extends javax.swing.JFrame {
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida.setText("¡Bienvenido(a)!");
         jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
+
+        Buscar2.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar2MousePressed(evt);
+            }
+        });
+        Buscar2.setLayout(new java.awt.GridBagLayout());
+
+        jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Buscar");
+        Buscar2.add(jLabel3, new java.awt.GridBagConstraints());
+
+        Buscar3.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar3MousePressed(evt);
+            }
+        });
+        Buscar3.setLayout(new java.awt.GridBagLayout());
+        Buscar2.add(Buscar3, new java.awt.GridBagConstraints());
+
+        jPanel3.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 740, 170, 70));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 1080));
 
@@ -249,130 +296,6 @@ public class interfaz extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void BuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMousePressed
-        Camino.setText("");
-        String nodoINI = "";
-        String nodoFIN = "";
-        nodoINI = (String) NodoA.getSelectedItem();
-        nodoFIN = (String) NodoB.getSelectedItem();
-        Boolean iniesp = false;
-        Boolean finesp = false;
-        String temp3 = "";
-        String temp4 = "";
-        if(NodoA.getSelectedItem().equals("Biblioteca")){
-            nodoINI = "J";
-            iniesp = true;
-            temp3 = "Biblioteca->";
-        }
-        if(NodoB.getSelectedItem().equals("Biblioteca")){
-            nodoFIN = "J";
-            finesp = true;
-            temp4 = "Biblioteca";
-        }
-        if(NodoA.getSelectedItem().equals("Auditorio menor")){
-            nodoINI = "J";
-            iniesp = true;
-            temp3 = "Auditorio menor->";
-        }
-        if(NodoB.getSelectedItem().equals("Auditorio menor")){
-            nodoFIN = "J";
-            finesp = true;
-            temp4 = "Auditorio menor";
-        }
-        if(NodoA.getSelectedItem().equals("Auditorio mayor")){
-            nodoINI = "H";
-            iniesp = true;
-            temp3 = "Auditorio mayor->";
-        }
-        if(NodoB.getSelectedItem().equals("Auditorio mayor")){
-            nodoFIN = "H";
-            finesp = true;
-            temp4 = "Auditorio mayor";
-        }
-        if(nodoINI == nodoFIN){
-            temp3 = "";
-        }
-        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino);
-        draw.setCamino(camino);
-        draw.ponerCamino();
-        if(iniesp && !finesp){
-            Nodo temp = camino.getCabeza().getSiguiente();
-            
-            while(temp != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
-                    Camino.setText("Se encuentra sobre el mismo nodo");
-                    break;
-                }
-                temp3 = temp3 + temp.getNombre();
-            
-                temp = temp.getSiguiente();
-                if(temp != null){
-                    temp3 = temp3 + "->";
-                }
-            }
-        }
-        if(finesp && !iniesp){
-            Nodo temp = camino.getCabeza();
-            while(temp.getSiguiente() != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
-                    Camino.setText("Se encuentra sobre el mismo nodo");
-                    break;
-                }
-                temp3 = temp3 + temp.getNombre();
-                temp = temp.getSiguiente();
-                if(temp != null){
-                    temp3 = temp3 + "->";
-                }
-                if(temp.getSiguiente() == null){
-                    temp3 = temp3 + temp4;
-                    break;
-                }
-            }
-        }
-        if(!iniesp && !finesp){
-             Nodo temp = camino.getCabeza();
-            
-            while(temp != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
-                    Camino.setText("Se encuentra sobre el mismo nodo");
-                    break;
-                }
-                temp3 = temp3 + temp.getNombre();
-            
-            temp = temp.getSiguiente();
-            if(temp != null){
-                temp3 = temp3 + "->";
-                }
-            }
-        }
-        if(iniesp && finesp){
-            Nodo temp = camino.getCabeza().getSiguiente();
-            while(temp.getSiguiente() != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
-                    Camino.setText("Se encuentra sobre el mismo nodo");
-                    break;
-                }
-                temp3 = temp3 + temp.getNombre();
-                temp = temp.getSiguiente();
-                if(temp != null){
-                    temp3 = temp3 + "->";
-                }
-                if(temp.getSiguiente() == null){
-                    temp3 = temp3 + temp4;
-                    break;
-                }
-            }
-        }
-        if(camino.getSize() > 0){
-            Camino.append(temp3);
-        }
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_BuscarMousePressed
 
     private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
         if(check == false){
@@ -403,6 +326,34 @@ public class interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NodoBActionPerformed
 
+    private void Buscar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar1MousePressed
+
+    private void Buscar3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar3MousePressed
+
+    private void Buscar2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar2MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar2MousePressed
+
+    private void AdminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdminMousePressed
+        if(perm){
+            sesion = null;
+            JFrame frame = this;
+            ADMIN adminventana = new ADMIN(grafo);
+            adminventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            adminventana.setVisible(true);
+            Timer timer = new Timer(10, new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    frame.setVisible(false);
+                }
+            });
+            timer.start();
+        }
+    }//GEN-LAST:event_AdminMousePressed
+
     private void poblarComponentes() {
     Nodo temp = cargar.getCabeza();
     while(temp != null) {
@@ -416,8 +367,12 @@ public class interfaz extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Admin;
+    private javax.swing.JLabel AdminText;
     private javax.swing.JLabel Bienvenida;
-    private javax.swing.JPanel Buscar;
+    private javax.swing.JPanel Buscar1;
+    private javax.swing.JPanel Buscar2;
+    private javax.swing.JPanel Buscar3;
     private javax.swing.JTextArea Camino;
     private javax.swing.JPanel CerrarSesion;
     private javax.swing.JLabel Check;
@@ -434,8 +389,8 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel dndva1;
     private javax.swing.JLabel dndviene;
     private javax.swing.JLabel dndviene1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

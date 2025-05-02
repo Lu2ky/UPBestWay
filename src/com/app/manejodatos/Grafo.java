@@ -14,9 +14,11 @@ import com.app.manejodatos.Nodo;
 import com.app.manejodatos.ListaEnlazadaAristas;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.conexion.Conexion;
+import com.app.interfaz.Drawer;
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.awt.TextArea;
 import java.util.Arrays;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
@@ -43,34 +45,31 @@ public class Grafo {
         Aristas.agregarArista(new Arista(nuevo.getFin(),nuevo.getInicio(),nuevo.getPeso(),nuevo.isEscaleras()));
         Aristas.agregarArista(nuevo);
     }
-    public ListaEnlazada Dijkstra(String iniS, String finS, boolean escaleras,JTextArea a) {
-    Nodo ini = Nodos.obtenerNodo(iniS);
-    Nodo fn = Nodos.obtenerNodo(finS);
-    int[] distancias = new int[Nodos.getSize()];
-    ListaEnlazada visitados = new ListaEnlazada();
-    int[] padres = new int[Nodos.getSize()];
-    Arrays.fill(padres, -1);
-    Arrays.fill(distancias, Integer.MAX_VALUE);
-    distancias[ini.getId()] = 0;
+    public ListaEnlazada Dijkstra(String iniS, String finS, boolean escaleras,JTextArea a, Drawer drawerGrafo) {
+        Nodo ini = Nodos.obtenerNodo(iniS);
+        Nodo fn = Nodos.obtenerNodo(finS);
+        int[] distancias = new int[Nodos.getSize()];
+        ListaEnlazada visitados = new ListaEnlazada();
+        int[] padres = new int[Nodos.getSize()];
+        Arrays.fill(padres, -1);
+        Arrays.fill(distancias, Integer.MAX_VALUE);
+        distancias[ini.getId()] = 0;
     
-    PriorityQueue pq = new PriorityQueue();
-    ListaEnlazadaAristas vecinos = Aristas.obtenerPorInicio(ini.getNombre());
-    pq.push(new Arista(null, ini, 0,!escaleras));
-    boolean c1 = false;
+        PriorityQueue pq = new PriorityQueue();
+        ListaEnlazadaAristas vecinos = Aristas.obtenerPorInicio(ini.getNombre());
+        pq.push(new Arista(null, ini, 0,!escaleras));   
 
-    while (visitados.getSize() < Nodos.getSize() && !pq.isEmpty()) {
-        Arista act = pq.pop();
-        Nodo act1 = act.getFin();
+        while (visitados.getSize() < Nodos.getSize() && !pq.isEmpty()) {
+            Arista act = pq.pop();
+            Nodo act1 = act.getFin();
+            if (visitados.NodoPresente(act1.getNombre())) {
+                continue;
+            }
+            Nodo act2 = new Nodo( act1.getId(),act1.getNombre() , act1.getSiguiente());
+            act2.setSiguiente(null);
+            visitados.agregarNodo2(act2);
         
-        
-        if (visitados.NodoPresente(act1.getNombre())) {
-            continue;
-        }
-        Nodo act2 = new Nodo( act1.getId(),act1.getNombre() , act1.getSiguiente());
-        act2.setSiguiente(null);
-        visitados.agregarNodo2(act2);
-        
-        vecinos = Aristas.obtenerPorInicio(act1.getNombre());
+            vecinos = Aristas.obtenerPorInicio(act1.getNombre());
         Arista vec = vecinos.getCabeza();
         
         while (vec != null) {
@@ -89,18 +88,19 @@ public class Grafo {
             
             vec = vec.getSiguiente();
         }
-        c1 = true;
     }
     
     if(distancias[fn.getId()] < Integer.MAX_VALUE){
         a.append("Metros: " + distancias[fn.getId()] + ", Camino: ");
         if(distancias[fn.getId()] == 0){
             a.setText("Se encuentra sobre el mismo nodo");
+            drawerGrafo.reiniciarAristas(Aristas);
         }
     }
     
     else{
         a.append("La ruta entra " + iniS + " y " + finS + " no existe");
+        drawerGrafo.reiniciarAristas(Aristas);
     }
     return rCamino(ini, fn, padres);
 }
