@@ -182,6 +182,11 @@ public class interfaz extends javax.swing.JFrame {
         NodoA.setMaximumRowCount(5);
         NodoA.setFocusCycleRoot(true);
         NodoA.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        NodoA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NodoAActionPerformed(evt);
+            }
+        });
         jPanel3.add(NodoA, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
@@ -402,6 +407,10 @@ public class interfaz extends javax.swing.JFrame {
     private void NodoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NodoBActionPerformed
+
+    private void NodoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NodoAActionPerformed
 
     private void poblarComponentes() {
     Nodo temp = cargar.getCabeza();

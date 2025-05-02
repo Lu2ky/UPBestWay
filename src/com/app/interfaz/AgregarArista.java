@@ -44,6 +44,7 @@ public class AgregarArista extends javax.swing.JFrame {
         Buscar1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -104,7 +105,7 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Buscar.add(jPanel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 610, 170, 70));
+        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 170, 70));
 
         dndviene2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene2.setText("Edificio Inicial ");
@@ -149,7 +150,10 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Buscar1.add(jPanel5, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 610, 170, 70));
+        jPanel3.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 620, 170, 70));
+
+        jTextField1.setText("jTextField1");
+        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 190, 60));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 1080));
 
@@ -222,5 +226,6 @@ public class AgregarArista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

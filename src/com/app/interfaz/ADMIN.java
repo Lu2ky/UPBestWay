@@ -49,12 +49,13 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 150, 870));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 1360, 1120));
 
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -142,7 +143,7 @@ public class ADMIN extends javax.swing.JFrame {
 
         jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 170, 70));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 888, 850));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 888, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
