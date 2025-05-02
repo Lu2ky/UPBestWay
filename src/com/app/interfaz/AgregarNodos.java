@@ -6,6 +6,7 @@ package com.app.interfaz;
 
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.Nodo;
+import java.awt.Color;
 
 /**
  *
@@ -18,8 +19,9 @@ public class AgregarNodos extends javax.swing.JFrame {
      */
     public AgregarNodos() {
         initComponents();
+        Nombrevacio.setVisible(false);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,21 +39,20 @@ public class AgregarNodos extends javax.swing.JFrame {
         LogoN4 = new javax.swing.JLabel();
         Logo1 = new javax.swing.JLabel();
         LogoN3 = new javax.swing.JLabel();
-        Bienvenida1 = new javax.swing.JLabel();
-        User1 = new javax.swing.JTextField();
+        X = new javax.swing.JLabel();
         Buscar4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
-        Bienvenida3 = new javax.swing.JLabel();
-        Nombre_texto = new javax.swing.JTextField();
-        User3 = new javax.swing.JTextField();
+        Y = new javax.swing.JLabel();
         SeparadorUser1 = new javax.swing.JPanel();
         SeparadorUser7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        Buscar3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        Nnodo = new javax.swing.JTextField();
+        PosicionX = new javax.swing.JTextField();
+        PosicionY = new javax.swing.JTextField();
+        Nombrevacio = new javax.swing.JLabel();
 
         SeparadorUser3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -69,6 +70,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
+        jPanel1.setForeground(new java.awt.Color(255, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
@@ -83,31 +85,16 @@ public class AgregarNodos extends javax.swing.JFrame {
         LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
         jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
 
-        Bienvenida1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
-        Bienvenida1.setText("Y");
-        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 560, -1, 30));
-
-        User1.setBackground(new java.awt.Color(255, 190, 15));
-        User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        User1.setForeground(java.awt.Color.gray);
-        User1.setText(bundle.getString("crear_cuenta.User1.text")); // NOI18N
-        User1.setToolTipText(bundle.getString("crear_cuenta.User1.toolTipText")); // NOI18N
-        User1.setBorder(null);
-        User1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                User1MousePressed(evt);
-            }
-        });
-        User1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                User1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 560, 120, 30));
+        X.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        X.setText("Y");
+        jPanel1.add(X, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 560, -1, 30));
 
         Buscar4.setBackground(new java.awt.Color(140, 0, 0));
         Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Agergar_Nodo(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Agergar_Nodo(evt);
             }
@@ -125,129 +112,130 @@ public class AgregarNodos extends javax.swing.JFrame {
         Bienvenida2.setText("¡Bienvenido(a)!");
         jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
-        Bienvenida3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
-        Bienvenida3.setText("X");
-        jPanel1.add(Bienvenida3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 560, -1, 30));
-
-        Nombre_texto.setBackground(new java.awt.Color(255, 190, 15));
-        Nombre_texto.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        Nombre_texto.setForeground(java.awt.Color.gray);
-        Nombre_texto.setText(bundle.getString("crear_cuenta.User1.text")); // NOI18N
-        Nombre_texto.setToolTipText(bundle.getString("crear_cuenta.User1.toolTipText")); // NOI18N
-        Nombre_texto.setBorder(null);
-        Nombre_texto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                Nombre_textoMousePressed(evt);
-            }
-        });
-        Nombre_texto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Nombre_textoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(Nombre_texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 540, 30));
-
-        User3.setBackground(new java.awt.Color(255, 190, 15));
-        User3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        User3.setForeground(java.awt.Color.gray);
-        User3.setText(bundle.getString("crear_cuenta.User1.text")); // NOI18N
-        User3.setToolTipText(bundle.getString("crear_cuenta.User1.toolTipText")); // NOI18N
-        User3.setBorder(null);
-        User3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                User3MousePressed(evt);
-            }
-        });
-        User3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                User3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(User3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 120, 30));
+        Y.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        Y.setText("X");
+        jPanel1.add(Y, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 560, -1, 30));
 
         SeparadorUser1.setBackground(new java.awt.Color(0, 0, 0));
 
         SeparadorUser7.setBackground(new java.awt.Color(0, 0, 0));
         SeparadorUser1.add(SeparadorUser7);
 
-        jPanel1.add(SeparadorUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 500, 1));
+        jPanel1.add(SeparadorUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 500, 1));
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, -20, 970, 1100));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, -20, 1220, 1100));
 
         jLabel8.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel8.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Ingrese la Posicion");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, 510, 50));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 510, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
-
-        Buscar3.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar3.addMouseListener(new java.awt.event.MouseAdapter() {
+        Nnodo.setBackground(new java.awt.Color(255, 190, 15));
+        Nnodo.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Nnodo.setForeground(java.awt.Color.gray);
+        Nnodo.setText("Ingrese el nombre del nodo");
+        Nnodo.setBorder(null);
+        Nnodo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Buscar3Agregarnodo(evt);
+                Limpiar(evt);
             }
         });
-        Buscar3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Buscar3popup(evt);
+        Nnodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NnodoActionPerformed(evt);
             }
         });
-        Buscar3.setLayout(new java.awt.GridBagLayout());
+        jPanel1.add(Nnodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 500, 40));
 
-        jLabel5.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Agregar ");
-        Buscar3.add(jLabel5, new java.awt.GridBagConstraints());
+        PosicionX.setBackground(new java.awt.Color(255, 190, 15));
+        PosicionX.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        PosicionX.setForeground(java.awt.Color.gray);
+        PosicionX.setText("Ingrese la posicion del Nodo");
+        PosicionX.setBorder(null);
+        PosicionX.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PosicionXMousePressed(evt);
+            }
+        });
+        jPanel1.add(PosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, 330, 30));
 
-        getContentPane().add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 170, 70));
+        PosicionY.setBackground(new java.awt.Color(255, 190, 15));
+        PosicionY.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        PosicionY.setForeground(java.awt.Color.gray);
+        PosicionY.setText("Ingrese la posicion del Nodo");
+        PosicionY.setBorder(null);
+        PosicionY.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PosicionYMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PosicionYMousePressed(evt);
+            }
+        });
+        PosicionY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PosicionYActionPerformed(evt);
+            }
+        });
+        jPanel1.add(PosicionY, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 560, -1, 30));
+
+        Nombrevacio.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        Nombrevacio.setForeground(new java.awt.Color(204, 0, 0));
+        Nombrevacio.setText("El nombre del nodo no puede estar vacio");
+        jPanel1.add(Nombrevacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 830, 270, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void User1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User1MousePressed
-    }//GEN-LAST:event_User1MousePressed
-
-    private void User1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_User1ActionPerformed
-
-    private void Buscar3Agregarnodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar3Agregarnodo
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Buscar3Agregarnodo
-
-    private void Buscar3popup(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Buscar3popup
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Buscar3popup
-
-    private void Nombre_textoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Nombre_textoMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Nombre_textoMousePressed
-
-    private void User3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User3MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_User3MousePressed
-
-    private void User3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_User3ActionPerformed
-
     private void Agergar_Nodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Agergar_Nodo
-       String nombrenodo = Nombre_texto.getText() ;
-       Nodo nodonuevo = new Nodo(01,nombrenodo,null);
-     
+        String nombreNodo = Nnodo.getText();
+        if (nombreNodo == null || Nnodo.getText().equals("")) {
+            Nombrevacio.setVisible(true);
+            
+            return;
+        }
+        Nodo nodoNuevo = new Nodo(nombreNodo);
+        grafo.agregarNodo(nodoNuevo);
+       
+       
     }//GEN-LAST:event_Agergar_Nodo
 
-    private void Nombre_textoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nombre_textoActionPerformed
+    private void NnodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NnodoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Nombre_textoActionPerformed
+    }//GEN-LAST:event_NnodoActionPerformed
+
+    private void Limpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Limpiar
+        Nnodo.setText("");
+         Nnodo.setForeground(Color.black);
+
+    }//GEN-LAST:event_Limpiar
+
+    private void PosicionYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PosicionYActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PosicionYActionPerformed
+
+    private void PosicionXMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosicionXMousePressed
+        PosicionX.setText("");
+        PosicionX.setForeground(Color.black);
+    }//GEN-LAST:event_PosicionXMousePressed
+
+    private void PosicionYMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosicionYMousePressed
+        PosicionY.setText("");
+        PosicionY.setForeground(Color.black);
+    }//GEN-LAST:event_PosicionYMousePressed
+
+    private void PosicionYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosicionYMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PosicionYMouseClicked
 
     /**
      * @param args the command line arguments
@@ -285,25 +273,24 @@ public class AgregarNodos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Bienvenida1;
     private javax.swing.JLabel Bienvenida2;
-    private javax.swing.JLabel Bienvenida3;
-    private javax.swing.JPanel Buscar3;
     private javax.swing.JPanel Buscar4;
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
-    private javax.swing.JTextField Nombre_texto;
+    private javax.swing.JTextField Nnodo;
+    private javax.swing.JLabel Nombrevacio;
+    private javax.swing.JTextField PosicionX;
+    private javax.swing.JTextField PosicionY;
     private javax.swing.JPanel SeparadorUser1;
     private javax.swing.JPanel SeparadorUser3;
     private javax.swing.JPanel SeparadorUser4;
     private javax.swing.JPanel SeparadorUser5;
     private javax.swing.JPanel SeparadorUser6;
     private javax.swing.JPanel SeparadorUser7;
-    private javax.swing.JTextField User1;
-    private javax.swing.JTextField User3;
+    private javax.swing.JLabel X;
+    private javax.swing.JLabel Y;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

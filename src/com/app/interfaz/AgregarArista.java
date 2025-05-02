@@ -4,17 +4,48 @@
  */
 package com.app.interfaz;
 
+import com.app.manejodatos.Nodo;
+import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
+import com.app.manejodatos.Grafo;
+import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.Nodo;
+
 /**
  *
  * @author ADMIN
  */
 public class AgregarArista extends javax.swing.JFrame {
-
+    
+    Grafo grafo = null;
+    boolean check = true;
+    Sesion sesion = null;
+    Conexion cox = null;
+    Boolean perm = false;
+    Drawer draw = null;
+    ListaEnlazada cargar = null;
     /**
      * Creates new form AgregarArista
      */
-    public AgregarArista() {
+    public AgregarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();
+        cox = coxload;
+        
+        grafo = grafoload;
+        cargar = grafo.getNodos();
+        this.perm = perm;
+        initComponents();
+        draw = new Drawer(perm,cox,null,grafo.getNodos(),grafo.getAristas());
+         this.sesion = sesion;
+        Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+        NodoInicial.addItem("Biblioteca");
+        NodoInicial.addItem("Auditorio menor");
+        NodoInicial.addItem("Auditorio mayor");
+        NodoFinal.addItem("Biblioteca");
+        NodoFinal.addItem("Auditorio menor");
+        NodoFinal.addItem("Auditorio mayor");
+        
+        poblarComponentes();
     }
 
     /**
@@ -173,6 +204,14 @@ public class AgregarArista extends javax.swing.JFrame {
                 new AgregarArista().setVisible(true);
             }
         });
+    }
+    private void poblarComponentes() {
+    Nodo temp = cargar.getCabeza();
+    while(temp != null) {
+        NodoInicial.addItem(temp.getNombre());
+        NodoFinal.addItem(temp.getNombre());
+        temp = temp.getSiguiente();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
