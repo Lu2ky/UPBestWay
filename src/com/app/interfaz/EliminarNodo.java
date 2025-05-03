@@ -5,18 +5,43 @@
 package com.app.interfaz;
 
 
-import com.app.manejodatos.*;
+import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
+import com.app.manejodatos.Grafo;
+import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.Nodo;
+
 /**
  *
  * @author ADMIN
  */
 public class EliminarNodo extends javax.swing.JFrame {
-
+    
+    Grafo grafo = null;
+    boolean check = true;
+    Sesion sesion = null;
+    Conexion cox = null;
+    Boolean perm = false;
+    Drawer draw = null;
+    ListaEnlazada cargar = null;
     /**
      * Creates new form EliminarNodo
      */
-    public EliminarNodo() {
+    public EliminarNodo(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {
         initComponents();
+        cox = coxload;
+        
+        grafo = grafoload;
+        cargar = grafo.getNodos();
+        this.perm = perm;
+        initComponents();
+        draw = new Drawer(perm,cox,null,grafo.getNodos(),grafo.getAristas());
+         this.sesion = sesion;
+        Bienvenida2.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+        Nodoeliminar.addItem("Biblioteca");
+        Nodoeliminar.addItem("Auditorio menor");
+        Nodoeliminar.addItem("Auditorio mayor");
+        
     }
 
     /**
@@ -36,7 +61,7 @@ public class EliminarNodo extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        NodoInicial = new combo_suggestion.ComboBoxSuggestion();
+        Nodoeliminar = new combo_suggestion.ComboBoxSuggestion();
         a = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,7 +85,7 @@ public class EliminarNodo extends javax.swing.JFrame {
         Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Buscar4Agergar_Nodo(evt);
+                EliminarNodo(evt);
             }
         });
         Buscar4.setLayout(new java.awt.GridBagLayout());
@@ -81,12 +106,12 @@ public class EliminarNodo extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 150, 870));
 
-        NodoInicial.setBackground(new java.awt.Color(140, 0, 0));
-        NodoInicial.setBorder(null);
-        NodoInicial.setMaximumRowCount(5);
-        NodoInicial.setFocusCycleRoot(true);
-        NodoInicial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jPanel1.add(NodoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 220, 50));
+        Nodoeliminar.setBackground(new java.awt.Color(140, 0, 0));
+        Nodoeliminar.setBorder(null);
+        Nodoeliminar.setMaximumRowCount(5);
+        Nodoeliminar.setFocusCycleRoot(true);
+        Nodoeliminar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jPanel1.add(Nodoeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 220, 50));
 
         a.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         a.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
@@ -110,11 +135,10 @@ public class EliminarNodo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Buscar4Agergar_Nodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar4Agergar_Nodo
-        String nombrenodo = Nombre_texto.getText() ;
-        Nodo nodonuevo = new Nodo(01,nombrenodo,null);
-        Grafo.agregarNodo(nodonuevo);
-    }//GEN-LAST:event_Buscar4Agergar_Nodo
+    private void EliminarNodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarNodo
+        Object Elim = Nodoeliminar.getSelectedItem();
+        Elim = null;
+    }//GEN-LAST:event_EliminarNodo
 
     /**
      * @param args the command line arguments
@@ -157,7 +181,7 @@ public class EliminarNodo extends javax.swing.JFrame {
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
-    private combo_suggestion.ComboBoxSuggestion NodoInicial;
+    private combo_suggestion.ComboBoxSuggestion Nodoeliminar;
     private javax.swing.JLabel a;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

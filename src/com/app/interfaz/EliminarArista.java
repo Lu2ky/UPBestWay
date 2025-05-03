@@ -8,8 +8,6 @@ import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
-import com.app.manejodatos.Nodo;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -19,7 +17,7 @@ import javax.swing.Timer;
  *
  * @author ADMIN
  */
-public class AgregarArista extends javax.swing.JFrame {
+public class EliminarArista extends javax.swing.JFrame {
 
     Grafo grafo = null;
     boolean check = true;
@@ -30,9 +28,9 @@ public class AgregarArista extends javax.swing.JFrame {
     ListaEnlazada cargar = null;
 
     /**
-     * Creates new form AgregarArista
+     * Creates new form EliminarArista
      */
-    public AgregarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
+    public EliminarArista() {
         initComponents();
         cox = coxload;
 
@@ -43,14 +41,12 @@ public class AgregarArista extends javax.swing.JFrame {
         draw = new Drawer(perm, cox, null, grafo.getNodos(), grafo.getAristas());
         this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
-        NodoInicial.addItem("Biblioteca");
-        NodoInicial.addItem("Auditorio menor");
-        NodoInicial.addItem("Auditorio mayor");
-        NodoFinal.addItem("Biblioteca");
-        NodoFinal.addItem("Auditorio menor");
-        NodoFinal.addItem("Auditorio mayor");
-
-        poblarComponentes();
+        NodoI.addItem("Biblioteca");
+        NodoI.addItem("Auditorio menor");
+        NodoI.addItem("Auditorio mayor");
+        NodoF.addItem("Biblioteca");
+        NodoF.addItem("Auditorio menor");
+        NodoF.addItem("Auditorio mayor");
     }
 
     /**
@@ -62,14 +58,13 @@ public class AgregarArista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Logo1 = new javax.swing.JLabel();
         LogoN3 = new javax.swing.JLabel();
         LogoN4 = new javax.swing.JLabel();
         dndva2 = new javax.swing.JLabel();
-        NodoFinal = new combo_suggestion.ComboBoxSuggestion();
-        NodoInicial = new combo_suggestion.ComboBoxSuggestion();
+        NodoF = new combo_suggestion.ComboBoxSuggestion();
+        NodoI = new combo_suggestion.ComboBoxSuggestion();
         Buscar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -77,17 +72,10 @@ public class AgregarArista extends javax.swing.JFrame {
         CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        SeparadorPass = new javax.swing.JPanel();
-        Ponderado = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel4.setBackground(new java.awt.Color(140, 0, 0));
-        jPanel4.setFocusable(false);
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 1350, 1180));
 
         jPanel3.setBackground(new java.awt.Color(255, 190, 15));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -108,28 +96,23 @@ public class AgregarArista extends javax.swing.JFrame {
         dndva2.setText("Edificio final");
         jPanel3.add(dndva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 190, 40));
 
-        NodoFinal.setBackground(new java.awt.Color(140, 0, 0));
-        NodoFinal.setBorder(null);
-        NodoFinal.setMaximumRowCount(5);
-        NodoFinal.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        NodoFinal.addActionListener(new java.awt.event.ActionListener() {
+        NodoF.setBackground(new java.awt.Color(140, 0, 0));
+        NodoF.setBorder(null);
+        NodoF.setMaximumRowCount(5);
+        NodoF.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        NodoF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NodoFinalActionPerformed(evt);
+                NodoFActionPerformed(evt);
             }
         });
-        jPanel3.add(NodoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
+        jPanel3.add(NodoF, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
 
-        NodoInicial.setBackground(new java.awt.Color(140, 0, 0));
-        NodoInicial.setBorder(null);
-        NodoInicial.setMaximumRowCount(5);
-        NodoInicial.setFocusCycleRoot(true);
-        NodoInicial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        NodoInicial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NodoInicialActionPerformed(evt);
-            }
-        });
-        jPanel3.add(NodoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
+        NodoI.setBackground(new java.awt.Color(140, 0, 0));
+        NodoI.setBorder(null);
+        NodoI.setMaximumRowCount(5);
+        NodoI.setFocusCycleRoot(true);
+        NodoI.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jPanel3.add(NodoI, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
         Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -137,7 +120,7 @@ public class AgregarArista extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Agregar");
+        jLabel1.setText("Eliminar");
         Buscar.add(jLabel1, new java.awt.GridBagConstraints());
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
@@ -145,7 +128,7 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Buscar.add(jPanel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 670, 170, 70));
+        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, 170, 70));
 
         dndviene2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene2.setText("Edificio Inicial ");
@@ -171,34 +154,19 @@ public class AgregarArista extends javax.swing.JFrame {
         Bienvenida.setText("¡Bienvenido(a)!");
         jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Ponderado");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, 210, -1));
-
-        SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel3.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 500, 1));
-
-        Ponderado.setBackground(new java.awt.Color(255, 190, 15));
-        Ponderado.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        Ponderado.setForeground(java.awt.Color.gray);
-        Ponderado.setText("Ingrese el ponderado de la arista");
-        Ponderado.setBorder(null);
-        Ponderado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PonderadoActionPerformed(evt);
-            }
-        });
-        jPanel3.add(Ponderado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 560, 360, 60));
-
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 1080));
+
+        jPanel4.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel4.setFocusable(false);
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, -20, 1350, 1200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NodoFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoFinalActionPerformed
+    private void NodoFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NodoFinalActionPerformed
+    }//GEN-LAST:event_NodoFActionPerformed
 
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
         sesion = null;
@@ -213,16 +181,6 @@ public class AgregarArista extends javax.swing.JFrame {
         });
         timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
-
-    private void PonderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PonderadoActionPerformed
-        Ponderado.setText("");
-        Ponderado.setForeground(Color.black);
-
-    }//GEN-LAST:event_PonderadoActionPerformed
-
-    private void NodoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoInicialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NodoInicialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,31 +199,22 @@ public class AgregarArista extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarArista().setVisible(true);
+                new EliminarArista().setVisible(true);
             }
         });
-    }
-
-    private void poblarComponentes() {
-        Nodo temp = cargar.getCabeza();
-        while (temp != null) {
-            NodoInicial.addItem(temp.getNombre());
-            NodoFinal.addItem(temp.getNombre());
-            temp = temp.getSiguiente();
-        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -275,15 +224,12 @@ public class AgregarArista extends javax.swing.JFrame {
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
-    private combo_suggestion.ComboBoxSuggestion NodoFinal;
-    private combo_suggestion.ComboBoxSuggestion NodoInicial;
-    private javax.swing.JTextField Ponderado;
-    private javax.swing.JPanel SeparadorPass;
+    private combo_suggestion.ComboBoxSuggestion NodoF;
+    private combo_suggestion.ComboBoxSuggestion NodoI;
     private javax.swing.JLabel dndva2;
     private javax.swing.JLabel dndviene2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

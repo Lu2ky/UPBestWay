@@ -4,16 +4,29 @@
  */
 package com.app.interfaz;
 
+import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
+import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.Timer;
 
 /**
  *
  * @author ADMIN
  */
 public class AgregarNodos extends javax.swing.JFrame {
-
+    Grafo grafo = null;
+    boolean check = true;
+    Sesion sesion = null;
+    Conexion cox = null;
+    Boolean perm = false;
+    Drawer draw = null;
+    ListaEnlazada cargar = null;
     /**
      * Creates new form AgregarNodos
      */
@@ -49,10 +62,12 @@ public class AgregarNodos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        Nnodo = new javax.swing.JTextField();
         PosicionX = new javax.swing.JTextField();
+        Nnodo = new javax.swing.JTextField();
         PosicionY = new javax.swing.JTextField();
         Nombrevacio = new javax.swing.JLabel();
+        CerrarSesion = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         SeparadorUser3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -137,6 +152,18 @@ public class AgregarNodos extends javax.swing.JFrame {
         jLabel1.setText("Ingrese la Posicion");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 510, 50));
 
+        PosicionX.setBackground(new java.awt.Color(255, 190, 15));
+        PosicionX.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        PosicionX.setForeground(java.awt.Color.gray);
+        PosicionX.setText("Ingrese la posicion del Nodo");
+        PosicionX.setBorder(null);
+        PosicionX.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PosicionXMousePressed(evt);
+            }
+        });
+        jPanel1.add(PosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, 330, 30));
+
         Nnodo.setBackground(new java.awt.Color(255, 190, 15));
         Nnodo.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Nnodo.setForeground(java.awt.Color.gray);
@@ -152,19 +179,7 @@ public class AgregarNodos extends javax.swing.JFrame {
                 NnodoActionPerformed(evt);
             }
         });
-        jPanel1.add(Nnodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 500, 40));
-
-        PosicionX.setBackground(new java.awt.Color(255, 190, 15));
-        PosicionX.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        PosicionX.setForeground(java.awt.Color.gray);
-        PosicionX.setText("Ingrese la posicion del Nodo");
-        PosicionX.setBorder(null);
-        PosicionX.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                PosicionXMousePressed(evt);
-            }
-        });
-        jPanel1.add(PosicionX, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 560, 330, 30));
+        jPanel1.add(Nnodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 500, 40));
 
         PosicionY.setBackground(new java.awt.Color(255, 190, 15));
         PosicionY.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -191,6 +206,22 @@ public class AgregarNodos extends javax.swing.JFrame {
         Nombrevacio.setText("El nombre del nodo no puede estar vacio");
         jPanel1.add(Nombrevacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 830, 270, 40));
 
+        CerrarSesion.setBackground(new java.awt.Color(140, 0, 0));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CerrarSesionMousePressed(evt);
+            }
+        });
+        CerrarSesion.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Cerrar Sesion");
+        CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
+
+        jPanel1.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1920, 1080));
 
         pack();
@@ -204,7 +235,7 @@ public class AgregarNodos extends javax.swing.JFrame {
             return;
         }
         Nodo nodoNuevo = new Nodo(nombreNodo);
-        grafo.agregarNodo(nodoNuevo);
+       
        
        
     }//GEN-LAST:event_Agergar_Nodo
@@ -236,6 +267,20 @@ public class AgregarNodos extends javax.swing.JFrame {
     private void PosicionYMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PosicionYMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_PosicionYMouseClicked
+
+    private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
+        sesion = null;
+        JFrame frame = this;
+        Inicio_sesion inis = new Inicio_sesion(grafo);
+        inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        inis.setVisible(true);
+        Timer timer = new Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_CerrarSesionMousePressed
 
     /**
      * @param args the command line arguments
@@ -275,6 +320,7 @@ public class AgregarNodos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida2;
     private javax.swing.JPanel Buscar4;
+    private javax.swing.JPanel CerrarSesion;
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
@@ -291,6 +337,7 @@ public class AgregarNodos extends javax.swing.JFrame {
     private javax.swing.JLabel X;
     private javax.swing.JLabel Y;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
