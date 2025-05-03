@@ -8,9 +8,8 @@ package com.app.manejodatos;
  *
  * @author bohor
  */
-
-
 public class ListaEnlazada {
+
     private Nodo cabeza;
     private int size;
 
@@ -32,9 +31,9 @@ public class ListaEnlazada {
     public void setSize(int size) {
         this.size = size;
     }
-    
+
     public void agregarNodo(Nodo nuevo) {
-        if(nuevo == null){
+        if (nuevo == null) {
             return;
         }
         if (cabeza == null) {
@@ -49,6 +48,7 @@ public class ListaEnlazada {
         nuevo.setId(size);
         size++;
     }
+
     public void agregarNodo2(Nodo nuevo) {
         if (cabeza == null) {
             cabeza = nuevo;
@@ -61,54 +61,101 @@ public class ListaEnlazada {
         }
         size++;
     }
-  
-            
+
+    public boolean eliminarNodo(String nombre) {
+        if (cabeza == null) {
+            return false;
+        }
+        if (cabeza.getNombre().equals(nombre)) {
+            cabeza = (Nodo) cabeza.getSiguiente();
+            size--;
+            return true;
+        }
+        Nodo actual = cabeza;
+        while (actual.getSiguiente() != null) {
+            Nodo siguiente = (Nodo) actual.getSiguiente();
+            if (siguiente.getNombre().equals(nombre)) {
+                actual.setSiguiente(siguiente.getSiguiente());
+                size--;
+                return true;
+            }
+            actual = siguiente;
+        }
+        return false;
+    }
+
+    public boolean eliminarNodoporNodo(Nodo nodoAEliminar) {
+        if (cabeza == null || nodoAEliminar == null) {
+            return false;
+        }
+        if (cabeza.equals(nodoAEliminar)) {
+            cabeza = (Nodo) cabeza.getSiguiente();
+            size--;
+            return true;
+        }
+        Nodo actual = cabeza;
+        while (actual.getSiguiente() != null) {
+            Nodo siguiente = (Nodo) actual.getSiguiente();
+            if (siguiente.equals(nodoAEliminar)) {
+                actual.setSiguiente(siguiente.getSiguiente());
+                size--;
+                return true;
+            }
+            actual = siguiente;
+        }
+        return false;
+    }
+
     public int obtenerIndice(String nombre) {
         Nodo temp = cabeza;
         while (temp != null) {
-            
-            if (temp.getNombre() == nombre){
+
+            if (temp.getNombre() == nombre) {
                 return temp.getId();
             }
             temp = temp.getSiguiente();
         }
         return -1;
     }
-    public Nodo obtenerNodo(int id){
-        Nodo temp=cabeza;
+
+    public Nodo obtenerNodo(int id) {
+        Nodo temp = cabeza;
         while (temp != null) {
-            if (temp.getId() == id){
+            if (temp.getId() == id) {
                 break;
             }
-            temp =temp.getSiguiente();
+            temp = temp.getSiguiente();
         }
         return temp;
     }
-    public Nodo obtenerNodo(String nombre){
-        Nodo temp=cabeza;
+
+    public Nodo obtenerNodo(String nombre) {
+        Nodo temp = cabeza;
         while (temp != null) {
-            if (temp.getNombre().equals(nombre)){
+            if (temp.getNombre().equals(nombre)) {
                 break;
             }
-            temp =temp.getSiguiente();
+            temp = temp.getSiguiente();
         }
         return temp;
     }
-    public void MostrarLista(){
-        Nodo temp=cabeza;
-        while(temp!=null){
+
+    public void MostrarLista() {
+        Nodo temp = cabeza;
+        while (temp != null) {
             System.out.print(temp.getNombre() + " ");
             temp = temp.getSiguiente();
         }
         return;
     }
-    public boolean NodoPresente(String nombre){
-        if(cabeza == null){
-         return false;
+
+    public boolean NodoPresente(String nombre) {
+        if (cabeza == null) {
+            return false;
         }
         Nodo temp = cabeza;
-        while(temp != null){
-            if(temp.getNombre().equals(nombre)){
+        while (temp != null) {
+            if (temp.getNombre().equals(nombre)) {
                 return true;
             }
             temp = temp.getSiguiente();
@@ -123,6 +170,5 @@ public class ListaEnlazada {
     public void setCabeza(Nodo cabeza) {
         this.cabeza = cabeza;
     }
-    
-    
+
 }

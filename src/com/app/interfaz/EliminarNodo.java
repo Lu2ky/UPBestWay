@@ -53,6 +53,7 @@ public class EliminarNodo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         LogoN4 = new javax.swing.JLabel();
         Logo1 = new javax.swing.JLabel();
@@ -60,11 +61,17 @@ public class EliminarNodo extends javax.swing.JFrame {
         Buscar4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         Nodoeliminar = new combo_suggestion.ComboBoxSuggestion();
         a = new javax.swing.JLabel();
+        Mostrar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel2.setFocusable(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, -30, 1360, 1170));
 
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,11 +108,6 @@ public class EliminarNodo extends javax.swing.JFrame {
         Bienvenida2.setText("¡Bienvenido(a)!");
         jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
-        jPanel2.setFocusable(false);
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 150, 870));
-
         Nodoeliminar.setBackground(new java.awt.Color(140, 0, 0));
         Nodoeliminar.setBorder(null);
         Nodoeliminar.setMaximumRowCount(5);
@@ -117,20 +119,11 @@ public class EliminarNodo extends javax.swing.JFrame {
         a.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
         jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 358, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        Mostrar.setBackground(new java.awt.Color(255, 190, 15));
+        Mostrar.setBorder(null);
+        jPanel1.add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, 460, 70));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 1090));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -154,13 +147,13 @@ public class EliminarNodo extends javax.swing.JFrame {
             }
         }
         if (nodoAEliminar != null) {
-            cargar.remove(nodoAEliminar);
-            System.out.println("Nodo '" + nodoNombre + "' eliminado.");
+            cargar.eliminarNodoporNodo(nodoAEliminar);
+            Mostrar.setText("Nodo '" + nodoNombre + "' eliminado.");
            
             // aqui se actualizaria el grafo pero nose como hacerlo creo q es asi 
             draw.repaint();
         } else {
-            System.out.println("Nodo '" + nodoNombre + "' no encontrado.");
+            Mostrar.setText("Nodo '" + nodoNombre + "' no encontrado.");
         }
     }//GEN-LAST:event_EliminarNodo
 
@@ -205,6 +198,7 @@ public class EliminarNodo extends javax.swing.JFrame {
     private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN3;
     private javax.swing.JLabel LogoN4;
+    private javax.swing.JTextField Mostrar;
     private combo_suggestion.ComboBoxSuggestion Nodoeliminar;
     private javax.swing.JLabel a;
     private javax.swing.JLabel jLabel6;
