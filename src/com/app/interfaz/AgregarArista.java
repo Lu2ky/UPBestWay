@@ -34,8 +34,9 @@ public class AgregarArista extends javax.swing.JFrame {
      * Creates new form AgregarArista
      */
     public AgregarArista() {
-       
+
     }
+
     public AgregarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();
         cox = coxload;
@@ -139,6 +140,14 @@ public class AgregarArista extends javax.swing.JFrame {
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
         Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearNuevaArista(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                crearNuevaArista(evt);
+            }
+        });
         Buscar.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
@@ -310,11 +319,26 @@ public class AgregarArista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 
-    private void crearNuevaArista() {
+
+    private void BuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMousePressed
+       
+    }//GEN-LAST:event_BuscarMousePressed
+
+    private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
+        if (check == false) {
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));
+            check = true;
+        } else {
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Checked-removebg-preview.png")));
+            check = false;
+        }
+    }//GEN-LAST:event_CheckMousePressed
+
+    private void crearNuevaArista(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearNuevaArista
         String inicioNombre = (String) NodoInicial.getSelectedItem();
         String finNombre = (String) NodoFinal.getSelectedItem();
         String pesoStr = Ponderado.getText().trim();
-        boolean escaleras = false; // Assuming no UI input for escaleras, default false
+        boolean escaleras = false; // lo quitamos por si acaso 
 
         if (inicioNombre == null || finNombre == null || inicioNombre.isEmpty() || finNombre.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Seleccione nodos de inicio y fin válidos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -348,24 +372,10 @@ public class AgregarArista extends javax.swing.JFrame {
 
         javax.swing.JOptionPane.showMessageDialog(this, "Arista agregada exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-        // Optionally clear or reset inputs
+        // se resetio para despues 
         Ponderado.setText("");
         NodoInicial.setSelectedIndex(0);
-        NodoFinal.setSelectedIndex(0);
-    }
+        NodoFinal.setSelectedIndex(0);}
+    
+    }//GEN-LAST:event_crearNuevaArista
 
-    private void BuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMousePressed
-        crearNuevaArista();
-    }//GEN-LAST:event_BuscarMousePressed
-
-    private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
-        if(check == false){
-            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));
-            check = true;
-        }
-        else {
-            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Checked-removebg-preview.png")));
-            check = false;
-        }
-    }//GEN-LAST:event_CheckMousePressed
-}

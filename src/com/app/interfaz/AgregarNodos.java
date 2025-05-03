@@ -229,12 +229,17 @@ public class AgregarNodos extends javax.swing.JFrame {
 
     private void Agergar_Nodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Agergar_Nodo
         String nombreNodo = Nnodo.getText();
+         
         if (nombreNodo == null || Nnodo.getText().equals("")) {
             Nombrevacio.setVisible(true);
             
             return;
         }
+        else{
         Nodo nodoNuevo = new Nodo(nombreNodo);
+        grafo.agregarNodo(nodoNuevo);
+        }
+        
        
        
        
