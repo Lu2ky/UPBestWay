@@ -42,7 +42,7 @@ public class AgregarArista extends javax.swing.JFrame {
         grafo = grafoload;
         cargar = grafo.getNodos();
         this.perm = perm;
-        initComponents();
+        // Removed duplicate initComponents call
         draw = new Drawer(perm, cox, null, grafo.getNodos(), grafo.getAristas());
         this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
@@ -54,6 +54,11 @@ public class AgregarArista extends javax.swing.JFrame {
         NodoFinal.addItem("Auditorio mayor");
 
         poblarComponentes();
+    }
+
+    // Added default constructor to fix instantiation issue
+    public AgregarArista() {
+        initComponents();
     }
 
     /**
