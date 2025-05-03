@@ -27,6 +27,10 @@ public class EliminarNodo extends javax.swing.JFrame {
     /**
      * Creates new form EliminarNodo
      */
+    public EliminarNodo() {
+ 
+
+    }
     public EliminarNodo(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();
         cox = coxload;

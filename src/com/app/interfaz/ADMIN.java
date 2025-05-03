@@ -5,6 +5,7 @@
 package com.app.interfaz;
 
 import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -92,6 +93,11 @@ public class ADMIN extends javax.swing.JFrame {
 
         Buscar1.setBackground(new java.awt.Color(140, 0, 0));
         Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cambiarp4(evt);
+            }
+        });
         Buscar1.setLayout(new java.awt.GridBagLayout());
 
         jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
@@ -138,6 +144,11 @@ public class ADMIN extends javax.swing.JFrame {
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
         Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cambiarp2(evt);
+            }
+        });
         Buscar.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
@@ -149,6 +160,11 @@ public class ADMIN extends javax.swing.JFrame {
 
         Buscar4.setBackground(new java.awt.Color(140, 0, 0));
         Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cambiarp3(evt);
+            }
+        });
         Buscar4.setLayout(new java.awt.GridBagLayout());
 
         jLabel5.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
@@ -165,8 +181,9 @@ public class ADMIN extends javax.swing.JFrame {
 
     private void cambarp1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambarp1
         JFrame este = this;
-        AgregarNodos aa = new AgregarNodos(grafoload,cox);
+        AgregarNodos aa = new AgregarNodos();
         aa.setVisible(true);
+        aa.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 este.setVisible(false);
@@ -174,6 +191,45 @@ public class ADMIN extends javax.swing.JFrame {
         });
         timer.start();
     }//GEN-LAST:event_cambarp1
+
+    private void cambiarp2(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp2
+       JFrame este = this;
+        EliminarNodo EE = new EliminarNodo();
+        EE.setVisible(true);
+        EE.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_cambiarp2
+
+    private void cambiarp3(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp3
+        JFrame este = this;
+        AgregarArista AA = new AgregarArista();
+        AA.setVisible(true);
+        AA.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_cambiarp3
+
+    private void cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp4
+        JFrame este = this;
+        EliminarArista EA = new EliminarArista();
+        EA.setVisible(true);
+        EA.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_cambiarp4
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

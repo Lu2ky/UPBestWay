@@ -31,9 +31,11 @@ public class EliminarArista extends javax.swing.JFrame {
      * Creates new form EliminarArista
      */
     public EliminarArista() {
+    }
+
+    public EliminarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();
         cox = coxload;
-
         grafo = grafoload;
         cargar = grafo.getNodos();
         this.perm = perm;
