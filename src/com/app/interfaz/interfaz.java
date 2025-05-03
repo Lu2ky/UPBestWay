@@ -60,7 +60,7 @@ public class interfaz extends javax.swing.JFrame {
         
         this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
-        NodoInicial.addItem("Biblioteca");
+        NodoA.addItem("Biblioteca");
         NodoA.addItem("Auditorio menor");
         NodoA.addItem("Auditorio mayor");
         NodoB.addItem("Biblioteca");

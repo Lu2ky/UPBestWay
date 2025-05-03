@@ -10,6 +10,7 @@ import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
+import java.awt.Color;
 
 /**
  *
@@ -72,6 +73,9 @@ public class AgregarArista extends javax.swing.JFrame {
         CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        SeparadorPass = new javax.swing.JPanel();
+        Ponderado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -124,7 +128,7 @@ public class AgregarArista extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Eliminar");
+        jLabel1.setText("Agregar");
         Buscar.add(jLabel1, new java.awt.GridBagConstraints());
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
@@ -132,7 +136,7 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Buscar.add(jPanel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 170, 70));
+        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 670, 170, 70));
 
         dndviene2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene2.setText("Edificio Inicial ");
@@ -158,6 +162,26 @@ public class AgregarArista extends javax.swing.JFrame {
         Bienvenida.setText("¡Bienvenido(a)!");
         jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Ponderado");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, 210, -1));
+
+        SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 500, 1));
+
+        Ponderado.setBackground(new java.awt.Color(255, 190, 15));
+        Ponderado.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Ponderado.setForeground(java.awt.Color.gray);
+        Ponderado.setText("Ingrese el ponderado de la arista");
+        Ponderado.setBorder(null);
+        Ponderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PonderadoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Ponderado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 560, 360, 60));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 1080));
 
         pack();
@@ -170,6 +194,12 @@ public class AgregarArista extends javax.swing.JFrame {
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
  
     }//GEN-LAST:event_CerrarSesionMousePressed
+
+    private void PonderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PonderadoActionPerformed
+         Ponderado.setText("");
+         Ponderado.setForeground(Color.black);
+
+    }//GEN-LAST:event_PonderadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,10 +253,13 @@ public class AgregarArista extends javax.swing.JFrame {
     private javax.swing.JLabel LogoN4;
     private combo_suggestion.ComboBoxSuggestion NodoFinal;
     private combo_suggestion.ComboBoxSuggestion NodoInicial;
+    private javax.swing.JTextField Ponderado;
+    private javax.swing.JPanel SeparadorPass;
     private javax.swing.JLabel dndva2;
     private javax.swing.JLabel dndviene2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
