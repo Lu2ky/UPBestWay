@@ -8,6 +8,7 @@ import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.Nodo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -30,8 +31,7 @@ public class EliminarArista extends javax.swing.JFrame {
     /**
      * Creates new form EliminarArista
      */
-    public EliminarArista() {
-    }
+   
 
     public EliminarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();
@@ -49,6 +49,7 @@ public class EliminarArista extends javax.swing.JFrame {
         NodoF.addItem("Biblioteca");
         NodoF.addItem("Auditorio menor");
         NodoF.addItem("Auditorio mayor");
+        poblarComponentes();
     }
 
     /**
@@ -192,7 +193,14 @@ public class EliminarArista extends javax.swing.JFrame {
     private void EliminarArista(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarArista
         // TODO add your handling code here:
     }//GEN-LAST:event_EliminarArista
-
+      private void poblarComponentes() {
+        Nodo temp = cargar.getCabeza();
+        while (temp != null) {
+            NodoI.addItem(temp.getNombre());
+            NodoF.addItem(temp.getNombre());
+            temp = temp.getSiguiente();
+        }
+    }
     /**
      * @param args the command line arguments
      */

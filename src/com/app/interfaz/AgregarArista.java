@@ -33,9 +33,7 @@ public class AgregarArista extends javax.swing.JFrame {
     /**
      * Creates new form AgregarArista
      */
-    public AgregarArista() {
-
-    }
+    
 
     public AgregarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();

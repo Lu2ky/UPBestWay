@@ -27,10 +27,7 @@ public class EliminarNodo extends javax.swing.JFrame {
     /**
      * Creates new form EliminarNodo
      */
-    public EliminarNodo() {
- 
-
-    }
+    
     public EliminarNodo(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();
         cox = coxload;
@@ -45,7 +42,7 @@ public class EliminarNodo extends javax.swing.JFrame {
         Nodoeliminar.addItem("Biblioteca");
         Nodoeliminar.addItem("Auditorio menor");
         Nodoeliminar.addItem("Auditorio mayor");
-
+        poblarComponentes();
     }
 
     /**
@@ -135,13 +132,13 @@ public class EliminarNodo extends javax.swing.JFrame {
     private void EliminarNodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarNodo
         Object Elim = Nodoeliminar.getSelectedItem();
         Elim = null;
-        // Get the selected node name from the combo box
+       
         String nodoNombre = (String) Nodoeliminar.getSelectedItem();
         if (nodoNombre == null || nodoNombre.isEmpty()) {
-            System.out.println("No node selected to delete.");
+            Mostrar.setText("No ha selecionado un nodo para eliminar");
             return;
         }
-        // aca se encuanta el no do a removaer
+        // aca se encuanta el nodo a remover
         Nodo nodoAEliminar = null;
         for (int i = 0; i < cargar.getSize(); i++) {
             Nodo nodo = (Nodo) cargar.obtenerNodo(i);
@@ -154,13 +151,20 @@ public class EliminarNodo extends javax.swing.JFrame {
             cargar.eliminarNodoporNodo(nodoAEliminar);
             Mostrar.setText("Nodo '" + nodoNombre + "' eliminado.");
            
-            // aqui se actualizaria el grafo pero nose como hacerlo creo q es asi 
+            // aqui se actualizaria el grafo pero nose como hacerlo, creo q es asi 
             draw.repaint();
         } else {
             Mostrar.setText("Nodo '" + nodoNombre + "' no encontrado.");
         }
     }//GEN-LAST:event_EliminarNodo
-
+      private void poblarComponentes() {
+        Nodo temp = cargar.getCabeza();
+        while (temp != null) {
+            Nodoeliminar.addItem(temp.getNombre());
+            
+            temp = temp.getSiguiente();
+        }
+    }
     /**
      * @param args the command line arguments
      */
