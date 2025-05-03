@@ -4,7 +4,6 @@
  */
 package com.app.interfaz;
 
-
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
@@ -16,7 +15,7 @@ import com.app.manejodatos.Nodo;
  * @author ADMIN
  */
 public class EliminarNodo extends javax.swing.JFrame {
-    
+
     Grafo grafo = null;
     boolean check = true;
     Sesion sesion = null;
@@ -24,24 +23,25 @@ public class EliminarNodo extends javax.swing.JFrame {
     Boolean perm = false;
     Drawer draw = null;
     ListaEnlazada cargar = null;
+
     /**
      * Creates new form EliminarNodo
      */
-    public EliminarNodo(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {
+    public EliminarNodo(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
         initComponents();
         cox = coxload;
-        
+
         grafo = grafoload;
         cargar = grafo.getNodos();
         this.perm = perm;
         initComponents();
-        draw = new Drawer(perm,cox,null,grafo.getNodos(),grafo.getAristas());
-         this.sesion = sesion;
+        draw = new Drawer(perm, cox, null, grafo.getNodos(), grafo.getAristas());
+        this.sesion = sesion;
         Bienvenida2.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
         Nodoeliminar.addItem("Biblioteca");
         Nodoeliminar.addItem("Auditorio menor");
         Nodoeliminar.addItem("Auditorio mayor");
-        
+
     }
 
     /**
@@ -138,6 +138,30 @@ public class EliminarNodo extends javax.swing.JFrame {
     private void EliminarNodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarNodo
         Object Elim = Nodoeliminar.getSelectedItem();
         Elim = null;
+        // Get the selected node name from the combo box
+        String nodoNombre = (String) Nodoeliminar.getSelectedItem();
+        if (nodoNombre == null || nodoNombre.isEmpty()) {
+            System.out.println("No node selected to delete.");
+            return;
+        }
+        // aca se encuanta el no do a removaer
+        Nodo nodoAEliminar = null;
+        for (int i = 0; i < cargar.getSize(); i++) {
+            Nodo nodo = (Nodo) cargar.obtenerNodo(i);
+            if (nodo.getNombre().equals(nodoNombre)) {
+                nodoAEliminar = nodo;
+                break;
+            }
+        }
+        if (nodoAEliminar != null) {
+            cargar.remove(nodoAEliminar);
+            System.out.println("Nodo '" + nodoNombre + "' eliminado.");
+           
+            // aqui se actualizaria el grafo pero nose como hacerlo creo q es asi 
+            draw.repaint();
+        } else {
+            System.out.println("Nodo '" + nodoNombre + "' no encontrado.");
+        }
     }//GEN-LAST:event_EliminarNodo
 
     /**

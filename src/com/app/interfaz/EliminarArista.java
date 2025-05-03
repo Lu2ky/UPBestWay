@@ -116,6 +116,11 @@ public class EliminarArista extends javax.swing.JFrame {
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
         Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarArista(evt);
+            }
+        });
         Buscar.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
@@ -181,6 +186,10 @@ public class EliminarArista extends javax.swing.JFrame {
         });
         timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
+
+    private void EliminarArista(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarArista
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EliminarArista
 
     /**
      * @param args the command line arguments

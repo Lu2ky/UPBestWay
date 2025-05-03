@@ -61,6 +61,8 @@ public class ListaEnlazada {
         }
         size++;
     }
+  
+            
     public int obtenerIndice(String nombre) {
         Nodo temp = cabeza;
         while (temp != null) {
