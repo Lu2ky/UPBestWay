@@ -77,6 +77,9 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         Mensaje = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         Carrusel = new javax.swing.JLabel();
         Fondo = new javax.swing.JPanel();
@@ -238,6 +241,31 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel7.setText(bundle.getString("Inicio_sesion.jLabel7.text")); // NOI18N
         Fondo1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
 
+        jPanel7.setBackground(new java.awt.Color(189, 32, 0));
+        jPanel7.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel7MousePressed(evt);
+            }
+        });
+        jPanel7.setLayout(new java.awt.GridBagLayout());
+
+        jLabel8.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText(bundle.getString("Inicio_sesion.jLabel8.text")); // NOI18N
+        jPanel7.add(jLabel8, new java.awt.GridBagConstraints());
+
+        jPanel8.setBackground(new java.awt.Color(189, 32, 0));
+        jPanel8.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+        jPanel7.add(jPanel8, new java.awt.GridBagConstraints());
+
+        Fondo1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 990, 160, 70));
+
         Fondo2.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1090));
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
@@ -362,6 +390,20 @@ public class Inicio_sesion extends javax.swing.JFrame {
             Mensaje.setForeground(Color.blue);
         }
     }//GEN-LAST:event_InicioMousePressed
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jPanel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MousePressed
+        try {
+            String url = "https://www.upb.edu.co/es/home";
+            Runtime rt = Runtime.getRuntime();
+            rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jPanel7MousePressed
     private void carrusel(){
         ImageIcon[] imagenes = new ImageIcon[]{
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG1.jpg")),
@@ -418,11 +460,14 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
 }
