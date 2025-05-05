@@ -9,6 +9,7 @@ import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,14 +25,24 @@ public class AgregarNodos extends javax.swing.JFrame {
     boolean check = true;
     Sesion sesion = null;
     Conexion cox = null;
-    Boolean perm = false;
+    Boolean agregar = false;
     Drawer draw = null;
     ListaEnlazada cargar = null;
     /**
      * Creates new form AgregarNodos
      */
-    public AgregarNodos() {
+    public AgregarNodos(Conexion coxload,Grafo grafoload) {
+        this.sesion = sesion;
         initComponents();
+        cox = coxload;
+        grafo = grafoload;
+        cargar = grafo.getNodos();
+
+        // Removed duplicate initComponents call
+        draw = new Drawer(false, cox, null, grafo.getNodos(), grafo.getAristas());
+        jPanel5.setLayout(new BorderLayout());
+        jPanel5.add(draw,BorderLayout.CENTER);
+        jPanel5.setVisible(true);
         Nombrevacio.setVisible(false);
     }
     
@@ -60,6 +71,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         SeparadorUser1 = new javax.swing.JPanel();
         SeparadorUser7 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         PosicionX = new javax.swing.JTextField();
@@ -82,6 +94,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         SeparadorUser3.add(SeparadorUser5);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
@@ -91,14 +104,14 @@ public class AgregarNodos extends javax.swing.JFrame {
         LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
         LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 660, 90));
+        jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 660, 90));
 
         Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, -1));
+        jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, -1));
 
         LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
         LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
+        jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
 
         X.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         X.setText("Y");
@@ -125,7 +138,7 @@ public class AgregarNodos extends javax.swing.JFrame {
 
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida2.setText("¡Bienvenido(a)!");
-        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         Y.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         Y.setText("X");
@@ -141,7 +154,15 @@ public class AgregarNodos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, -20, 1220, 1100));
+
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel5.setEnabled(false);
+        jPanel5.setFocusable(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         jLabel8.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel8.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
@@ -204,7 +225,7 @@ public class AgregarNodos extends javax.swing.JFrame {
         Nombrevacio.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Nombrevacio.setForeground(new java.awt.Color(204, 0, 0));
         Nombrevacio.setText("El nombre del nodo no puede estar vacio");
-        jPanel1.add(Nombrevacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 830, 270, 40));
+        jPanel1.add(Nombrevacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 830, 270, 40));
 
         CerrarSesion.setBackground(new java.awt.Color(140, 0, 0));
         CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -222,27 +243,21 @@ public class AgregarNodos extends javax.swing.JFrame {
 
         jPanel1.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1920, 1080));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1930, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Agergar_Nodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Agergar_Nodo
-        String nombreNodo = Nnodo.getText();
-         
-        if (nombreNodo == null || Nnodo.getText().equals("")) {
-            Nombrevacio.setVisible(true);
-            
-            return;
+        agregar = true;
+        if(Nnodo.getText().equals("")){
+            Nombrevacio.setText("El espacio de nombre no puede estar vacio");
         }
-        else{
-        Nodo nodoNuevo = new Nodo(nombreNodo);
-        grafo.agregarNodo(nodoNuevo);
+        if(agregar){
+            agregarNodoAGrafo(Nnodo.getText(),agregar);
+            Nombrevacio.setText(agregar.toString());
+            agregar = false;
         }
-        
-       
-       
-       
     }//GEN-LAST:event_Agergar_Nodo
 
     private void NnodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NnodoActionPerformed
@@ -251,7 +266,7 @@ public class AgregarNodos extends javax.swing.JFrame {
 
     private void Limpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Limpiar
         Nnodo.setText("");
-         Nnodo.setForeground(Color.black);
+        Nnodo.setForeground(Color.black);
 
     }//GEN-LAST:event_Limpiar
 
@@ -287,39 +302,12 @@ public class AgregarNodos extends javax.swing.JFrame {
         timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarNodos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarNodos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarNodos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarNodos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AgregarNodos().setVisible(true);
-            }
-        });
+    private void agregarNodoAGrafo(String nombre, Boolean agregar1){
+        draw.agregarNodo(nombre,agregar,Nnodo); 
+    }
+    
+    public String getNnodo(){
+        return Nnodo.getText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -347,5 +335,6 @@ public class AgregarNodos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

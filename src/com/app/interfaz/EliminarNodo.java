@@ -9,6 +9,8 @@ import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
+import com.app.manejodatos.Stack;
+import java.awt.BorderLayout;
 
 /**
  *
@@ -17,38 +19,35 @@ import com.app.manejodatos.Nodo;
 public class EliminarNodo extends javax.swing.JFrame {
 
     Grafo grafo = null;
-    boolean check = true;
     Sesion sesion = null;
     Conexion cox = null;
     Boolean perm = false;
     Drawer draw = null;
     ListaEnlazada cargar = null;
+    Stack Nodoseliminados = new Stack();
 
     /**
      * Creates new form EliminarNodo
      */
     
-    public EliminarNodo(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
+    public EliminarNodo(Sesion sesion, Conexion coxload, Grafo grafoload) {
+        this.sesion = sesion;
         initComponents();
         cox = coxload;
-
         grafo = grafoload;
         cargar = grafo.getNodos();
-        this.perm = perm;
+
         // Removed duplicate initComponents call
-        draw = new Drawer(perm, cox, null, grafo.getNodos(), grafo.getAristas());
-        this.sesion = sesion;
-        Bienvenida2.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+        draw = new Drawer(false, cox, null, grafo.getNodos(), grafo.getAristas());
+        jPanel3.add(draw,BorderLayout.CENTER);
+        jPanel3.setVisible(true);
+        Bienvenida2.setText("¡Bienvenido(a) " + this.sesion.getNombre() + "!");
         Nodoeliminar.addItem("Biblioteca");
         Nodoeliminar.addItem("Auditorio menor");
         Nodoeliminar.addItem("Auditorio mayor");
         poblarComponentes();
     }
 
-    // Added default constructor to fix instantiation issue
-    public EliminarNodo() {
-        initComponents();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,7 +58,6 @@ public class EliminarNodo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         LogoN4 = new javax.swing.JLabel();
         Logo1 = new javax.swing.JLabel();
@@ -70,14 +68,12 @@ public class EliminarNodo extends javax.swing.JFrame {
         Nodoeliminar = new combo_suggestion.ComboBoxSuggestion();
         a = new javax.swing.JLabel();
         Mostrar = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
-        jPanel2.setFocusable(false);
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, -30, 1360, 1170));
 
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -129,32 +125,41 @@ public class EliminarNodo extends javax.swing.JFrame {
         Mostrar.setBorder(null);
         jPanel1.add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, 460, 70));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 1090));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
+
+        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel2.setFocusable(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void EliminarNodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarNodo
-        Object Elim = Nodoeliminar.getSelectedItem();
-        Elim = null;
-       
+        String Elim = (String) Nodoeliminar.getSelectedItem();
+        Nodo nodoAEliminar = null;
         String nodoNombre = (String) Nodoeliminar.getSelectedItem();
         if (nodoNombre == null || nodoNombre.isEmpty()) {
             Mostrar.setText("No ha selecionado un nodo para eliminar");
             return;
         }
-        // aca se encuanta el nodo a remover
-        Nodo nodoAEliminar = null;
-        for (int i = 0; i < cargar.getSize(); i++) {
-            Nodo nodo = (Nodo) cargar.obtenerNodo(i);
-            if (nodo.getNombre().equals(nodoNombre)) {
-                nodoAEliminar = nodo;
-                break;
-            }
+        if(nodoNombre == "Auditorio mayor"){
+            nodoAEliminar = cargar.obtenerNodo("H");
         }
+        else if(nodoNombre == "Auditorio menor" || nodoNombre ==  "Biblioteca"){
+            nodoAEliminar = cargar.obtenerNodo("J");
+        }
+        else{
+            // aca se encuanta el nodo a remover
+            nodoAEliminar = cargar.obtenerNodo(nodoNombre);
+        }
+        
         if (nodoAEliminar != null) {
-            cargar.eliminarNodoporNodo(nodoAEliminar);
+            cargar.eliminarNodoBIEN(nodoAEliminar.getNombre());
             Mostrar.setText("Nodo '" + nodoNombre + "' eliminado.");
+            Nodoseliminados.push(nodoAEliminar);
            
             // aqui se actualizaria el grafo pero nose como hacerlo, creo q es asi 
             draw.repaint();
@@ -166,43 +171,8 @@ public class EliminarNodo extends javax.swing.JFrame {
         Nodo temp = cargar.getCabeza();
         while (temp != null) {
             Nodoeliminar.addItem(temp.getNombre());
-            
             temp = temp.getSiguiente();
         }
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EliminarNodo().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -217,5 +187,6 @@ public class EliminarNodo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

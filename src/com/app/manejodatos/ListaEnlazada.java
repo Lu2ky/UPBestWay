@@ -67,7 +67,7 @@ public class ListaEnlazada {
             return false;
         }
         if (cabeza.getNombre().equals(nombre)) {
-            cabeza = (Nodo) cabeza.getSiguiente();
+            cabeza = cabeza.getSiguiente();
             size--;
             return true;
         }
@@ -84,26 +84,22 @@ public class ListaEnlazada {
         return false;
     }
 
-    public boolean eliminarNodoporNodo(Nodo nodoAEliminar) {
-        if (cabeza == null || nodoAEliminar == null) {
-            return false;
-        }
-        if (cabeza.equals(nodoAEliminar)) {
-            cabeza = (Nodo) cabeza.getSiguiente();
+    public void eliminarNodoBIEN(String nombreNodo){
+        if(cabeza.getNombre().equals(nombreNodo)){
+            Nodo temp = cabeza.getSiguiente();
+            cabeza = temp;
             size--;
-            return true;
+            return;
         }
-        Nodo actual = cabeza;
-        while (actual.getSiguiente() != null) {
-            Nodo siguiente = (Nodo) actual.getSiguiente();
-            if (siguiente.equals(nodoAEliminar)) {
-                actual.setSiguiente(siguiente.getSiguiente());
+        Nodo temp = cabeza;
+        while(temp.getSiguiente() != null){
+            if(temp.getSiguiente().getNombre().equals(nombreNodo)){
+                temp.setSiguiente(temp.getSiguiente().getSiguiente());
                 size--;
-                return true;
+                return;
             }
-            actual = siguiente;
+            temp = temp.getSiguiente();
         }
-        return false;
     }
 
     public int obtenerIndice(String nombre) {

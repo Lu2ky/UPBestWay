@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ADMIN/Documents/GitHub/ProyectoGrafos/src/com/app/interfaz/AgregarNodos.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/GitHub/ProyectoGrafos/src/com/app/interfaz/EliminarArista.java</file>
-            <file>file:/C:/Users/ADMIN/Documents/GitHub/ProyectoGrafos/src/com/app/interfaz/EliminarNodo.java</file>
+            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/manejodatos/ListaEnlazada/ListaEnlazada.java</file>
+            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/manejodatos/ListaEnlazada/Nodo.java</file>
         </group>
     </open-files>
 </project-private>
