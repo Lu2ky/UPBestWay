@@ -28,10 +28,12 @@ public class ADMIN extends javax.swing.JFrame {
      */
     private Grafo grafoload;
     private Conexion cox;
+    private Sesion sesion;
     
-    public ADMIN(Grafo grafo, Conexion cox) {
+    public ADMIN(Grafo grafo, Conexion cox,Sesion ses) {
         grafoload = grafo;
         this.cox = cox;
+        sesion = ses;
         initComponents();
     }
 
@@ -98,12 +100,12 @@ public class ADMIN extends javax.swing.JFrame {
                 cambiarp4(evt);
             }
         });
-        Buscar1.setLayout(new java.awt.GridBagLayout());
+        Buscar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Eliminar");
-        Buscar1.add(jLabel2, new java.awt.GridBagConstraints());
+        Buscar1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 20, -1, -1));
 
         jPanel1.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 600, 170, 70));
 
@@ -122,23 +124,23 @@ public class ADMIN extends javax.swing.JFrame {
                 cambarp1(evt);
             }
         });
-        Buscar2.setLayout(new java.awt.GridBagLayout());
+        Buscar2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Agregar ");
-        Buscar2.add(jLabel3, new java.awt.GridBagConstraints());
+        Buscar2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 20, -1, -1));
 
         jPanel1.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 170, 70));
 
         Buscar3.setBackground(new java.awt.Color(140, 0, 0));
         Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar3.setLayout(new java.awt.GridBagLayout());
+        Buscar3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Confirmar cambios");
-        Buscar3.add(jLabel4, new java.awt.GridBagConstraints());
+        Buscar3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 20, -1, -1));
 
         jPanel1.add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 770, 220, 70));
 
@@ -181,7 +183,7 @@ public class ADMIN extends javax.swing.JFrame {
 
     private void cambarp1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambarp1
         JFrame este = this;
-        AgregarNodos aa = new AgregarNodos();
+        AgregarNodos aa = new AgregarNodos(cox,grafoload);
         aa.setVisible(true);
         aa.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -194,7 +196,7 @@ public class ADMIN extends javax.swing.JFrame {
 
     private void cambiarp2(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp2
        JFrame este = this;
-        EliminarNodo EE = new EliminarNodo();
+        EliminarNodo EE = new EliminarNodo(sesion,cox,grafoload);
         EE.setVisible(true);
         EE.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {

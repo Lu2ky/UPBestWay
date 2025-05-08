@@ -467,9 +467,8 @@ public class interfaz extends javax.swing.JFrame {
 
     private void AdminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdminMousePressed
         if(perm){
-            sesion = null;
             JFrame frame = this;
-            ADMIN adminventana = new ADMIN(grafo,cox);
+            ADMIN adminventana = new ADMIN(grafo,cox,this.sesion);
             adminventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
             adminventana.setVisible(true);
             Timer timer = new Timer(10, new ActionListener() {

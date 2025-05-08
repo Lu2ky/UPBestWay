@@ -19,6 +19,8 @@ public class Drawer extends JPanel {
     private ListaEnlazada nodos = new ListaEnlazada();
     private ListaEnlazadaAristas aristas = new ListaEnlazadaAristas();
     private ListaEnlazada camino = null;
+    private Boolean privilegios;
+    private MouseAdapter listener;
 
     public Drawer(Boolean privilegios,Conexion cox,ListaEnlazada camino,ListaEnlazada nodos,ListaEnlazadaAristas ar) {
         setPreferredSize(new Dimension(831, 940));
@@ -44,6 +46,31 @@ public class Drawer extends JPanel {
         aristas = aris;
         repaint();
     }
+    public void agregarNodo(String nombre,boolean edicion, JTextField Nnodo){  
+        privilegios = edicion;
+            listener = new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                Nodo nuevo = null;
+                if (SwingUtilities.isLeftMouseButton(e) && privilegios ) {
+                    nuevo = new Nodo(Nnodo.getText(),e.getX(),e.getY());
+                    nodos.agregarNodo(nuevo);
+                    repaint();
+                    privilegios = false;
+                }
+            }
+        }; 
+            this.addMouseListener(listener);
+        
+        
+         
+    } 
+    public void removerEvento(){  
+    if (listener != null) {  
+        this.removeMouseListener(listener); // Remueve el listener  
+        listener = null; // Limpia la referencia  
+    }  
+}
+    
     
 
     @Override
