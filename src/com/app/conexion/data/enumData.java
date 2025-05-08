@@ -14,9 +14,9 @@ public class enumData {
     private String pass;
 
     public enumData() {
-        this.url = "jdbc:mysql://annie-do.with.playit.plus:1641/datosgrafos";
-        this.ususario = "Programa";
-        this.pass = "EWEPILLOPHONE";
+            this.url = "jdbc:mysql://annie-do.with.playit.plus:1641/datosgrafos";
+        this.ususario = "Luky";
+        this.pass = "123";
     }
 
     public String getUrl() {

@@ -161,7 +161,7 @@ public class EliminarArista extends javax.swing.JFrame {
         jLabel2.setText("Cerrar Sesion");
         CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
+        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 900, 170, 70));
 
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida.setText("¡Bienvenido(a)!");
