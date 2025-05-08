@@ -34,16 +34,17 @@ public class Drawer extends JPanel {
     }
     public void ponerCamino(){
         aristas = new ListaEnlazadaAristas();
-        Nodo temp = camino.getCabeza();
-        while(temp.getSiguiente() != null){
+        for(Nodo temp : camino){
+            if(temp.getSiguiente() == null){
+                break;
+            }
             aristas.agregarArista(new Arista(temp,temp.getSiguiente(),0,false));
-            temp = temp.getSiguiente();
             
         }
         repaint();
     }
     public void reiniciarAristas(ListaEnlazadaAristas aris){
-        aristas = aris;
+        aristas.setCabeza(aris.getCabeza());
         repaint();
     }
     public void agregarNodo(String nombre,boolean edicion, JTextField Nnodo){  
@@ -66,8 +67,8 @@ public class Drawer extends JPanel {
     } 
     public void removerEvento(){  
     if (listener != null) {  
-        this.removeMouseListener(listener); // Remueve el listener  
-        listener = null; // Limpia la referencia  
+        this.removeMouseListener(listener);
+        listener = null;
     }  
 }
     
@@ -77,26 +78,20 @@ public class Drawer extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
-        Arista temp1 = aristas.getCabeza();
         
-        while(temp1 != null){
+        for(Arista temp1 : aristas){
             int iniX,iniY,finX,finY; iniX = temp1.getInicio().getX(); iniY = temp1.getInicio().getY(); finX = temp1.getFin().getX(); finY = temp1.getFin().getY();
-    
             g.drawLine(temp1.getInicio().getX(), temp1.getInicio().getY(), temp1.getFin().getX(), temp1.getFin().getY());
             g.drawLine(finX, finY, finX - 10 , finY - 10);
             g.drawLine(finX, finY, finX - 10 , finY + 10);
-            
-            temp1 = temp1.getSiguiente();
         }
         
         g.setColor(Color.BLACK);
-        Nodo temp = nodos.getCabeza();
-        while(temp != null){
+        for(Nodo temp : nodos){
             g.fillOval(temp.getX() - 15, temp.getY() - 15, 30, 30);
             g.setColor(Color.BLUE);
             g.drawString(temp.getNombre(), temp.getX() - 15, temp.getY() - 15);
             g.setColor(Color.BLACK);
-            temp = temp.getSiguiente();
         }
         
         

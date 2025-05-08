@@ -14,6 +14,7 @@ import com.app.conexion.data.enumData;
 import java.awt.Color;
 import javax.swing.JLabel;
 import com.app.manejodatos.ListaEnlazada;
+import raven.toast.Notifications;
 
 public class Conexion{
        private Connection conexion;
@@ -36,7 +37,7 @@ public class Conexion{
         return conexion;
     }
     
-    public boolean addTotableUsers(String nickname,String password,javax.swing.JLabel Label){
+    public boolean addTotableUsers(String nickname,String password){
         String sql = "INSERT INTO usuarios (Nickname, Password, Permisos) VALUES (?, ?, 0)";
         try(PreparedStatement ps = conexion.prepareStatement(sql)){
             String sqlCount = "SELECT COUNT(*) FROM usuarios WHERE Nickname = ?";
@@ -47,15 +48,11 @@ public class Conexion{
             if (rsCount.next()) {
             int count = rsCount.getInt(1);
             if(count == 1){
-                Label.setText("Cuenta con el mismo usuario ya existe");
-                Label.setForeground(Color.RED);
                 return false;
             }else{
                 ps.setString(1, nickname);
                 ps.setString(2, password);
                 ps.executeUpdate();
-                Label.setText("Cuenta creada con exito");
-                Label.setForeground(Color.GREEN);
                 return true;
             } 
         }

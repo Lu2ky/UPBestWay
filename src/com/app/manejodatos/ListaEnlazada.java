@@ -4,11 +4,13 @@
  */
 package com.app.manejodatos;
 
+import java.util.Iterator;
+
 /**
  *
  * @author bohor
  */
-public class ListaEnlazada {
+public class ListaEnlazada implements Iterable<Nodo> {
 
     private Nodo cabeza;
     private int size;
@@ -165,6 +167,29 @@ public class ListaEnlazada {
 
     public void setCabeza(Nodo cabeza) {
         this.cabeza = cabeza;
+    }
+
+    @Override
+    public Iterator<Nodo> iterator() {
+        return new IteratorListaNodos();
+    }
+    
+    private class IteratorListaNodos implements Iterator<Nodo> {
+        
+        private Nodo actual = cabeza;
+
+        @Override
+        public boolean hasNext() {
+            return actual != null;
+        }
+
+        @Override
+        public Nodo next() {
+            Nodo nodoActual = actual;
+            actual = actual.getSiguiente();
+            return nodoActual;
+        }
+        
     }
 
 }

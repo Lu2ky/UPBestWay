@@ -86,9 +86,6 @@ public class interfaz extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Check = new javax.swing.JLabel();
-        Logo1 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
-        LogoN4 = new javax.swing.JLabel();
         dndviene = new javax.swing.JLabel();
         dndva1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -106,6 +103,7 @@ public class interfaz extends javax.swing.JFrame {
         Buscar2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         Buscar3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         Runner = new javax.swing.JButton();
@@ -139,18 +137,6 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
         jPanel3.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 50, 50));
-
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel3.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel3.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
-
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
-        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 660, 90));
 
         dndviene.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene.setText("Escaleras");
@@ -277,6 +263,11 @@ public class interfaz extends javax.swing.JFrame {
 
         jPanel3.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 740, 170, 70));
 
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
+        jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 1080));
 
         jPanel4.setBackground(new java.awt.Color(140, 0, 0));
@@ -386,7 +377,9 @@ public class interfaz extends javax.swing.JFrame {
         }
         ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino,draw);
         draw.setCamino(camino);
-        draw.ponerCamino();
+        if(camino.getCabeza() != null){
+            draw.ponerCamino();
+        }
         if(iniesp && !finesp){
             Nodo temp = camino.getCabeza().getSiguiente();
             
@@ -485,11 +478,9 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_NodoAActionPerformed
 
     private void poblarComponentes() {
-    Nodo temp = cargar.getCabeza();
-    while(temp != null) {
-        NodoA.addItem(temp.getNombre());
-        NodoB.addItem(temp.getNombre());
-        temp = temp.getSiguiente();
+    for(Nodo nodo: cargar){
+            NodoA.addItem(nodo.getNombre());
+            NodoB.addItem(nodo.getNombre());
         }
     }
     /**
@@ -506,9 +497,6 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JTextArea Camino;
     private javax.swing.JPanel CerrarSesion;
     private javax.swing.JLabel Check;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
     private combo_suggestion.ComboBoxSuggestion NodoA;
     private combo_suggestion.ComboBoxSuggestion NodoB;
     private javax.swing.JButton Runner;
@@ -521,6 +509,7 @@ public class interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel dndviene1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

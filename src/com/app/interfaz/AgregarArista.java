@@ -42,7 +42,7 @@ public class AgregarArista extends javax.swing.JFrame {
         grafo = grafoload;
         cargar = grafo.getNodos();
         this.perm = perm;
-        // Removed duplicate initComponents call
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         draw = new Drawer(perm, cox, null, grafo.getNodos(), grafo.getAristas());
         this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
@@ -54,11 +54,6 @@ public class AgregarArista extends javax.swing.JFrame {
         NodoFinal.addItem("Auditorio mayor");
 
         poblarComponentes();
-    }
-
-    // Added default constructor to fix instantiation issue
-    public AgregarArista() {
-        initComponents();
     }
 
     /**
@@ -92,6 +87,7 @@ public class AgregarArista extends javax.swing.JFrame {
         Check = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(140, 0, 0));
@@ -183,7 +179,7 @@ public class AgregarArista extends javax.swing.JFrame {
         jLabel2.setText("Cerrar Sesion");
         CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
+        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 970, 170, 70));
 
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida.setText("¡Bienvenido(a)!");
@@ -237,7 +233,7 @@ public class AgregarArista extends javax.swing.JFrame {
         Inicio_sesion inis = new Inicio_sesion(grafo);
         inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
         inis.setVisible(true);
-        Timer timer = new Timer(10, new ActionListener() {
+        Timer timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
             }
@@ -258,38 +254,6 @@ public class AgregarArista extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AgregarArista().setVisible(true);
-            }
-        });
-    }
-
     private void poblarComponentes() {
         Nodo temp = cargar.getCabeza();
         while (temp != null) {

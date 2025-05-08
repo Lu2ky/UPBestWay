@@ -48,9 +48,6 @@ public class ADMIN extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        LogoN4 = new javax.swing.JLabel();
-        Logo1 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
         Buscar1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -64,6 +61,7 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Buscar4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -77,21 +75,9 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
-        LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 660, 90));
-
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
-
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida.setText("Aristas");
-        jPanel1.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
+        jPanel1.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, -1, -1));
 
         Buscar1.setBackground(new java.awt.Color(140, 0, 0));
         Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -107,15 +93,15 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel2.setText("Eliminar");
         Buscar1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 20, -1, -1));
 
-        jPanel1.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 600, 170, 70));
+        jPanel1.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 670, 170, 70));
 
         Bienvenida1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida1.setText("¡Bienvenido(a)!");
-        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida2.setText("Nodos");
-        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
         Buscar2.setBackground(new java.awt.Color(140, 0, 0));
         Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -131,7 +117,7 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel3.setText("Agregar ");
         Buscar2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 20, -1, -1));
 
-        jPanel1.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 170, 70));
+        jPanel1.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 170, 70));
 
         Buscar3.setBackground(new java.awt.Color(140, 0, 0));
         Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -142,7 +128,7 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel4.setText("Confirmar cambios");
         Buscar3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 20, -1, -1));
 
-        jPanel1.add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 770, 220, 70));
+        jPanel1.add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 840, 220, 70));
 
         Buscar.setBackground(new java.awt.Color(140, 0, 0));
         Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -158,7 +144,7 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel1.setText("Eliminar");
         Buscar.add(jLabel1, new java.awt.GridBagConstraints());
 
-        jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 170, 70));
+        jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, 170, 70));
 
         Buscar4.setBackground(new java.awt.Color(140, 0, 0));
         Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -174,7 +160,12 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel5.setText("Agregar ");
         Buscar4.add(jLabel5, new java.awt.GridBagConstraints());
 
-        jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 600, 170, 70));
+        jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 670, 170, 70));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
+        jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 888, 1080));
 
@@ -209,7 +200,7 @@ public class ADMIN extends javax.swing.JFrame {
 
     private void cambiarp3(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp3
         JFrame este = this;
-        AgregarArista AA = new AgregarArista();
+        AgregarArista AA = new AgregarArista(sesion,cox,grafoload,true);
         AA.setVisible(true);
         AA.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -243,14 +234,12 @@ public class ADMIN extends javax.swing.JFrame {
     private javax.swing.JPanel Buscar2;
     private javax.swing.JPanel Buscar3;
     private javax.swing.JPanel Buscar4;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
