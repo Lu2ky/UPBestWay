@@ -60,9 +60,6 @@ public class AgregarNodos extends javax.swing.JFrame {
         SeparadorUser5 = new javax.swing.JPanel();
         SeparadorUser6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        LogoN4 = new javax.swing.JLabel();
-        Logo1 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
         X = new javax.swing.JLabel();
         Buscar4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -100,18 +97,6 @@ public class AgregarNodos extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 190, 15));
         jPanel1.setForeground(new java.awt.Color(255, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
-        LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 660, 90));
-
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
 
         X.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         X.setText("Y");
@@ -165,11 +150,11 @@ public class AgregarNodos extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         jLabel8.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
         jLabel8.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Ingrese la Posicion");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 510, 50));
 
@@ -254,9 +239,15 @@ public class AgregarNodos extends javax.swing.JFrame {
             Nombrevacio.setText("El espacio de nombre no puede estar vacio");
         }
         if(agregar){
-            agregarNodoAGrafo(Nnodo.getText(),agregar);
-            Nombrevacio.setText(agregar.toString());
-            agregar = false;
+            if(!draw.getNodos().NodoPresente(Nnodo.getText())){
+                agregarNodoAGrafo(Nnodo.getText(),agregar);
+                Nombrevacio.setText(agregar.toString());
+                agregar = false;
+            }
+            else{
+                Nombrevacio.setText("Nodo ya existe");
+                agregar = true;
+            }
         }
     }//GEN-LAST:event_Agergar_Nodo
 
@@ -314,9 +305,6 @@ public class AgregarNodos extends javax.swing.JFrame {
     private javax.swing.JLabel Bienvenida2;
     private javax.swing.JPanel Buscar4;
     private javax.swing.JPanel CerrarSesion;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
     private javax.swing.JTextField Nnodo;
     private javax.swing.JLabel Nombrevacio;
     private javax.swing.JTextField PosicionX;

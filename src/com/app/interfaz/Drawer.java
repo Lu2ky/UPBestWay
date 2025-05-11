@@ -65,6 +65,15 @@ public class Drawer extends JPanel {
         
          
     } 
+
+    public ListaEnlazada getNodos() {
+        return nodos;
+    }
+
+    public void setNodos(ListaEnlazada nodos) {
+        this.nodos = nodos;
+    }
+    
     public void removerEvento(){  
     if (listener != null) {  
         this.removeMouseListener(listener);

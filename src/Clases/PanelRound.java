@@ -73,8 +73,8 @@ public class PanelRound extends JPanel {
         if (roundBottomRight > 0) {
             area.intersect(new Area(createRoundBottomRight()));
         }
-        Color color1 = new Color(255, 0, 64);   // Rojo fuerte
-        Color color2 = new Color(128, 0, 128); // Morado
+        Color color1 = new Color(255, 0, 64);
+        Color color2 = new Color(128, 0, 128);
 
         int width = getWidth();
         int height = getHeight();
