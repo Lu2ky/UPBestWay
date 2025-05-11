@@ -219,7 +219,7 @@ public class Conexion{
         e.printStackTrace();
         }
     }
-    public boolean searchUser(String nickname, String passw, JLabel Text){
+    public boolean searchUser(String nickname, String passw){
         String sql = "SELECT * FROM usuarios WHERE  Nickname = ?";
         String user = "";
         String pass = "";
@@ -233,7 +233,6 @@ public class Conexion{
                     perm = rs.getBoolean("Permisos");
                 }
                 else{
-                    Text.setText("No hay un usuario existente");
                     return false;
                 }
                 if(pass.equals(passw)){

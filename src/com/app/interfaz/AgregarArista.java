@@ -230,7 +230,7 @@ public class AgregarArista extends javax.swing.JFrame {
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
         sesion = null;
         JFrame frame = this;
-        Inicio_sesion inis = new Inicio_sesion(grafo);
+        Inicio_sesion inis = new Inicio_sesion(grafo,cox);
         inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
         inis.setVisible(true);
         Timer timer = new Timer(1, new ActionListener() {

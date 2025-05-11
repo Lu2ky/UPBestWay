@@ -13,6 +13,7 @@ import java.util.Iterator;
 public class ListaEnlazadaAristas implements Iterable<Arista>{
     private Arista cabeza;
     private int size;
+    private Arista cola;
 
     public ListaEnlazadaAristas() {
         this.cabeza = null;
@@ -33,14 +34,15 @@ public class ListaEnlazadaAristas implements Iterable<Arista>{
     }
     
     public void agregarArista(Arista nuevo) {
+        if (nuevo == null) {
+            return;
+        }
         if (cabeza == null) {
             cabeza = nuevo;
+            cola = nuevo;
         } else {
-            Arista temp = cabeza;
-            while (temp.getSiguiente() != null) {
-                temp = temp.getSiguiente();
-            }
-            temp.setSiguiente(nuevo);
+            cola.setSiguiente(nuevo);
+            cola = nuevo;
         }
         size++;
     }

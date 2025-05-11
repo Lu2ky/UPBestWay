@@ -431,7 +431,7 @@ public class crear_cuenta extends javax.swing.JFrame {
 
     private void InicioSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioSesionMousePressed
         JFrame frame = this;
-        Inicio_sesion is = new Inicio_sesion(grafo);
+        Inicio_sesion is = new Inicio_sesion(grafo,cox);
         is.setVisible(true); 
         is.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {

@@ -43,17 +43,19 @@ import raven.toast.Notifications;
 public class Inicio_sesion extends javax.swing.JFrame {
     
     int indice = 0;
-    public Sesion sesion = new Sesion();
+    public Sesion sesion = null;
     boolean ver = false;
-    static Conexion cox = new Conexion();
+    static Conexion cox = null;
     static Grafo grafo = null;
     final boolean ini = true;
 
     /**
      * Creates new form Inicio_sesion
      */
-    public Inicio_sesion(Grafo grafoload) {
+    public Inicio_sesion(Grafo grafoload,Conexion conexion) {
         grafo = grafoload;
+        cox = conexion;
+        sesion = null;
         initComponents();
         
         PanelRound dgree1 = new PanelRound();
@@ -108,7 +110,6 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        Mensaje = new javax.swing.JLabel();
         Visitanos = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -179,10 +180,12 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
 
         jLabel3.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText(bundle.getString("Inicio_sesion.jLabel3.text")); // NOI18N
         Fondo1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
+        IniciarSesionTexto1.setForeground(new java.awt.Color(0, 0, 0));
         IniciarSesionTexto1.setText(bundle.getString("Inicio_sesion.IniciarSesionTexto1.text")); // NOI18N
         Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
 
@@ -194,6 +197,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Fondo1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 500, 1));
 
         jLabel2.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText(bundle.getString("Inicio_sesion.jLabel2.text")); // NOI18N
         Fondo1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, -1));
 
@@ -256,13 +260,6 @@ public class Inicio_sesion extends javax.swing.JFrame {
         });
         Fondo1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, -1, 30));
 
-        Mensaje.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        Mensaje.setForeground(new java.awt.Color(204, 255, 204));
-        Mensaje.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Mensaje.setText(bundle.getString("Inicio_sesion.Mensaje.text")); // NOI18N
-        Mensaje.setName("dwdawdad"); // NOI18N
-        Fondo1.add(Mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 670, 20));
-
         Visitanos.setBackground(new java.awt.Color(255, 255, 255));
         Visitanos.setForeground(new java.awt.Color(255, 255, 255));
         Visitanos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -292,7 +289,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
         Fondo1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
 
-        Fondo2.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1090));
+        Fondo2.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -316,7 +313,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         LogoN1.setText(bundle.getString("Inicio_sesion.LogoN1.text")); // NOI18N
         Fondo.add(LogoN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
 
-        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 1080));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
@@ -378,8 +375,8 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
-        if(cox.searchUser(User1.getText(), Password.getText(), Mensaje)){
-            sesion.setNombre(User1.getText());
+        if(cox.searchUser(User1.getText(), Password.getText())){
+            sesion = new Sesion(User1.getText());
             Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.BOTTOM_CENTER,"Se inicio sesion");
             Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
             JFrame frame = this;
@@ -394,8 +391,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
             timer.start();
         }
         else{
-            Mensaje.setText("Usuario no encontrado");
-            Mensaje.setForeground(Color.blue);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_CENTER,"No se encontro este usuario");
         }
     }//GEN-LAST:event_InicioMousePressed
 
@@ -452,12 +448,13 @@ public class Inicio_sesion extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {    
-        FlatLightLaf.setup();
-        grafo = new Grafo(cox);
+        Conexion cox = new Conexion();
+        Grafo g = new Grafo(cox);
+        FlatDarculaLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Inicio_sesion(grafo).setVisible(true);
+                new Inicio_sesion(g,cox).setVisible(true);
             }
         });
     }
@@ -472,7 +469,6 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private javax.swing.JLabel Logo;
     private javax.swing.JLabel LogoN1;
     private javax.swing.JLabel LogoN2;
-    private javax.swing.JLabel Mensaje;
     private javax.swing.JPasswordField Password;
     private javax.swing.JPanel SeparadorPass;
     private javax.swing.JPanel SeparadorUser;

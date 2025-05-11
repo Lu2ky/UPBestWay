@@ -13,6 +13,7 @@ import java.util.Iterator;
 public class ListaEnlazada implements Iterable<Nodo> {
 
     private Nodo cabeza;
+    private Nodo cola;
     private int size;
 
     public ListaEnlazada() {
@@ -40,12 +41,10 @@ public class ListaEnlazada implements Iterable<Nodo> {
         }
         if (cabeza == null) {
             cabeza = nuevo;
+            cola = nuevo;
         } else {
-            Nodo temp = cabeza;
-            while (temp.getSiguiente() != null) {
-                temp = (Nodo) temp.getSiguiente();
-            }
-            temp.setSiguiente(nuevo);
+            cola.setSiguiente(nuevo);
+            cola = nuevo;
         }
         nuevo.setId(size);
         size++;
@@ -54,12 +53,10 @@ public class ListaEnlazada implements Iterable<Nodo> {
     public void agregarNodo2(Nodo nuevo) {
         if (cabeza == null) {
             cabeza = nuevo;
+            cola = nuevo;
         } else {
-            Nodo temp = cabeza;
-            while (temp.getSiguiente() != null) {
-                temp = (Nodo) temp.getSiguiente();
-            }
-            temp.setSiguiente(nuevo);
+            cola.setSiguiente(nuevo);
+            cola = nuevo;
         }
         size++;
     }

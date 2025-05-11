@@ -4,13 +4,17 @@
  */
 package com.app.interfaz;
 
+import Clases.PanelRound;
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
 import com.app.manejodatos.Stack;
+import combo_suggestion.ComboBoxSuggestion;
 import java.awt.BorderLayout;
+import javax.swing.DefaultComboBoxModel;
+import raven.toast.Notifications;
 
 /**
  *
@@ -32,7 +36,11 @@ public class EliminarNodo extends javax.swing.JFrame {
     
     public EliminarNodo(Sesion sesion, Conexion coxload, Grafo grafoload) {
         this.sesion = sesion;
+        PanelRound dgree1 = new PanelRound();
         initComponents();
+        Buscar4.setLayout(new BorderLayout());
+        Buscar4.add(dgree1,BorderLayout.CENTER);
+        Buscar4.setOpaque(true);
         cox = coxload;
         grafo = grafoload;
         cargar = grafo.getNodos();
@@ -59,15 +67,12 @@ public class EliminarNodo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        LogoN4 = new javax.swing.JLabel();
-        Logo1 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
         Buscar4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
         Nodoeliminar = new combo_suggestion.ComboBoxSuggestion();
         a = new javax.swing.JLabel();
-        Mostrar = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
 
@@ -75,22 +80,10 @@ public class EliminarNodo extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 190, 15));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
-        LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 660, 90));
-
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
-
-        Buscar4.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar4.setBackground(new java.awt.Color(255, 255, 255));
         Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -107,10 +100,11 @@ public class EliminarNodo extends javax.swing.JFrame {
         jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 660, 170, 70));
 
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
+        Bienvenida2.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida2.setText("¡Bienvenido(a)!");
-        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
 
-        Nodoeliminar.setBackground(new java.awt.Color(140, 0, 0));
+        Nodoeliminar.setBackground(new java.awt.Color(0, 0, 0));
         Nodoeliminar.setBorder(null);
         Nodoeliminar.setMaximumRowCount(5);
         Nodoeliminar.setFocusCycleRoot(true);
@@ -118,16 +112,18 @@ public class EliminarNodo extends javax.swing.JFrame {
         jPanel1.add(Nodoeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 220, 50));
 
         a.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        a.setForeground(new java.awt.Color(0, 0, 0));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
         a.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
-        jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
+        jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
-        Mostrar.setBackground(new java.awt.Color(255, 190, 15));
-        Mostrar.setBorder(null);
-        jPanel1.add(Mostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 520, 460, 70));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
 
-        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
@@ -142,7 +138,7 @@ public class EliminarNodo extends javax.swing.JFrame {
         Nodo nodoAEliminar = null;
         String nodoNombre = (String) Nodoeliminar.getSelectedItem();
         if (nodoNombre == null || nodoNombre.isEmpty()) {
-            Mostrar.setText("No ha selecionado un nodo para eliminar");
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"Seleccione un nodo");
             return;
         }
         if(nodoNombre == "Auditorio mayor"){
@@ -158,13 +154,24 @@ public class EliminarNodo extends javax.swing.JFrame {
         
         if (nodoAEliminar != null) {
             cargar.eliminarNodoBIEN(nodoAEliminar.getNombre());
-            Mostrar.setText("Nodo '" + nodoNombre + "' eliminado.");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.BOTTOM_LEFT,"Nodo '" + nodoNombre + "' eliminado.");
             Nodoseliminados.push(nodoAEliminar);
            
-            // aqui se actualizaria el grafo pero nose como hacerlo, creo q es asi 
+            DefaultComboBoxModel<String> nueva = new DefaultComboBoxModel<>();
+            for (Nodo nombreNodo : cargar) {
+                nueva.addElement(nombreNodo.getNombre());
+            }
+            if(cargar.NodoPresente("J")){
+                nueva.addElement("Biblioteca");
+                nueva.addElement("Auditorio menor");
+            }
+            if(cargar.NodoPresente("H")){
+                nueva.addElement("Auditorio mayor");
+            }
+            Nodoeliminar.setModel(nueva);
             draw.repaint();
         } else {
-            Mostrar.setText("Nodo '" + nodoNombre + "' no encontrado.");
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"Nodo "+ nodoNombre +" no encontrado");
         }
     }//GEN-LAST:event_EliminarNodo
       private void poblarComponentes() {
@@ -178,13 +185,10 @@ public class EliminarNodo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida2;
     private javax.swing.JPanel Buscar4;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
-    private javax.swing.JTextField Mostrar;
     private combo_suggestion.ComboBoxSuggestion Nodoeliminar;
     private javax.swing.JLabel a;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
