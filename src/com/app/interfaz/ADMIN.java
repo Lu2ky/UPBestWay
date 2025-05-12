@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import com.app.interfaz.AgregarNodos;
+import static com.app.interfaz.Inicio_sesion.grafo;
 import java.awt.BorderLayout;
 
 /**
@@ -232,7 +233,7 @@ public class ADMIN extends javax.swing.JFrame {
         Buscar6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Buscar6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Buscar6cambiarp4(evt);
+                volver(evt);
             }
         });
         Buscar6.setLayout(new java.awt.GridBagLayout());
@@ -349,9 +350,19 @@ public class ADMIN extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Buscar7cambiarp4
 
-    private void Buscar6cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar6cambiarp4
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Buscar6cambiarp4
+    private void volver(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_volver
+        sesion = null;
+        JFrame frame = this;
+        Inicio_sesion inis = new Inicio_sesion(grafo,cox);
+        inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        inis.setVisible(true);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_volver
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
