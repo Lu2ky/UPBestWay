@@ -88,7 +88,7 @@ public class Grafo {
     }
     
     if(distancias[fn.getId()] < Integer.MAX_VALUE){
-        a.append("Metros: " + distancias[fn.getId()] + ", Camino: ");
+        a.append("Metros: " + distancias[fn.getId()] + "\nCamino: ");
         if(distancias[fn.getId()] == 0){
             a.setText("Se encuentra sobre el mismo nodo");
             drawerGrafo.reiniciarAristas(Aristas);
@@ -120,7 +120,7 @@ public class Grafo {
         return caminoList;
     }
 
-    Stack pila = new Stack();
+    Stack<Nodo> pila = new Stack();
     int actualId = destino.getId();
     boolean caminoValido = true;
     
@@ -145,7 +145,7 @@ public class Grafo {
         }
     }
     if (!caminoValido || pila.isEmpty() || 
-        !pila.peek().getNombre().equals(origen.getNombre())) {
+        !pila.peek().getValor().getNombre().equals(origen.getNombre())) {
         return new ListaEnlazada();
     }
 

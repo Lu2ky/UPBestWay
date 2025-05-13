@@ -9,6 +9,8 @@ import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
+import com.app.utilidad.PanelRound;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -27,34 +29,49 @@ public class EliminarArista extends javax.swing.JFrame {
     Boolean perm = false;
     Drawer draw = null;
     ListaEnlazada cargar = null;
+    Buffer buffer;
 
     /**
      * Creates new form EliminarArista
      */
    
 
-    public EliminarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm) {
+    public EliminarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm,Buffer buf,Drawer draw) {
         initComponents();
+        buffer = buf;
+        this.draw = draw;
         cox = coxload;
         grafo = grafoload;
         cargar = grafo.getNodos();
         this.perm = perm;
         // Removed duplicate initComponents call
-        draw = new Drawer(perm, cox, null, grafo.getNodos(), grafo.getAristas());
         this.sesion = sesion;
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
+        
+        Buscar.setLayout(new BorderLayout());
+        Buscar.add(dgree1,BorderLayout.CENTER);
+        Buscar.setVisible(true);
+        
+        CerrarSesion.setLayout(new BorderLayout());
+        CerrarSesion.add(dgree2,BorderLayout.CENTER);
+        CerrarSesion.setVisible(true);
+        
+        jPanel5.setLayout(new BorderLayout());
+        jPanel5.add(draw, BorderLayout.CENTER);
+        jPanel5.setVisible(true);
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
-        NodoI.addItem("Biblioteca");
-        NodoI.addItem("Auditorio menor");
-        NodoI.addItem("Auditorio mayor");
-        NodoF.addItem("Biblioteca");
-        NodoF.addItem("Auditorio menor");
-        NodoF.addItem("Auditorio mayor");
+         if (draw.getNodos().NodoPresente("J")) {
+            NodoI.addItem("Biblioteca");
+            NodoI.addItem("Auditorio menor");
+            NodoF.addItem("Auditorio menor");
+            NodoF.addItem("Biblioteca");
+        }
+        if (draw.getNodos().NodoPresente("H")) {
+            NodoI.addItem("Auditorio mayor");
+            NodoF.addItem("Auditorio mayor");
+        }
         poblarComponentes();
-    }
-
-    // Added default constructor to fix instantiation issue
-    public EliminarArista() {
-        initComponents();
     }
 
     /**
@@ -66,22 +83,45 @@ public class EliminarArista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Buscar = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         dndva2 = new javax.swing.JLabel();
         NodoF = new combo_suggestion.ComboBoxSuggestion();
         NodoI = new combo_suggestion.ComboBoxSuggestion();
-        Buscar = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         dndviene2 = new javax.swing.JLabel();
         CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Buscar.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Eliminar(evt);
+            }
+        });
+        Buscar.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Eliminar");
+        Buscar.add(jLabel1, new java.awt.GridBagConstraints());
+
+        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel2.setFocusable(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Buscar.add(jPanel2, new java.awt.GridBagConstraints());
+
+        getContentPane().add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 560, 170, 70));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,35 +150,14 @@ public class EliminarArista extends javax.swing.JFrame {
         NodoI.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jPanel3.add(NodoI, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
-        Buscar.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EliminarArista(evt);
-            }
-        });
-        Buscar.setLayout(new java.awt.GridBagLayout());
-
-        jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Eliminar");
-        Buscar.add(jLabel1, new java.awt.GridBagConstraints());
-
-        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
-        jPanel2.setFocusable(false);
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Buscar.add(jPanel2, new java.awt.GridBagConstraints());
-
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, 170, 70));
-
         dndviene2.setBackground(new java.awt.Color(0, 0, 0));
         dndviene2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         dndviene2.setForeground(new java.awt.Color(0, 0, 0));
         dndviene2.setText("Edificio Inicial ");
         jPanel3.add(dndviene2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 40));
 
-        CerrarSesion.setBackground(new java.awt.Color(140, 0, 0));
-        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CerrarSesionMousePressed(evt);
@@ -151,7 +170,7 @@ public class EliminarArista extends javax.swing.JFrame {
         jLabel2.setText("Volver");
         CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 900, 170, 70));
+        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 1000, 170, 70));
 
         Bienvenida.setBackground(new java.awt.Color(0, 0, 0));
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
@@ -164,12 +183,18 @@ public class EliminarArista extends javax.swing.JFrame {
         jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 1080));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
         jPanel4.setFocusable(false);
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, -20, 1310, 1200));
+
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel5.setAlignmentX(0.0F);
+        jPanel5.setAlignmentY(0.0F);
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,9 +204,9 @@ public class EliminarArista extends javax.swing.JFrame {
     }//GEN-LAST:event_NodoFActionPerformed
 
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
-        sesion = null;
+
         JFrame frame = this;
-        Inicio_sesion inis = new Inicio_sesion(grafo,cox);
+        ADMIN inis = new ADMIN(grafo,cox,sesion,buffer,draw);
         inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
         inis.setVisible(true);
         Timer timer = new Timer(10, new ActionListener() {
@@ -192,9 +217,24 @@ public class EliminarArista extends javax.swing.JFrame {
         timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
 
-    private void EliminarArista(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarArista
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EliminarArista
+    private void Eliminar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Eliminar
+        String ini = (String) NodoI.getSelectedItem();
+        String fin = (String) NodoF.getSelectedItem();
+        if(ini.equals("Biblioteca") || ini.equals("Auditorio menor")){
+            ini = "J";
+        }
+        if(fin.equals("Biblioteca") || fin.equals("Auditorio menor")){
+            fin = "J";
+        }
+        if(ini.equals("Auditorio mayor")){
+            ini = "H";
+        }
+        if(fin.equals("Auditorio mayor")){
+            ini = "H";
+        }
+        draw.eliminarArista1(ini, fin,buffer);
+        draw.reiniciar();
+    }//GEN-LAST:event_Eliminar
       private void poblarComponentes() {         
         for(Nodo temp: cargar){
             NodoI.addItem(temp.getNombre());
@@ -204,37 +244,7 @@ public class EliminarArista extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EliminarArista().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida;
@@ -250,5 +260,6 @@ public class EliminarArista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

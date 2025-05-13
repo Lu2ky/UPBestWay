@@ -4,7 +4,8 @@
  */
 package com.app.interfaz;
 
-import Clases.PanelRound;
+import com.app.utilidad.PanelRound;
+import com.app.manejodatos.Nodo;
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
@@ -12,17 +13,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import com.app.interfaz.AgregarNodos;
+import com.app.manejodatos.Arista;
+import com.app.manejodatos.Stack;
 import java.awt.BorderLayout;
 
 /**
  *
  * @author ADMIN
  */
-
-    
-        
-        
 public class ADMIN extends javax.swing.JFrame {
 
     /**
@@ -32,8 +30,10 @@ public class ADMIN extends javax.swing.JFrame {
     private Conexion cox;
     private Sesion sesion;
     private Drawer draw;
-    
-    public ADMIN(Grafo grafo, Conexion cox,Sesion ses) {
+    private Buffer buffer;
+
+    public ADMIN(Grafo grafo, Conexion cox, Sesion ses, Buffer buf, Drawer draw) {
+        buffer = buf;
         PanelRound dgree1 = new PanelRound();
         PanelRound dgree2 = new PanelRound();
         PanelRound dgree3 = new PanelRound();
@@ -41,36 +41,90 @@ public class ADMIN extends javax.swing.JFrame {
         PanelRound dgree5 = new PanelRound();
         PanelRound dgree6 = new PanelRound();
         initComponents();
-        draw = new Drawer(false, cox, null, grafo.getNodos(), grafo.getAristas());
-        jPanel4.add(draw,BorderLayout.CENTER);
+        this.draw = draw;
+        jPanel4.add(draw, BorderLayout.CENTER);
         jPanel4.setVisible(true);
         Buscar2.setLayout(new BorderLayout());
-        Buscar2.add(dgree1,BorderLayout.CENTER);
+        Buscar2.add(dgree1, BorderLayout.CENTER);
         Buscar2.setOpaque(true);
-        
+
         Buscar.setLayout(new BorderLayout());
-        Buscar.add(dgree2,BorderLayout.CENTER);
+        Buscar.add(dgree2, BorderLayout.CENTER);
         Buscar.setOpaque(true);
-        
+
         Buscar4.setLayout(new BorderLayout());
-        Buscar4.add(dgree3,BorderLayout.CENTER);
+        Buscar4.add(dgree3, BorderLayout.CENTER);
         Buscar4.setOpaque(true);
-        
+
         Buscar1.setLayout(new BorderLayout());
-        Buscar1.add(dgree4,BorderLayout.CENTER);
+        Buscar1.add(dgree4, BorderLayout.CENTER);
         Buscar1.setOpaque(true);
-        
+
         Buscar6.setLayout(new BorderLayout());
-        Buscar6.add(dgree5,BorderLayout.CENTER);
+        Buscar6.add(dgree5, BorderLayout.CENTER);
         Buscar6.setOpaque(true);
-        
+
         Buscar3.setLayout(new BorderLayout());
-        Buscar3.add(dgree6,BorderLayout.CENTER);
+        Buscar3.add(dgree6, BorderLayout.CENTER);
         Buscar3.setOpaque(true);
         grafoload = grafo;
         this.cox = cox;
         sesion = ses;
-        
+        Bienvenida1.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+
+    }
+
+    public ADMIN(Grafo grafo, Conexion cox, Sesion ses, Stack<Nodo> NodosN, Stack<Nodo> NodosE, Stack<Arista> AristasA, Stack<Arista> AristasE) {
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
+        PanelRound dgree3 = new PanelRound();
+        PanelRound dgree4 = new PanelRound();
+        PanelRound dgree5 = new PanelRound();
+        PanelRound dgree6 = new PanelRound();
+        initComponents();
+        if (NodosE != null) {
+            buffer.setNeliminar(NodosE);
+        }
+        if (NodosN != null) {
+            buffer.setNagregar(NodosN);
+        }
+        if (AristasA != null) {
+            buffer.setAagregar(AristasA);
+        }
+        if (AristasE != null) {
+            buffer.setAeliminar(AristasE);
+        }
+        draw = new Drawer(false, cox, null, grafo.getNodos(), grafo.getAristas(),buffer);
+        jPanel4.add(draw, BorderLayout.CENTER);
+        jPanel4.setVisible(true);
+        Buscar2.setLayout(new BorderLayout());
+        Buscar2.add(dgree1, BorderLayout.CENTER);
+        Buscar2.setOpaque(true);
+
+        Buscar.setLayout(new BorderLayout());
+        Buscar.add(dgree2, BorderLayout.CENTER);
+        Buscar.setOpaque(true);
+
+        Buscar4.setLayout(new BorderLayout());
+        Buscar4.add(dgree3, BorderLayout.CENTER);
+        Buscar4.setOpaque(true);
+
+        Buscar1.setLayout(new BorderLayout());
+        Buscar1.add(dgree4, BorderLayout.CENTER);
+        Buscar1.setOpaque(true);
+
+        Buscar6.setLayout(new BorderLayout());
+        Buscar6.add(dgree5, BorderLayout.CENTER);
+        Buscar6.setOpaque(true);
+
+        Buscar3.setLayout(new BorderLayout());
+        Buscar3.add(dgree6, BorderLayout.CENTER);
+        Buscar3.setOpaque(true);
+        grafoload = grafo;
+        this.cox = cox;
+        sesion = ses;
+        Bienvenida1.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+
     }
 
     /**
@@ -83,6 +137,8 @@ public class ADMIN extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Bienvenida = new javax.swing.JLabel();
         Buscar1 = new javax.swing.JPanel();
@@ -107,12 +163,21 @@ public class ADMIN extends javax.swing.JFrame {
         SeparadorUser1 = new javax.swing.JPanel();
         SeparadorUser = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setFocusable(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel4.setAlignmentX(0.0F);
+        jPanel4.setAlignmentY(0.0F);
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,7 +188,7 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, -1, -1));
 
         Buscar1.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cambiarp4(evt);
@@ -165,7 +230,7 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
         Buscar2.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cambarp1(evt);
@@ -181,7 +246,12 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 170, 70));
 
         Buscar3.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar3MousePressed(evt);
+            }
+        });
         Buscar3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
@@ -192,7 +262,7 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 810, 220, 70));
 
         Buscar.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cambiarp2(evt);
@@ -208,7 +278,7 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, 170, 70));
 
         Buscar4.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cambiarp3(evt);
@@ -229,7 +299,7 @@ public class ADMIN extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
 
         Buscar6.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 Buscar6cambiarp4(evt);
@@ -277,21 +347,14 @@ public class ADMIN extends javax.swing.JFrame {
 
         jPanel1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 700, 1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
-
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel2.setFocusable(false);
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cambarp1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambarp1
         JFrame este = this;
-        AgregarNodos aa = new AgregarNodos(cox,grafoload);
+        AgregarNodos aa = new AgregarNodos(sesion, cox, grafoload, true, buffer, draw);
         aa.setVisible(true);
         aa.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -303,8 +366,8 @@ public class ADMIN extends javax.swing.JFrame {
     }//GEN-LAST:event_cambarp1
 
     private void cambiarp2(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp2
-       JFrame este = this;
-        EliminarNodo EE = new EliminarNodo(sesion,cox,grafoload);
+        JFrame este = this;
+        EliminarNodo EE = new EliminarNodo(sesion, cox, grafoload, true, buffer, draw);
         EE.setVisible(true);
         EE.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -317,7 +380,7 @@ public class ADMIN extends javax.swing.JFrame {
 
     private void cambiarp3(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp3
         JFrame este = this;
-        AgregarArista AA = new AgregarArista(sesion,cox,grafoload,true);
+        AgregarArista AA = new AgregarArista(sesion, cox, grafoload, true, buffer, draw);
         AA.setVisible(true);
         AA.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -330,7 +393,7 @@ public class ADMIN extends javax.swing.JFrame {
 
     private void cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp4
         JFrame este = this;
-        EliminarArista EA = new EliminarArista();
+        EliminarArista EA = new EliminarArista(sesion, cox, grafoload, true, buffer, draw);
         EA.setVisible(true);
         EA.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -350,8 +413,49 @@ public class ADMIN extends javax.swing.JFrame {
     }//GEN-LAST:event_Buscar7cambiarp4
 
     private void Buscar6cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar6cambiarp4
-        // TODO add your handling code here:
+        JFrame este = this;
+        interfaz EA = new interfaz(sesion, cox, grafoload, true, buffer);
+        EA.setVisible(true);
+        EA.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
     }//GEN-LAST:event_Buscar6cambiarp4
+
+    private void Buscar3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar3MousePressed
+        Stack<Nodo> NodosAagregar = buffer.getNagregar();
+        if(NodosAagregar.peek() != null){
+            for(Nodo nuevo: NodosAagregar){
+                cox.addTotableNodos(nuevo.getNombre(),nuevo.getX(),nuevo.getY());
+            }
+        }
+        Stack<Nodo> NodosAEliminar = buffer.getNeliminar();
+        if(NodosAEliminar.peek() != null){
+            for(Nodo eliminado : NodosAEliminar){
+                cox.eliminarTOtableNodos(eliminado.getNombre());
+            }
+        }
+         Stack<Arista> AristaAagregar = buffer.getAagregar();
+         if(AristaAagregar.peek() != null){
+             for(Arista agregada: AristaAagregar){
+                int id1 = cox.searchNodoName(agregada.getInicio().getNombre()).getId();
+                int id2 = cox.searchNodoName(agregada.getFin().getNombre()).getId();
+                cox.addtoTableArist(id1,id2,agregada.getPeso(),agregada.isEscaleras());
+            }
+         }
+         Stack<Arista> AristaAEliminar = buffer.getAeliminar();
+         if(AristaAEliminar.peek() != null){
+             for(Arista eliminada : AristaAEliminar ){
+             int id1 = cox.searchNodoName(eliminada.getInicio().getNombre()).getId();
+             int id2 = cox.searchNodoName(eliminada.getFin().getNombre()).getId();
+             cox.eliminarTOtableArista(id1, id2);
+             cox.eliminarTOtableArista(id2, id1);
+         }
+         }
+    }//GEN-LAST:event_Buscar3MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

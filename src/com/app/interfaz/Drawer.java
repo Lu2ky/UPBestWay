@@ -1,70 +1,95 @@
 package com.app.interfaz;
 
 import com.app.conexion.Conexion;
-import com.app.manejodatos.Arista;
-import com.app.manejodatos.ListaEnlazada;
-import com.app.manejodatos.ListaEnlazadaAristas;
-import com.app.manejodatos.Nodo;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.app.manejodatos.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import static java.lang.Math.*;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Drawer extends JPanel {
+
     private ListaEnlazada nodos = new ListaEnlazada();
     private ListaEnlazadaAristas aristas = new ListaEnlazadaAristas();
     private ListaEnlazada camino = null;
     private Boolean privilegios;
     private MouseAdapter listener;
-
-    public Drawer(Boolean privilegios,Conexion cox,ListaEnlazada camino,ListaEnlazada nodos,ListaEnlazadaAristas ar) {
+    private JTextField nombreNodo;
+    private Buffer temp;
+    
+    public Drawer(Boolean privilegios, Conexion cox, ListaEnlazada camino, ListaEnlazada nodos, ListaEnlazadaAristas ar,Buffer buf) {
+        temp = buf;
         setPreferredSize(new Dimension(831, 940));
-        setBackground(new java.awt.Color(144,0,0));
+        setBackground(Color.BLACK);
         this.nodos = nodos;
         this.aristas = ar;
-        repaint();    
+        repaint();
     }
+
     public void setCamino(ListaEnlazada camino) {
         this.camino = camino;
     }
-    public void ponerCamino(){
+
+    public void ponerCamino() {
         aristas = new ListaEnlazadaAristas();
-        for(Nodo temp : camino){
-            if(temp.getSiguiente() == null){
+        for (Nodo temp : camino) {
+            if (temp.getSiguiente() == null) {
                 break;
             }
-            aristas.agregarArista(new Arista(temp,temp.getSiguiente(),0,false));
-            
+            aristas.agregarArista(new Arista(temp, temp.getSiguiente(), 0, false));
+
         }
         repaint();
     }
-    public void reiniciarAristas(ListaEnlazadaAristas aris){
+
+    public void reiniciarAristas(ListaEnlazadaAristas aris) {
         aristas.setCabeza(aris.getCabeza());
         repaint();
     }
-    public void agregarNodo(String nombre,boolean edicion, JTextField Nnodo){  
+
+    public Boolean agregarNodo(boolean edicion) {
         privilegios = edicion;
-            listener = new MouseAdapter(){
-            public void mousePressed(MouseEvent e){
-                Nodo nuevo = null;
-                if (SwingUtilities.isLeftMouseButton(e) && privilegios ) {
-                    nuevo = new Nodo(Nnodo.getText(),e.getX(),e.getY());
+        listener = new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e) && privilegios) {
+                    Nodo nuevo = new Nodo(nombreNodo.getText(), e.getX(), e.getY());
                     nodos.agregarNodo(nuevo);
+                    temp.getNagregar().push(nodos.getCola());
                     repaint();
-                    privilegios = false;
+                    
                 }
+                privilegios = false;
             }
-        }; 
-            this.addMouseListener(listener);
-        
-        
-         
-    } 
+            
+        };
+        this.addMouseListener(listener);
+        return temp.getNagregar().peek() != null;
+    }
+    public void eliminarArista1(String ini, String fin,Buffer buf){
+        aristas.eliminarAristaInicioFin(ini, fin,this,buf);
+       aristas.eliminarAristaInicioFin(fin, ini,this,buf);
+        repaint();
+    }
+    public void eliminarArista(String nodo,Buffer buf){
+
+        aristas.eliminarAristaInicio(nodo, this, buf);
+        repaint();
+    }
+
+    public JTextField getNombreNodo() {
+        return nombreNodo;
+    }
+
+    public void setNombreNodo(JTextField nombreNodo) {
+        this.nombreNodo = nombreNodo;
+    }
+
+    public ListaEnlazadaAristas getAristas() {
+        return aristas;
+    }
+
+    public void setAristas(ListaEnlazadaAristas aristas) {
+        this.aristas = aristas;
+    }
 
     public ListaEnlazada getNodos() {
         return nodos;
@@ -73,36 +98,52 @@ public class Drawer extends JPanel {
     public void setNodos(ListaEnlazada nodos) {
         this.nodos = nodos;
     }
+
+    public Buffer getTemp() {
+        return temp;
+    }
+
+    public void setTemp(Buffer temp) {
+        this.temp = temp;
+    }
     
-    public void removerEvento(){  
-    if (listener != null) {  
-        this.removeMouseListener(listener);
-        listener = null;
-    }  
-}
-    
-    
+
+    public void removerEvento() {
+        if (listener != null) {
+            this.removeMouseListener(listener);
+            listener = null;
+        }
+
+    }
+
+    public void reiniciar() {
+        repaint();
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.WHITE);
-        
-        for(Arista temp1 : aristas){
-            int iniX,iniY,finX,finY; iniX = temp1.getInicio().getX(); iniY = temp1.getInicio().getY(); finX = temp1.getFin().getX(); finY = temp1.getFin().getY();
+
+        for (Arista temp1 : aristas) {
+            int iniX, iniY, finX, finY;
+            iniX = temp1.getInicio().getX();
+            iniY = temp1.getInicio().getY();
+            finX = temp1.getFin().getX();
+            finY = temp1.getFin().getY();
             g.drawLine(temp1.getInicio().getX(), temp1.getInicio().getY(), temp1.getFin().getX(), temp1.getFin().getY());
-            g.drawLine(finX, finY, finX - 10 , finY - 10);
-            g.drawLine(finX, finY, finX - 10 , finY + 10);
+            g.drawLine(finX, finY, finX - 10, finY - 10);
+            g.drawLine(finX, finY, finX - 10, finY + 10);
         }
-        
-        g.setColor(Color.BLACK);
-        for(Nodo temp : nodos){
+
+        g.setColor(Color.GRAY);
+        for (Nodo temp : nodos) {
             g.fillOval(temp.getX() - 15, temp.getY() - 15, 30, 30);
-            g.setColor(Color.BLUE);
+            g.setColor(new Color(255, 255, 255));
+            g.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 15));
             g.drawString(temp.getNombre(), temp.getX() - 15, temp.getY() - 15);
-            g.setColor(Color.BLACK);
+            g.setColor(Color.GRAY);
         }
-        
-        
+
     }
 }

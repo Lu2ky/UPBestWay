@@ -1,4 +1,5 @@
 package com.app.interfaz;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,33 +9,25 @@ package com.app.interfaz;
  *
  * @author ADMIN
  */
-
-import Clases.PanelRound;
+import com.app.utilidad.PanelRound;
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.Timer;
+
 public class interfaz extends javax.swing.JFrame {
 
     /**
      * Creates new form intrefas
      */
     //831x940
-
     Grafo grafo = null;
     boolean check = true;
     Sesion sesion = null;
@@ -42,10 +35,11 @@ public class interfaz extends javax.swing.JFrame {
     Boolean perm = false;
     Drawer draw = null;
     ListaEnlazada cargar = null;
-    
-    public interfaz(Sesion sesion,Conexion coxload,Grafo grafoload,Boolean perm) {  
+    Buffer buffer = null;
+
+    public interfaz(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm, Buffer buf) {
         cox = coxload;
-        
+        buffer = buf;
         grafo = grafoload;
         cargar = grafoload.getNodos();
         this.perm = perm;
@@ -54,34 +48,38 @@ public class interfaz extends javax.swing.JFrame {
         PanelRound dgree2 = new PanelRound();
         PanelRound dgree3 = new PanelRound();
         Busqueda.setLayout(new BorderLayout());
-        Busqueda.add(dgree1,BorderLayout.CENTER);
+        Busqueda.add(dgree1, BorderLayout.CENTER);
         Busqueda.setOpaque(true);
         CerrarSesion.setLayout(new BorderLayout());
-        CerrarSesion.add(dgree2,BorderLayout.CENTER);
+        CerrarSesion.add(dgree2, BorderLayout.CENTER);
         CerrarSesion.setOpaque(true);
-        
-        
-        draw = new Drawer(false,cox,null,grafo.getNodos(),grafo.getAristas());
+
+        draw = new Drawer(false, cox, null, grafo.getNodos(), grafo.getAristas(),buffer);
         jPanel5.setLayout(new BorderLayout());
-        jPanel5.add(draw,BorderLayout.CENTER);
+        jPanel5.add(draw, BorderLayout.CENTER);
         jPanel5.setVisible(true);
-        if(perm){
+        if (perm) {
             Admin.setLayout(new BorderLayout());
-            Admin.add(dgree3,BorderLayout.CENTER);
+            Admin.add(dgree3, BorderLayout.CENTER);
             Admin.setOpaque(true);
+            Admin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         }
-                
+
         poblarComponentes();
         this.sesion = sesion;
         Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
-        NodoA.addItem("Biblioteca");
-        NodoA.addItem("Auditorio menor");
-        NodoA.addItem("Auditorio mayor");
-        NodoB.addItem("Biblioteca");
-        NodoB.addItem("Auditorio menor");
-        NodoB.addItem("Auditorio mayor");
-        
-        
+
+        if (draw.getNodos().NodoPresente("J")) {
+            NodoA.addItem("Biblioteca");
+            NodoA.addItem("Auditorio menor");
+            NodoB.addItem("Auditorio menor");
+            NodoB.addItem("Biblioteca");
+        }
+        if (draw.getNodos().NodoPresente("H")) {
+            NodoA.addItem("Auditorio mayor");
+            NodoB.addItem("Auditorio mayor");
+        }
+
     }
 
     /**
@@ -93,6 +91,8 @@ public class interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelSecundario = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         Check = new javax.swing.JLabel();
@@ -114,12 +114,24 @@ public class interfaz extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Buscar3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        PanelSecundario = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PanelSecundario.setBackground(new java.awt.Color(0, 0, 0));
+        PanelSecundario.setFocusable(false);
+        PanelSecundario.setMinimumSize(new java.awt.Dimension(830, 980));
+        PanelSecundario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel5.setEnabled(false);
+        jPanel5.setFocusable(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelSecundario.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+
+        getContentPane().add(PanelSecundario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -128,7 +140,7 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Check.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png"))); // NOI18N
-        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Check.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CheckMousePressed(evt);
@@ -147,12 +159,14 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.add(dndva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 190, 40));
 
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setBorder(null);
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
         Camino.setColumns(20);
         Camino.setFont(new java.awt.Font("Roboto Black", 0, 24)); // NOI18N
         Camino.setRows(5);
+        Camino.setBorder(null);
         Camino.setFocusable(false);
         Camino.setKeymap(null);
         jScrollPane3.setViewportView(Camino);
@@ -222,7 +236,7 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.add(dndviene1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 40));
 
         CerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
-        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CerrarSesionMousePressed(evt);
@@ -243,7 +257,7 @@ public class interfaz extends javax.swing.JFrame {
         jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         Busqueda.setBackground(new java.awt.Color(255, 255, 255));
-        Busqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Busqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Busqueda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BusquedaMousePressed(evt);
@@ -273,21 +287,9 @@ public class interfaz extends javax.swing.JFrame {
         jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1090, 1080));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 1920, 1080));
 
-        PanelSecundario.setBackground(new java.awt.Color(0, 0, 0));
-        PanelSecundario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel5.setEnabled(false);
-        jPanel5.setFocusable(false);
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        PanelSecundario.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
-
-        jPanel1.add(PanelSecundario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 30, 830, 1080));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1920, 1110));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1100, 1110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -297,11 +299,10 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
-        if(check == false){
-            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));   
+        if (check == false) {
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));
             check = true;
-        }
-        else {
+        } else {
             Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Checked-removebg-preview.png")));
             check = false;
         }
@@ -310,14 +311,14 @@ public class interfaz extends javax.swing.JFrame {
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
         sesion = null;
         JFrame frame = this;
-        Inicio_sesion inis = new Inicio_sesion(grafo,cox);
+        Inicio_sesion inis = new Inicio_sesion(grafo, cox, buffer);
         inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
         inis.setVisible(true);
         Timer timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                    frame.setVisible(false);
+                frame.setVisible(false);
             }
-       });
+        });
         timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
 
@@ -344,126 +345,124 @@ public class interfaz extends javax.swing.JFrame {
         Boolean finesp = false;
         String temp3 = "";
         String temp4 = "";
-        if(NodoA.getSelectedItem().equals("Biblioteca")){
+        if (NodoA.getSelectedItem().equals("Biblioteca")) {
             nodoINI = "J";
             iniesp = true;
             temp3 = "Biblioteca->";
         }
-        if(NodoB.getSelectedItem().equals("Biblioteca")){
+        if (NodoB.getSelectedItem().equals("Biblioteca")) {
             nodoFIN = "J";
             finesp = true;
             temp4 = "Biblioteca";
         }
-        if(NodoA.getSelectedItem().equals("Auditorio menor")){
+        if (NodoA.getSelectedItem().equals("Auditorio menor")) {
             nodoINI = "J";
             iniesp = true;
             temp3 = "Auditorio menor->";
         }
-        if(NodoB.getSelectedItem().equals("Auditorio menor")){
+        if (NodoB.getSelectedItem().equals("Auditorio menor")) {
             nodoFIN = "J";
             finesp = true;
             temp4 = "Auditorio menor";
         }
-        if(NodoA.getSelectedItem().equals("Auditorio mayor")){
+        if (NodoA.getSelectedItem().equals("Auditorio mayor")) {
             nodoINI = "H";
             iniesp = true;
             temp3 = "Auditorio mayor->";
         }
-        if(NodoB.getSelectedItem().equals("Auditorio mayor")){
+        if (NodoB.getSelectedItem().equals("Auditorio mayor")) {
             nodoFIN = "H";
             finesp = true;
             temp4 = "Auditorio mayor";
         }
-        if(nodoINI == nodoFIN){
+        if (nodoINI == nodoFIN) {
             temp3 = "";
         }
-        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check,Camino,draw);
+        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check, Camino, draw);
         draw.setCamino(camino);
-        if(camino.getCabeza() != null){
+        if (camino.getCabeza() != null) {
             draw.ponerCamino();
         }
-        if(iniesp && !finesp){
+        if (iniesp && !finesp) {
             Nodo temp = camino.getCabeza().getSiguiente();
-            
-            while(temp != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+
+            while (temp != null) {
+                if (Camino.getText().contains("Se encuentra sobre el mismo nodo")) {
                     Camino.setText("Se encuentra sobre el mismo nodo");
                     break;
                 }
                 temp3 = temp3 + temp.getNombre();
-            
+
                 temp = temp.getSiguiente();
-                if(temp != null){
+                if (temp != null) {
                     temp3 = temp3 + "->";
                 }
             }
         }
-        if(finesp && !iniesp){
+        if (finesp && !iniesp) {
             Nodo temp = camino.getCabeza();
-            while(temp.getSiguiente() != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+            while (temp.getSiguiente() != null) {
+                if (Camino.getText().contains("Se encuentra sobre el mismo nodo")) {
                     Camino.setText("Se encuentra sobre el mismo nodo");
                     break;
                 }
                 temp3 = temp3 + temp.getNombre();
                 temp = temp.getSiguiente();
-                if(temp != null){
+                if (temp != null) {
                     temp3 = temp3 + "->";
                 }
-                if(temp.getSiguiente() == null){
+                if (temp.getSiguiente() == null) {
                     temp3 = temp3 + temp4;
                     break;
                 }
             }
         }
-        if(!iniesp && !finesp){
-             Nodo temp = camino.getCabeza();
-            
-            while(temp != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+        if (!iniesp && !finesp) {
+            Nodo temp = camino.getCabeza();
+
+            while (temp != null) {
+                if (Camino.getText().contains("Se encuentra sobre el mismo nodo")) {
                     Camino.setText("Se encuentra sobre el mismo nodo");
                     break;
                 }
                 temp3 = temp3 + temp.getNombre();
-            
-            temp = temp.getSiguiente();
-            if(temp != null){
-                temp3 = temp3 + "->";
+
+                temp = temp.getSiguiente();
+                if (temp != null) {
+                    temp3 = temp3 + "->";
                 }
             }
         }
-        if(iniesp && finesp){
+        if (iniesp && finesp) {
             Nodo temp = camino.getCabeza().getSiguiente();
-            while(temp.getSiguiente() != null){
-                if(Camino.getText().contains("Se encuentra sobre el mismo nodo")){
+            while (temp.getSiguiente() != null) {
+                if (Camino.getText().contains("Se encuentra sobre el mismo nodo")) {
                     Camino.setText("Se encuentra sobre el mismo nodo");
                     break;
                 }
                 temp3 = temp3 + temp.getNombre();
                 temp = temp.getSiguiente();
-                if(temp != null){
+                if (temp != null) {
                     temp3 = temp3 + "->";
                 }
-                if(temp.getSiguiente() == null){
+                if (temp.getSiguiente() == null) {
                     temp3 = temp3 + temp4;
                     break;
                 }
             }
         }
-        if(camino.getSize() > 0){
+        if (camino.getSize() > 0) {
             Camino.append(temp3);
         }
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_BusquedaMousePressed
 
     private void AdminMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdminMousePressed
-        if(perm){
+        if (perm) {
+            draw.reiniciarAristas(grafo.getAristas());
             JFrame frame = this;
-            ADMIN adminventana = new ADMIN(grafo,cox,this.sesion);
+            ADMIN adminventana = new ADMIN(grafo, cox, this.sesion, buffer, draw);
             adminventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
             adminventana.setVisible(true);
             Timer timer = new Timer(10, new ActionListener() {
@@ -480,7 +479,7 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_NodoAActionPerformed
 
     private void poblarComponentes() {
-    for(Nodo nodo: cargar){
+        for (Nodo nodo : cargar) {
             NodoA.addItem(nodo.getNombre());
             NodoB.addItem(nodo.getNombre());
         }

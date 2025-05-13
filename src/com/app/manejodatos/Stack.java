@@ -4,27 +4,28 @@
  */
 package com.app.manejodatos;
 
-import com.app.manejodatos.Nodo;
+import java.util.Iterator;
 
 /**
  *
  * @author bohor
+ * @param <T>
  */
-public class Stack {
-    private Nodo cima;
+public class Stack<T> implements Iterable<T> {
+
+    private NodoGenerico<T> cima;
     private int tam;
 
     public Stack() {
+        cima = null;
         this.tam = 0;
     }
-    
-    
 
-    public Nodo peek() {
+    public NodoGenerico<T> peek() {
         return cima;
     }
 
-    public void setCima(Nodo cima) {
+    public void setCima(NodoGenerico<T> cima) {
         this.cima = cima;
     }
 
@@ -35,31 +36,54 @@ public class Stack {
     public void setTam(int tam) {
         this.tam = tam;
     }
-    public Nodo pop(){
-        if(cima == null){
+
+    public T pop() {
+        if (cima == null) {
             return null;
         }
-        Nodo temp = cima;
+        T temp = cima.getValor();
         cima = cima.getSiguiente();
         tam--;
         return temp;
     }
-    public boolean isEmpty(){
-        if(tam == 0 || cima == null){
-            return true;
-        }
-        return false;
+
+    public boolean isEmpty() {
+        return tam == 0 || cima == null;
     }
-    public void push(Nodo nuevo){
-        if(cima == null){
-            cima = nuevo;
-        }
-        else {
-            nuevo.setSiguiente(cima);
-            cima = nuevo;
+
+    public void push(T nuevo) {
+        NodoGenerico<T> n = new NodoGenerico(nuevo);
+        if (cima == null) {
+            cima = n;
+        } else {
+            n.setSiguiente(cima);
+            cima = n;
         }
         tam++;
     }
-    
-    
+
+    @Override
+    public Iterator<T> iterator() {
+        return new IteradorDeStack();
+    }
+
+
+    private class IteradorDeStack implements Iterator<T> {
+
+        private NodoGenerico<T> actual = peek();
+
+        @Override
+        public boolean hasNext() {
+            return !isEmpty();
+        }
+
+        @Override
+        public T next() {
+            T valor = pop();
+            actual = actual.getSiguiente();
+            return valor;
+        }
+
+    }
+
 }

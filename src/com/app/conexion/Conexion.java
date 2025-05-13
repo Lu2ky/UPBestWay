@@ -68,8 +68,8 @@ public class Conexion{
         return false;
     }
     
-    public void addTotableNodos(String Nombre){
-        String sql = "INSERT INTO nodos (Nombre) VALUES (?)";
+    public void addTotableNodos(String Nombre,int X,int Y){
+        String sql = "INSERT INTO nodos (Nombre,X,Y) VALUES (?, ?, ?)";
         try(PreparedStatement ps = conexion.prepareStatement(sql)){
             String sqlCount = "SELECT COUNT(*) FROM nodos WHERE Nombre = ?";
             try (PreparedStatement psCount = conexion.prepareStatement(sqlCount)) {
@@ -82,6 +82,8 @@ public class Conexion{
                 System.out.println("Nodo ya existente");
             }else{
                 ps.setString(1, Nombre);
+                ps.setInt(2, X);
+                ps.setInt(3, Y);
                 int filas = ps.executeUpdate();
                 System.out.println("Filas insertadas: " + filas);
             }
@@ -95,6 +97,27 @@ public class Conexion{
             System.out.println("Error al introducir datos");
             e.printStackTrace();
         }  
+    }
+    public void eliminarTOtableNodos(String nombre){
+        String sql = "DELETE FROM nodos WHERE Nombre = ?";
+        try(PreparedStatement ps = conexion.prepareStatement(sql)){
+            ps.setString(1, nombre);
+            ps.executeUpdate();
+         }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public void eliminarTOtableArista(int idNodoA,int idNodoB){
+        String sql = "DELETE FROM aristas WHERE idNodoA = ? AND idNodoB = ?";
+        try(PreparedStatement ps = conexion.prepareStatement(sql)){
+            ps.setInt(1, idNodoA);
+            ps.setInt(2, idNodoB);
+            ps.executeUpdate();
+         }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     public void ImprimirNodos() {
     String sql = "SELECT idNodo, Nombre  FROM nodos";
@@ -157,19 +180,21 @@ public class Conexion{
     }
     public void addtoTableArist(int idNodoINI, int idNodoFIN,int ponderado,boolean stairs){
         String sql = "INSERT INTO aristas (idNodoA, idNodoB, Ponderado, Stairs) VALUES (?, ?, ?, ?)";
+        System.out.println("ewe");
         try(PreparedStatement ps = conexion.prepareStatement(sql)){
             
             ps.setInt(1, idNodoINI);
             ps.setInt(2, idNodoFIN);
             ps.setInt(3, ponderado);
             ps.setBoolean(4, stairs);
-            
+            System.out.println("ewe");
             String sql2 = "SELECT COUNT(*) FROM aristas WHERE idNodoA = ? AND idNodoB = ? AND Ponderado = ? AND Stairs = ?";
             try(PreparedStatement ps1 = conexion.prepareStatement(sql2)){
                 ps1.setInt(1, idNodoINI);
                 ps1.setInt(2, idNodoFIN);
                 ps1.setInt(3, ponderado);
                 ps1.setBoolean(4, stairs);
+                System.out.println("ewe");
                 ResultSet rsCount = ps1.executeQuery();
                 int count = 0;
                 if(rsCount.next()){
@@ -291,8 +316,7 @@ public class Conexion{
                 if(rs.next()){
                     int id1 = rs.getInt("idNodo");
                     String nombre1 = rs.getString("Nombre");
-                    int s = rs.getInt("idSiguiente");
-                    nodo = new Nodo(id1,nombre,searchNodo(s));        
+                    nodo = new Nodo(id1,nombre1,null);        
                 }
             }
         }catch(SQLException e){

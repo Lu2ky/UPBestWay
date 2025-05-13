@@ -4,16 +4,21 @@
  */
 package com.app.interfaz;
 
-import Clases.PanelRound;
+import com.app.utilidad.PanelRound;
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
+import com.app.manejodatos.Arista;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazada;
 import com.app.manejodatos.Nodo;
 import com.app.manejodatos.Stack;
-import combo_suggestion.ComboBoxSuggestion;
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.Timer;
 import raven.toast.Notifications;
 
 /**
@@ -25,37 +30,46 @@ public class EliminarNodo extends javax.swing.JFrame {
     Grafo grafo = null;
     Sesion sesion = null;
     Conexion cox = null;
-    Boolean perm = false;
     Drawer draw = null;
     ListaEnlazada cargar = null;
-    Stack Nodoseliminados = new Stack();
+    Buffer buffer;
 
     /**
      * Creates new form EliminarNodo
      */
-    
-    public EliminarNodo(Sesion sesion, Conexion coxload, Grafo grafoload) {
-        this.sesion = sesion;
+    public EliminarNodo(Sesion ses, Conexion coxload, Grafo grafoload, Boolean perm, Buffer buf, Drawer draw) {
+        buffer = buf;
+        this.draw = draw;
+        this.sesion = ses;
         PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
         initComponents();
         Buscar4.setLayout(new BorderLayout());
-        Buscar4.add(dgree1,BorderLayout.CENTER);
+        Buscar4.add(dgree1, BorderLayout.CENTER);
         Buscar4.setOpaque(true);
+        
+        CerrarSesion.setLayout(new BorderLayout());
+        CerrarSesion.add(dgree2 , BorderLayout.CENTER);
+        CerrarSesion.setOpaque(true);
         cox = coxload;
         grafo = grafoload;
         cargar = grafo.getNodos();
 
         // Removed duplicate initComponents call
-        draw = new Drawer(false, cox, null, grafo.getNodos(), grafo.getAristas());
-        jPanel3.add(draw,BorderLayout.CENTER);
+        jPanel3.add(draw, BorderLayout.CENTER);
         jPanel3.setVisible(true);
         Bienvenida2.setText("¡Bienvenido(a) " + this.sesion.getNombre() + "!");
-        Nodoeliminar.addItem("Biblioteca");
-        Nodoeliminar.addItem("Auditorio menor");
-        Nodoeliminar.addItem("Auditorio mayor");
+        if (draw.getNodos().NodoPresente("J")) {
+            Nodoeliminar.addItem("Biblioteca");
+            Nodoeliminar.addItem("Auditorio menor");
+        }
+        if (draw.getNodos().NodoPresente("H")) {
+            Nodoeliminar.addItem("Auditorio mayor");
+        }
+
+        Bienvenida2.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
         poblarComponentes();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,6 +83,8 @@ public class EliminarNodo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Buscar4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        CerrarSesion = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
         Nodoeliminar = new combo_suggestion.ComboBoxSuggestion();
         a = new javax.swing.JLabel();
@@ -84,7 +100,7 @@ public class EliminarNodo extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Buscar4.setBackground(new java.awt.Color(255, 255, 255));
-        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 EliminarNodo(evt);
@@ -99,6 +115,22 @@ public class EliminarNodo extends javax.swing.JFrame {
 
         jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 660, 170, 70));
 
+        CerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CerrarSesionMousePressed(evt);
+            }
+        });
+        CerrarSesion.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Volver");
+        CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
+
+        jPanel1.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 1000, 170, 70));
+
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida2.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida2.setText("¡Bienvenido(a)!");
@@ -109,13 +141,13 @@ public class EliminarNodo extends javax.swing.JFrame {
         Nodoeliminar.setMaximumRowCount(5);
         Nodoeliminar.setFocusCycleRoot(true);
         Nodoeliminar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jPanel1.add(Nodoeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 220, 50));
+        jPanel1.add(Nodoeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
-        a.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        a.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
         a.setForeground(new java.awt.Color(0, 0, 0));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
         a.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
-        jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+        jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
         jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
@@ -126,6 +158,8 @@ public class EliminarNodo extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
@@ -134,48 +168,63 @@ public class EliminarNodo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void EliminarNodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarNodo
-        String Elim = (String) Nodoeliminar.getSelectedItem();
+        draw.reiniciar();
         Nodo nodoAEliminar = null;
         String nodoNombre = (String) Nodoeliminar.getSelectedItem();
         if (nodoNombre == null || nodoNombre.isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"Seleccione un nodo");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_LEFT, "Seleccione un nodo");
             return;
         }
-        if(nodoNombre == "Auditorio mayor"){
-            nodoAEliminar = cargar.obtenerNodo("H");
-        }
-        else if(nodoNombre == "Auditorio menor" || nodoNombre ==  "Biblioteca"){
-            nodoAEliminar = cargar.obtenerNodo("J");
-        }
-        else{
-            // aca se encuanta el nodo a remover
-            nodoAEliminar = cargar.obtenerNodo(nodoNombre);
-        }
-        
-        if (nodoAEliminar != null) {
-            cargar.eliminarNodoBIEN(nodoAEliminar.getNombre());
-            Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.BOTTOM_LEFT,"Nodo '" + nodoNombre + "' eliminado.");
-            Nodoseliminados.push(nodoAEliminar);
-           
-            DefaultComboBoxModel<String> nueva = new DefaultComboBoxModel<>();
-            for (Nodo nombreNodo : cargar) {
-                nueva.addElement(nombreNodo.getNombre());
-            }
-            if(cargar.NodoPresente("J")){
-                nueva.addElement("Biblioteca");
-                nueva.addElement("Auditorio menor");
-            }
-            if(cargar.NodoPresente("H")){
-                nueva.addElement("Auditorio mayor");
-            }
-            Nodoeliminar.setModel(nueva);
-            draw.repaint();
+        if (nodoNombre.equals("Auditorio mayor")) {
+            nodoAEliminar = draw.getNodos().obtenerNodo("H");
+        } else if (nodoNombre.equals("Auditorio menor") || nodoNombre.equals("Biblioteca")) {
+            nodoAEliminar = draw.getNodos().obtenerNodo("J");
         } else {
-            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"Nodo "+ nodoNombre +" no encontrado");
+            // aca se encuanta el nodo a remover
+            nodoAEliminar = draw.getNodos().obtenerNodo(nodoNombre);
         }
+
+        if (nodoAEliminar != null) {
+            draw.getNodos().eliminarNodoBIEN(nodoAEliminar.getNombre());
+            System.out.println("Nodo a eliminar: " + nodoAEliminar.getNombre());
+
+            buffer.getNeliminar().push(nodoAEliminar);
+            draw.eliminarArista(nodoAEliminar.getNombre(), buffer);
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_LEFT, "Nodo '" + nodoNombre + "' eliminado.");
+
+        } else {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_LEFT, "Nodo " + nodoNombre + " no encontrado");
+        }
+        DefaultComboBoxModel<String> nueva = new DefaultComboBoxModel<>();
+        for (Nodo nombreNodo : draw.getNodos()) {
+            nueva.addElement(nombreNodo.getNombre());
+            draw.reiniciar();
+        }
+        if (cargar.NodoPresente("J")) {
+            nueva.addElement("Biblioteca");
+            nueva.addElement("Auditorio menor");
+        }
+        if (cargar.NodoPresente("H")) {
+            nueva.addElement("Auditorio mayor");
+        }
+        Nodoeliminar.setModel(nueva);
     }//GEN-LAST:event_EliminarNodo
-      private void poblarComponentes() {
-        Nodo temp = cargar.getCabeza();
+
+    private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
+
+        JFrame frame = this;
+        ADMIN inis = new ADMIN(grafo, cox, sesion, buffer, draw);
+        inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        inis.setVisible(true);
+        Timer timer = new Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_CerrarSesionMousePressed
+    private void poblarComponentes() {
+        Nodo temp = draw.getNodos().getCabeza();
         while (temp != null) {
             Nodoeliminar.addItem(temp.getNombre());
             temp = temp.getSiguiente();
@@ -185,8 +234,10 @@ public class EliminarNodo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida2;
     private javax.swing.JPanel Buscar4;
+    private javax.swing.JPanel CerrarSesion;
     private combo_suggestion.ComboBoxSuggestion Nodoeliminar;
     private javax.swing.JLabel a;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

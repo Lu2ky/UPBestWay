@@ -4,7 +4,7 @@
  */
 package com.app.interfaz;
 
-import Clases.PanelRound;
+import com.app.utilidad.PanelRound;
 import com.app.conexion.Conexion;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -431,7 +431,7 @@ public class crear_cuenta extends javax.swing.JFrame {
 
     private void InicioSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioSesionMousePressed
         JFrame frame = this;
-        Inicio_sesion is = new Inicio_sesion(grafo,cox);
+        Inicio_sesion is = new Inicio_sesion(grafo,cox,new Buffer());
         is.setVisible(true); 
         is.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {

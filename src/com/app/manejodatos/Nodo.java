@@ -31,6 +31,8 @@ public class Nodo{
         this.nombre = nombre;
         this.x = x;
         this.y = y;
+        this.siguiente = null;
+        this.id = 0; 
     }
     
 

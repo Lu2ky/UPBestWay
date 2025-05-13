@@ -83,21 +83,36 @@ public class ListaEnlazada implements Iterable<Nodo> {
         return false;
     }
 
-    public void eliminarNodoBIEN(String nombreNodo){
-        if(cabeza.getNombre().equals(nombreNodo)){
-            Nodo temp = cabeza.getSiguiente();
-            cabeza = temp;
+    public void eliminarNodoBIEN(String nombreNodo) {
+        if (cabeza == null) {
+            return;
+        }
+
+        if (cabeza.getNombre().equals(nombreNodo)) {
+            if(cabeza.getSiguiente() == null){
+                cabeza = null;
+            }
+            else{
+                cabeza = cabeza.getSiguiente();
+            }
+            if (cabeza == null) {
+                cola = null;
+            }
             size--;
             return;
         }
-        Nodo temp = cabeza;
-        while(temp.getSiguiente() != null){
-            if(temp.getSiguiente().getNombre().equals(nombreNodo)){
-                temp.setSiguiente(temp.getSiguiente().getSiguiente());
+        Nodo actual = cabeza;
+        while (actual.getSiguiente() != null) {
+            Nodo siguiente = actual.getSiguiente();
+            if (siguiente.getNombre().equals(nombreNodo)) {
+                actual.setSiguiente(siguiente.getSiguiente());
+                if (siguiente == cola) {
+                    cola = actual;
+                }
                 size--;
                 return;
             }
-            temp = temp.getSiguiente();
+            actual = actual.getSiguiente();
         }
     }
 
@@ -141,7 +156,6 @@ public class ListaEnlazada implements Iterable<Nodo> {
             System.out.print(temp.getNombre() + " ");
             temp = temp.getSiguiente();
         }
-        return;
     }
 
     public boolean NodoPresente(String nombre) {
@@ -170,9 +184,9 @@ public class ListaEnlazada implements Iterable<Nodo> {
     public Iterator<Nodo> iterator() {
         return new IteratorListaNodos();
     }
-    
+
     private class IteratorListaNodos implements Iterator<Nodo> {
-        
+
         private Nodo actual = cabeza;
 
         @Override
@@ -186,7 +200,15 @@ public class ListaEnlazada implements Iterable<Nodo> {
             actual = actual.getSiguiente();
             return nodoActual;
         }
-        
+
+    }
+
+    public Nodo getCola() {
+        return cola;
+    }
+
+    public void setCola(Nodo cola) {
+        this.cola = cola;
     }
 
 }
