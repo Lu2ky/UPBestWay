@@ -376,6 +376,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
             Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Se inicio sesion");
             Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
             JFrame frame = this;
+            buffer = new Buffer();
             interfaz inte = new interfaz(sesion, cox, grafo, verificarPer, buffer);
             inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
             inte.setVisible(true);
