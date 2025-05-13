@@ -373,7 +373,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
         if (cox.searchUser(User1.getText(), Password.getText())) {
             sesion = new Sesion(User1.getText());
-            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_CENTER, "Se inicio sesion");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Se inicio sesion");
             Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
             JFrame frame = this;
             interfaz inte = new interfaz(sesion, cox, grafo, verificarPer, buffer);
@@ -386,7 +386,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
             });
             timer.start();
         } else {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_CENTER, "No se encontro este usuario");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "No se encontro este usuario");
         }
     }//GEN-LAST:event_InicioMousePressed
 

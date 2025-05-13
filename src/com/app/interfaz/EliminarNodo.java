@@ -172,7 +172,7 @@ public class EliminarNodo extends javax.swing.JFrame {
         Nodo nodoAEliminar = null;
         String nodoNombre = (String) Nodoeliminar.getSelectedItem();
         if (nodoNombre == null || nodoNombre.isEmpty()) {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_LEFT, "Seleccione un nodo");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Seleccione un nodo");
             return;
         }
         if (nodoNombre.equals("Auditorio mayor")) {
@@ -190,10 +190,10 @@ public class EliminarNodo extends javax.swing.JFrame {
 
             buffer.getNeliminar().push(nodoAEliminar);
             draw.eliminarArista(nodoAEliminar.getNombre(), buffer);
-            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.BOTTOM_LEFT, "Nodo '" + nodoNombre + "' eliminado.");
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Nodo '" + nodoNombre + "' eliminado.");
 
         } else {
-            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.BOTTOM_LEFT, "Nodo " + nodoNombre + " no encontrado");
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Nodo " + nodoNombre + " no encontrado");
         }
         DefaultComboBoxModel<String> nueva = new DefaultComboBoxModel<>();
         for (Nodo nombreNodo : draw.getNodos()) {

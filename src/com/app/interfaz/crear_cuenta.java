@@ -310,49 +310,48 @@ public class crear_cuenta extends javax.swing.JFrame {
     private void CrearCuentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearCuentaMousePressed
         
         if(User1.getText().contains(" ")){
-            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.BOTTOM_LEFT,"El usuario no puede tener espacios"); 
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"El usuario no puede tener espacios"); 
             return;
         }
         if(User1.getText().equals("") || User1.getText().equals("Ingrese el nombre de usuario")){
-            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.BOTTOM_LEFT,"Ingrese un nombre de usuario");
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Ingrese un nombre de usuario");
             return;
         }
         if(Password1.getText().equals("")){
-            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.BOTTOM_LEFT,"Ingrese la contraseña");
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Ingrese la contraseña");
             return;
         }
         if(Password2.getText().equals("")){
-            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.BOTTOM_LEFT,"Ingrese nuevamente la contraseña");
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Ingrese nuevamente la contraseña");
             return;
         }
         if(!Password1.getText().equals(Password2.getText())){
-            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.BOTTOM_LEFT,"Contraseñas no coinciden");
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Contraseñas no coinciden");
             return;
         }
         if(Password1.getText().length() < 8){
-            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.BOTTOM_LEFT,"La contraseña debe tener al menos 8 caracteres");
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"La contraseña debe tener al menos 8 caracteres");
             return;
         }
         if(Password1.getText().length() > 32){
-            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"La contraseña puede tener maximo 32 caracteres");
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"La contraseña puede tener maximo 32 caracteres");
             return;
         }
         if ((Password1.getText().matches(".*[A-Z].*") && Password1.getText().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}.*") && !Password1.getText().contains(" "))){
             Boolean veri = cox.addTotableUsers(User1.getText(), Password1.getText());
             if(veri == true){
-                Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.BOTTOM_LEFT,"El usuario ha sido creado");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"El usuario ha sido creado");
                 return;
             }
-            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"El usuario ya existe");
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El usuario ya existe");
             
         }
         else{
-            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
             return;
         }
         if((!Password1.getText().matches(".*[A-Z].*") && !Password1.getText().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}.*") && Password1.getText().contains(" "))){
-            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_LEFT,"La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
-            return;
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
         }
         
         

@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import raven.toast.Notifications;
 
 /**
  *
@@ -338,21 +339,21 @@ public class AgregarArista extends javax.swing.JFrame {
         boolean escaleras = check;
 
         if (inicioNombre == null || finNombre == null || inicioNombre.isEmpty() || finNombre.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione nodos de inicio y fin válidos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"Seleccione nodos de inicio y fin válidos");
             return;
         }
         if (inicioNombre.equals(finNombre)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "El nodo inicial y final no pueden ser iguales.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El nodo inicial y final no pueden ser iguales");
             return;
         }
         int peso = 0;
         if (pesoStr.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un peso válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"Ingrese un peso válido");
             return;
         }
         peso = Integer.parseInt(pesoStr);
         if (peso <= 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "El peso debe ser un número entero positivo.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El peso debe ser un número entero positivo");
             return;
         }
 
@@ -360,7 +361,7 @@ public class AgregarArista extends javax.swing.JFrame {
         Nodo nodoFin = grafo.getNodos().obtenerNodo(finNombre);
 
         if (nodoInicio == null || nodoFin == null) {
-            javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron los nodos seleccionados en el grafo.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"No se encontraron los nodos seleccionados en el grafo");
             return;
         }
 
@@ -372,8 +373,7 @@ public class AgregarArista extends javax.swing.JFrame {
         draw.getTemp().getAagregar().push(temp);
         
         draw.reiniciar();
-
-        javax.swing.JOptionPane.showMessageDialog(this, "Arista agregada exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"Arista agregada exitosamente");
 
         // se resetio para despues 
         Ponderado.setText("");

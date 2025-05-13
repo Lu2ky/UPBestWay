@@ -201,17 +201,17 @@ public class AgregarNodos extends javax.swing.JFrame {
     private void Agergar_Nodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Agergar_Nodo
         agregar = true;
         if(Nnodo.getText().equals("") ||Nnodo.getText().equals("Ingrese el nombre del nodo")){
-            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_CENTER,"El espacio del nombre no puede estar vacio");
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El espacio del nombre no puede estar vacio");
             return;
         }
         if(agregar){
             if(!draw.getNodos().NodoPresente(Nnodo.getText())){
                 draw.agregarNodo(true);
-                Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.BOTTOM_CENTER,"De click en el grafo para agregar el nodo");
+                Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"De click en el grafo para agregar el nodo");
                 
             }
             else{
-                Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.BOTTOM_CENTER,"Nodo ya existe");
+                Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"Nodo ya existe");
                 agregar = false;
             }
         }
