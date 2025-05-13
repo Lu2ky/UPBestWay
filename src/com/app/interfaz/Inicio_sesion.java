@@ -4,6 +4,7 @@
  */
 package com.app.interfaz;
 
+import com.app.utilidad.PanelRound;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,37 +14,74 @@ import javax.swing.Timer;
 import com.app.conexion.data.Sesion;
 import com.app.conexion.Conexion;
 import com.app.manejodatos.Grafo;
+import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
+import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
+import com.formdev.flatlaf.ui.FlatUIUtils;
+import java.awt.BorderLayout;
+import java.util.concurrent.ScheduledExecutorService;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import raven.toast.Notifications;
 
 /**
  *
  * @author bohor
  */
 public class Inicio_sesion extends javax.swing.JFrame {
-    
+
     int indice = 0;
-    public Sesion sesion = new Sesion();
+    public Sesion sesion = null;
     boolean ver = false;
-    static Conexion cox = new Conexion();
+    static Conexion cox = null;
     static Grafo grafo = null;
     final boolean ini = true;
+    private Buffer buffer = null;
 
     /**
      * Creates new form Inicio_sesion
      */
-    public Inicio_sesion(Grafo grafoload) {
+    public Inicio_sesion(Grafo grafoload, Conexion conexion, Buffer buf) {
         grafo = grafoload;
+        cox = conexion;
+        sesion = null;
+        buffer = buf;
         initComponents();
+
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
+        PanelRound dgree3 = new PanelRound();
+
+        jPanel1.setLayout(new BorderLayout());
+        jPanel1.add(dgree1, BorderLayout.CENTER);
+        jPanel1.setOpaque(true);
+
+        Inicio.setLayout(new BorderLayout());
+        Inicio.add(dgree2, BorderLayout.CENTER);
+        Inicio.setOpaque(true);
+        Visitanos.setLayout(new BorderLayout());
+        Visitanos.add(dgree3, BorderLayout.CENTER);
+        Visitanos.setOpaque(true);
         carrusel();
         this.dispose();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.getRootPane().requestFocusInWindow();
         User1.setCaretPosition(User1.getText().length());
-        User1.moveCaretPosition(User1.getText().length()); 
+        User1.moveCaretPosition(User1.getText().length());
         grafo.getAristas().MostrarLista();
+
     }
 
     /**
@@ -60,11 +98,9 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        Logo1 = new javax.swing.JLabel();
         User1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         IniciarSesionTexto1 = new javax.swing.JLabel();
-        LogoN4 = new javax.swing.JLabel();
         SeparadorUser = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -75,8 +111,10 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        Mensaje = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        Visitanos = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         Carrusel = new javax.swing.JLabel();
         Fondo = new javax.swing.JPanel();
@@ -95,12 +133,12 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Fondo2.setForeground(new java.awt.Color(0, 60, 67));
         Fondo2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Fondo1.setBackground(new java.awt.Color(255, 190, 15));
+        Fondo1.setBackground(new java.awt.Color(255, 255, 255));
         Fondo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(189, 32, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(140, 0, 0));
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
@@ -124,10 +162,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
 
         Fondo1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 600, 160, 70));
 
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, 200));
-
-        User1.setBackground(new java.awt.Color(255, 190, 15));
+        User1.setBackground(new java.awt.Color(255, 255, 255));
         User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         User1.setForeground(java.awt.Color.gray);
         User1.setText(bundle.getString("Inicio_sesion.User1.text")); // NOI18N
@@ -146,16 +181,14 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
 
         jLabel3.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText(bundle.getString("Inicio_sesion.jLabel3.text")); // NOI18N
         Fondo1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
+        IniciarSesionTexto1.setForeground(new java.awt.Color(0, 0, 0));
         IniciarSesionTexto1.setText(bundle.getString("Inicio_sesion.IniciarSesionTexto1.text")); // NOI18N
-        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 270, -1));
-
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
-        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 610, 90));
+        Fondo1.add(IniciarSesionTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 270, -1));
 
         SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -165,15 +198,16 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Fondo1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 500, 1));
 
         jLabel2.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText(bundle.getString("Inicio_sesion.jLabel2.text")); // NOI18N
         Fondo1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, -1));
 
         SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
         Fondo1.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 500, 1));
 
-        Inicio.setBackground(new java.awt.Color(189, 32, 0));
-        Inicio.setForeground(new java.awt.Color(140, 0, 0));
-        Inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Inicio.setBackground(new java.awt.Color(255, 255, 255));
+        Inicio.setForeground(new java.awt.Color(255, 255, 255));
+        Inicio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Inicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 InicioMousePressed(evt);
@@ -200,7 +234,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         jLabel5.setDoubleBuffered(true);
         Fondo1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
 
-        Password.setBackground(new java.awt.Color(255, 190, 15));
+        Password.setBackground(new java.awt.Color(255, 255, 255));
         Password.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Password.setForeground(new java.awt.Color(140, 140, 140));
         Password.setText(bundle.getString("Inicio_sesion.Password.text")); // NOI18N
@@ -227,22 +261,40 @@ public class Inicio_sesion extends javax.swing.JFrame {
         });
         Fondo1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 530, -1, 30));
 
-        Mensaje.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        Mensaje.setForeground(new java.awt.Color(204, 255, 204));
-        Mensaje.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Mensaje.setText(bundle.getString("Inicio_sesion.Mensaje.text")); // NOI18N
-        Mensaje.setName("dwdawdad"); // NOI18N
-        Fondo1.add(Mensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 670, 20));
+        Visitanos.setBackground(new java.awt.Color(255, 255, 255));
+        Visitanos.setForeground(new java.awt.Color(255, 255, 255));
+        Visitanos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Visitanos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VisitanosMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                VisitanosMousePressed(evt);
+            }
+        });
+        Visitanos.setLayout(new java.awt.GridBagLayout());
 
-        jLabel7.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        jLabel7.setText(bundle.getString("Inicio_sesion.jLabel7.text")); // NOI18N
-        Fondo1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
+        jLabel8.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText(bundle.getString("Inicio_sesion.jLabel8.text")); // NOI18N
+        Visitanos.add(jLabel8, new java.awt.GridBagConstraints());
 
-        Fondo2.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1090));
+        jPanel8.setBackground(new java.awt.Color(189, 32, 0));
+        jPanel8.setForeground(new java.awt.Color(140, 0, 0));
+        jPanel8.setLayout(new java.awt.GridBagLayout());
+        Visitanos.add(jPanel8, new java.awt.GridBagConstraints());
 
-        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        Fondo1.add(Visitanos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 1000, 160, 70));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
+        Fondo1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
+
+        Fondo2.add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(Carrusel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 960, 930));
+        jPanel2.add(Carrusel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 830, 930));
 
         Fondo2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 840, 1080));
 
@@ -262,7 +314,7 @@ public class Inicio_sesion extends javax.swing.JFrame {
         LogoN1.setText(bundle.getString("Inicio_sesion.LogoN1.text")); // NOI18N
         Fondo.add(LogoN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 620, -1));
 
-        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 1080));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
         getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
@@ -271,33 +323,91 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private void User1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User1MousePressed
         User1.setText("");
         User1.setForeground(Color.black);
-        if(Password.getText().equals("")){
-                jLabel5.setText("Ingrese su contraseña");
+        if (Password.getText().equals("")) {
+            jLabel5.setText("Ingrese su contraseña");
         }
-        if(Password.getText().equals("Ingrese su contraseña")){
+        if (Password.getText().equals("Ingrese su contraseña")) {
             Password.setText("");
             jLabel5.setText("Ingrese su contraseña");
         }
-        
-            
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_User1MousePressed
 
     private void User1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_User1ActionPerformed
 
-    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        
-    }//GEN-LAST:event_jPanel1MouseClicked
+    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordActionPerformed
+
+    private void PasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMousePressed
+
+        if (User1.getText().equals("")) {
+            User1.setText("Ingrese su nombre de usuario");
+            User1.setForeground(Color.gray);
+        }
+        if (!User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.gray) {
+            User1.setForeground(Color.BLACK);
+        }
+        if (User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.BLACK) {
+            User1.setForeground(Color.gray);
+        }
+        jLabel5.setText("");
+        Password.setForeground(Color.black);
+    }//GEN-LAST:event_PasswordMousePressed
+
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        if (ver == false) {
+            Password.setEchoChar((char) 0);
+            jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
+            ver = true;
+        } else {
+            Password.setEchoChar('\u2022');
+            jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
+            ver = false;
+        }
+    }//GEN-LAST:event_jLabel4MousePressed
+
+    private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
+        if (cox.searchUser(User1.getText(), Password.getText())) {
+            sesion = new Sesion(User1.getText());
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Se inicio sesion");
+            Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
+            JFrame frame = this;
+            interfaz inte = new interfaz(sesion, cox, grafo, verificarPer, buffer);
+            inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            inte.setVisible(true);
+            Timer timer = new Timer(1, new ActionListener() {
+                public void actionPerformed(ActionEvent ae) {
+                    frame.setVisible(false);
+                }
+            });
+            timer.start();
+        } else {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "No se encontro este usuario");
+        }
+    }//GEN-LAST:event_InicioMousePressed
+
+    private void VisitanosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VisitanosMouseClicked
+
+    }//GEN-LAST:event_VisitanosMouseClicked
+
+    private void VisitanosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VisitanosMousePressed
+        try {
+            String url = "https://www.upb.edu.co/es/home";
+            Runtime rt = Runtime.getRuntime();
+            rt.exec("rundll32 url.dll,FileProtocolHandler " + url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_VisitanosMousePressed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         JFrame frame = this;
-        crear_cuenta cc = new crear_cuenta(cox,grafo);
-        cc.setVisible(true); 
+        crear_cuenta cc = new crear_cuenta(cox, grafo);
+        cc.setVisible(true);
         cc.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
@@ -307,62 +417,10 @@ public class Inicio_sesion extends javax.swing.JFrame {
         timer.start();
     }//GEN-LAST:event_jPanel1MousePressed
 
-    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordActionPerformed
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
 
-    private void PasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordMousePressed
-        
-        if(User1.getText().equals("")){
-            User1.setText("Ingrese su nombre de usuario");
-            User1.setForeground(Color.gray);
-        }
-        if(!User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.gray){
-            User1.setForeground(Color.BLACK);
-        }
-        if(User1.getText().equals("Ingrese su nombre de usuario") && User1.getForeground() == Color.BLACK){
-            User1.setForeground(Color.gray);
-        }
-        jLabel5.setText("");
-        Password.setForeground(Color.black);
-    }//GEN-LAST:event_PasswordMousePressed
-
-    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
-        if(ver == false){
-            Password.setEchoChar((char) 0);
-            jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Eye-removebg-preview.png")));
-            ver = true;
-        }
-        else{
-            Password.setEchoChar('\u2022');
-            jLabel4.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Noeye-removebg-preview.png")));
-            ver = false;
-        }
-    }//GEN-LAST:event_jLabel4MousePressed
-
-    private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
-        if(cox.searchUser(User1.getText(), Password.getText(), Mensaje)){
-            sesion.setNombre(User1.getText());
-            Mensaje.setText("Se inicio sesion");
-            Mensaje.setForeground(Color.blue);
-            Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
-            JFrame frame = this;
-            interfaz inte = new interfaz(sesion,cox,grafo,verificarPer);
-            inte.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            inte.setVisible(true);
-            Timer timer = new Timer(1, new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
-                }
-            });
-            timer.start();
-        }
-        else{
-            Mensaje.setText("Usuario no encontrado");
-            Mensaje.setForeground(Color.blue);
-        }
-    }//GEN-LAST:event_InicioMousePressed
-    private void carrusel(){
+    }//GEN-LAST:event_jPanel1MouseClicked
+    private void carrusel() {
         ImageIcon[] imagenes = new ImageIcon[]{
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG1.jpg")),
             new ImageIcon(getClass().getResource("/com/app/imagenes/IMG2.jpg")),
@@ -372,24 +430,29 @@ public class Inicio_sesion extends javax.swing.JFrame {
         Carrusel.setIcon(imagenes[0]);
         Timer timer = new Timer(2000, new ActionListener() {
             Random r = new Random();
+
             public void actionPerformed(ActionEvent e) {
                 indice = (indice + 1) % imagenes.length;
                 Carrusel.setIcon(imagenes[indice]);
             }
         });
         timer.start();
-        
+
     }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {    
+    public static void main(String args[]) {
+        Conexion cox = new Conexion();
+        Buffer buf = new Buffer();
         FlatLightLaf.setup();
-        grafo = new Grafo(cox);
+        Grafo g = new Grafo(cox);
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Inicio_sesion(grafo).setVisible(true);
+                new Inicio_sesion(g, cox, buf).setVisible(true);
             }
         });
     }
@@ -402,27 +465,27 @@ public class Inicio_sesion extends javax.swing.JFrame {
     private javax.swing.JLabel IniciarSesionTexto1;
     private javax.swing.JPanel Inicio;
     private javax.swing.JLabel Logo;
-    private javax.swing.JLabel Logo1;
     private javax.swing.JLabel LogoN1;
     private javax.swing.JLabel LogoN2;
-    private javax.swing.JLabel LogoN4;
-    private javax.swing.JLabel Mensaje;
     private javax.swing.JPasswordField Password;
     private javax.swing.JPanel SeparadorPass;
     private javax.swing.JPanel SeparadorUser;
     private javax.swing.JTextField User1;
+    private javax.swing.JPanel Visitanos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
 }

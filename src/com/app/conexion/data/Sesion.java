@@ -14,6 +14,12 @@ public class Sesion {
     public Sesion() {
     }
 
+    public Sesion(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+
     public String getNombre() {
         return nombre;
     }

@@ -4,30 +4,127 @@
  */
 package com.app.interfaz;
 
+import com.app.utilidad.PanelRound;
+import com.app.manejodatos.Nodo;
+import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import com.app.manejodatos.Arista;
+import com.app.manejodatos.Stack;
+import java.awt.BorderLayout;
 
 /**
  *
  * @author ADMIN
  */
-
-    
-        
-        
 public class ADMIN extends javax.swing.JFrame {
 
     /**
      * Creates new form ADMIN
      */
     private Grafo grafoload;
-    
-    public ADMIN(Grafo grafo) {
-        grafoload= grafo;
+    private Conexion cox;
+    private Sesion sesion;
+    private Drawer draw;
+    private Buffer buffer;
+
+    public ADMIN(Grafo grafo, Conexion cox, Sesion ses, Buffer buf, Drawer draw) {
+        buffer = buf;
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
+        PanelRound dgree3 = new PanelRound();
+        PanelRound dgree4 = new PanelRound();
+        PanelRound dgree5 = new PanelRound();
+        PanelRound dgree6 = new PanelRound();
         initComponents();
+        this.draw = draw;
+        jPanel4.add(draw, BorderLayout.CENTER);
+        jPanel4.setVisible(true);
+        Buscar2.setLayout(new BorderLayout());
+        Buscar2.add(dgree1, BorderLayout.CENTER);
+        Buscar2.setOpaque(true);
+
+        Buscar.setLayout(new BorderLayout());
+        Buscar.add(dgree2, BorderLayout.CENTER);
+        Buscar.setOpaque(true);
+
+        Buscar4.setLayout(new BorderLayout());
+        Buscar4.add(dgree3, BorderLayout.CENTER);
+        Buscar4.setOpaque(true);
+
+        Buscar1.setLayout(new BorderLayout());
+        Buscar1.add(dgree4, BorderLayout.CENTER);
+        Buscar1.setOpaque(true);
+
+        Buscar6.setLayout(new BorderLayout());
+        Buscar6.add(dgree5, BorderLayout.CENTER);
+        Buscar6.setOpaque(true);
+
+        Buscar3.setLayout(new BorderLayout());
+        Buscar3.add(dgree6, BorderLayout.CENTER);
+        Buscar3.setOpaque(true);
+        grafoload = grafo;
+        this.cox = cox;
+        sesion = ses;
+        Bienvenida1.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+
+    }
+
+    public ADMIN(Grafo grafo, Conexion cox, Sesion ses, Stack<Nodo> NodosN, Stack<Nodo> NodosE, Stack<Arista> AristasA, Stack<Arista> AristasE) {
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
+        PanelRound dgree3 = new PanelRound();
+        PanelRound dgree4 = new PanelRound();
+        PanelRound dgree5 = new PanelRound();
+        PanelRound dgree6 = new PanelRound();
+        initComponents();
+        if (NodosE != null) {
+            buffer.setNeliminar(NodosE);
+        }
+        if (NodosN != null) {
+            buffer.setNagregar(NodosN);
+        }
+        if (AristasA != null) {
+            buffer.setAagregar(AristasA);
+        }
+        if (AristasE != null) {
+            buffer.setAeliminar(AristasE);
+        }
+        draw = new Drawer(false, cox, null, grafo.getNodos(), grafo.getAristas(),buffer);
+        jPanel4.add(draw, BorderLayout.CENTER);
+        jPanel4.setVisible(true);
+        Buscar2.setLayout(new BorderLayout());
+        Buscar2.add(dgree1, BorderLayout.CENTER);
+        Buscar2.setOpaque(true);
+
+        Buscar.setLayout(new BorderLayout());
+        Buscar.add(dgree2, BorderLayout.CENTER);
+        Buscar.setOpaque(true);
+
+        Buscar4.setLayout(new BorderLayout());
+        Buscar4.add(dgree3, BorderLayout.CENTER);
+        Buscar4.setOpaque(true);
+
+        Buscar1.setLayout(new BorderLayout());
+        Buscar1.add(dgree4, BorderLayout.CENTER);
+        Buscar1.setOpaque(true);
+
+        Buscar6.setLayout(new BorderLayout());
+        Buscar6.add(dgree5, BorderLayout.CENTER);
+        Buscar6.setOpaque(true);
+
+        Buscar3.setLayout(new BorderLayout());
+        Buscar3.add(dgree6, BorderLayout.CENTER);
+        Buscar3.setOpaque(true);
+        grafoload = grafo;
+        this.cox = cox;
+        sesion = ses;
+        Bienvenida1.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+
     }
 
     /**
@@ -38,15 +135,16 @@ public class ADMIN extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        LogoN4 = new javax.swing.JLabel();
-        Logo1 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
         Buscar1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        Buscar5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         Bienvenida1 = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
         Buscar2 = new javax.swing.JPanel();
@@ -55,93 +153,121 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         Buscar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        Buscar4 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        Buscar6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        Buscar7 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        SeparadorUser1 = new javax.swing.JPanel();
+        SeparadorUser = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 1360, 1120));
 
-        jPanel1.setBackground(new java.awt.Color(255, 190, 15));
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel4.setAlignmentX(0.0F);
+        jPanel4.setAlignmentY(0.0F);
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN4.setForeground(new java.awt.Color(0, 0, 0));
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
-        LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 660, 90));
-
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setForeground(new java.awt.Color(0, 0, 0));
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
 
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida.setText("Aristas");
-        jPanel1.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, -1, -1));
+        jPanel1.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, -1, -1));
 
-        Buscar1.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar1.setLayout(new java.awt.GridBagLayout());
+        Buscar1.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cambiarp4(evt);
+            }
+        });
+        Buscar1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Eliminar");
-        Buscar1.add(jLabel2, new java.awt.GridBagConstraints());
+        Buscar1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 20, -1, -1));
 
-        jPanel1.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 600, 170, 70));
+        Buscar5.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar5cambiarp4(evt);
+            }
+        });
+        Buscar5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Eliminar");
+        Buscar5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 20, -1, -1));
+
+        Buscar1.add(Buscar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 670, 170, 70));
+
+        jPanel1.add(Buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 670, 170, 70));
 
         Bienvenida1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida1.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida1.setText("¡Bienvenido(a)!");
-        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+        jPanel1.add(Bienvenida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
         Bienvenida2.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida2.setText("Nodos");
-        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
-        Buscar2.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar2.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cambarp1(evt);
             }
         });
-        Buscar2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                popup(evt);
-            }
-        });
-        Buscar2.setLayout(new java.awt.GridBagLayout());
+        Buscar2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Agregar ");
-        Buscar2.add(jLabel3, new java.awt.GridBagConstraints());
+        Buscar2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 20, -1, -1));
 
-        jPanel1.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 170, 70));
+        jPanel1.add(Buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 170, 70));
 
-        Buscar3.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Buscar3.setLayout(new java.awt.GridBagLayout());
+        Buscar3.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar3MousePressed(evt);
+            }
+        });
+        Buscar3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Agregar ");
-        Buscar3.add(jLabel4, new java.awt.GridBagConstraints());
+        jLabel4.setText("Confirmar cambios");
+        Buscar3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 20, -1, -1));
 
-        jPanel1.add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 600, 170, 70));
+        jPanel1.add(Buscar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 810, 220, 70));
 
-        Buscar.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cambiarp2(evt);
+            }
+        });
         Buscar.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
@@ -149,21 +275,88 @@ public class ADMIN extends javax.swing.JFrame {
         jLabel1.setText("Eliminar");
         Buscar.add(jLabel1, new java.awt.GridBagConstraints());
 
-        jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 170, 70));
+        jPanel1.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, 170, 70));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 888, 1080));
+        Buscar4.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cambiarp3(evt);
+            }
+        });
+        Buscar4.setLayout(new java.awt.GridBagLayout());
+
+        jLabel5.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Agregar ");
+        Buscar4.add(jLabel5, new java.awt.GridBagConstraints());
+
+        jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 670, 170, 70));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
+        jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
+
+        Buscar6.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar6cambiarp4(evt);
+            }
+        });
+        Buscar6.setLayout(new java.awt.GridBagLayout());
+
+        jLabel7.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Volver");
+        Buscar6.add(jLabel7, new java.awt.GridBagConstraints());
+
+        Buscar7.setBackground(new java.awt.Color(140, 0, 0));
+        Buscar7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                Buscar7cambiarp4(evt);
+            }
+        });
+        Buscar7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Eliminar");
+        Buscar7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 20, -1, -1));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 46;
+        gridBagConstraints.ipady = 21;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(670, 480, 0, 0);
+        Buscar6.add(Buscar7, gridBagConstraints);
+
+        jPanel1.add(Buscar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 810, 170, 70));
+
+        SeparadorUser1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.add(SeparadorUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 770, 700, 1));
+
+        SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        SeparadorUser.add(jPanel3);
+
+        jPanel1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 700, 1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void popup(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_popup
-        // TODO add your handling code here:
-    }//GEN-LAST:event_popup
-
     private void cambarp1(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambarp1
         JFrame este = this;
-        AgregarNodos aa = new AgregarNodos();
+        AgregarNodos aa = new AgregarNodos(sesion, cox, grafoload, true, buffer, draw);
         aa.setVisible(true);
+        aa.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 este.setVisible(false);
@@ -172,40 +365,98 @@ public class ADMIN extends javax.swing.JFrame {
         timer.start();
     }//GEN-LAST:event_cambarp1
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ADMIN().setVisible(true);
+    private void cambiarp2(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp2
+        JFrame este = this;
+        EliminarNodo EE = new EliminarNodo(sesion, cox, grafoload, true, buffer, draw);
+        EE.setVisible(true);
+        EE.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
             }
         });
-    }
+        timer.start();
+    }//GEN-LAST:event_cambiarp2
+
+    private void cambiarp3(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp3
+        JFrame este = this;
+        AgregarArista AA = new AgregarArista(sesion, cox, grafoload, true, buffer, draw);
+        AA.setVisible(true);
+        AA.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_cambiarp3
+
+    private void cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarp4
+        JFrame este = this;
+        EliminarArista EA = new EliminarArista(sesion, cox, grafoload, true, buffer, draw);
+        EA.setVisible(true);
+        EA.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_cambiarp4
+
+    private void Buscar5cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar5cambiarp4
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar5cambiarp4
+
+    private void Buscar7cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar7cambiarp4
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Buscar7cambiarp4
+
+    private void Buscar6cambiarp4(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar6cambiarp4
+        JFrame este = this;
+        interfaz EA = new interfaz(sesion, cox, grafoload, true, buffer);
+        EA.setVisible(true);
+        EA.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                este.setVisible(false);
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_Buscar6cambiarp4
+
+    private void Buscar3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar3MousePressed
+        Stack<Nodo> NodosAagregar = buffer.getNagregar();
+        if(NodosAagregar.peek() != null){
+            for(Nodo nuevo: NodosAagregar){
+                cox.addTotableNodos(nuevo.getNombre(),nuevo.getX(),nuevo.getY());
+            }
+        }
+        Stack<Nodo> NodosAEliminar = buffer.getNeliminar();
+        if(NodosAEliminar.peek() != null){
+            for(Nodo eliminado : NodosAEliminar){
+                cox.eliminarTOtableNodos(eliminado.getNombre());
+            }
+        }
+         Stack<Arista> AristaAagregar = buffer.getAagregar();
+         if(AristaAagregar.peek() != null){
+             for(Arista agregada: AristaAagregar){
+                int id1 = cox.searchNodoName(agregada.getInicio().getNombre()).getId();
+                int id2 = cox.searchNodoName(agregada.getFin().getNombre()).getId();
+                cox.addtoTableArist(id1,id2,agregada.getPeso(),agregada.isEscaleras());
+            }
+         }
+         Stack<Arista> AristaAEliminar = buffer.getAeliminar();
+         if(AristaAEliminar.peek() != null){
+             for(Arista eliminada : AristaAEliminar ){
+             int id1 = cox.searchNodoName(eliminada.getInicio().getNombre()).getId();
+             int id2 = cox.searchNodoName(eliminada.getFin().getNombre()).getId();
+             cox.eliminarTOtableArista(id1, id2);
+             cox.eliminarTOtableArista(id2, id1);
+         }
+         }
+    }//GEN-LAST:event_Buscar3MousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida;
@@ -215,14 +466,24 @@ public class ADMIN extends javax.swing.JFrame {
     private javax.swing.JPanel Buscar1;
     private javax.swing.JPanel Buscar2;
     private javax.swing.JPanel Buscar3;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
+    private javax.swing.JPanel Buscar4;
+    private javax.swing.JPanel Buscar5;
+    private javax.swing.JPanel Buscar6;
+    private javax.swing.JPanel Buscar7;
+    private javax.swing.JPanel SeparadorUser;
+    private javax.swing.JPanel SeparadorUser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

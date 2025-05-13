@@ -4,6 +4,7 @@
  */
 package com.app.interfaz;
 
+import com.app.utilidad.PanelRound;
 import com.app.conexion.Conexion;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -13,8 +14,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
+import java.awt.BorderLayout;
 import java.util.Arrays;
 import javax.swing.JFrame;
+import raven.toast.Notifications;
 
 /**
  *
@@ -36,6 +39,15 @@ public class crear_cuenta extends javax.swing.JFrame {
         grafo = Grafoload;
         Arrays.fill(ver, false);
         initComponents();
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
+        InicioSesion.setLayout(new BorderLayout());
+        InicioSesion.add(dgree1,BorderLayout.CENTER);
+        InicioSesion.setOpaque(true);
+
+        CrearCuenta.setLayout(new BorderLayout());
+        CrearCuenta.add(dgree2,BorderLayout.CENTER);
+        CrearCuenta.setOpaque(true);
         carrusel();
         this.dispose();
         this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -60,24 +72,22 @@ public class crear_cuenta extends javax.swing.JFrame {
         Password1Text = new javax.swing.JLabel();
         Password1 = new javax.swing.JPasswordField();
         User1 = new javax.swing.JTextField();
-        Logo1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
         IniciarSesionTexto1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        LogoN4 = new javax.swing.JLabel();
         SeparadorUser = new javax.swing.JPanel();
         SeparadorPass4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        InicioSesion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         SeparadorPass = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        CrearCuenta = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         Mensaje = new javax.swing.JLabel();
         Password1See = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         Password2See = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         Fondo2 = new javax.swing.JPanel();
         Carrusel = new javax.swing.JLabel();
 
@@ -90,7 +100,7 @@ public class crear_cuenta extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Fondo1.setBackground(new java.awt.Color(255, 190, 15));
+        Fondo1.setBackground(new java.awt.Color(255, 255, 255));
         Fondo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Password2Text.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
@@ -100,7 +110,7 @@ public class crear_cuenta extends javax.swing.JFrame {
         Password2Text.setDoubleBuffered(true);
         Fondo1.add(Password2Text, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 670, -1, -1));
 
-        Password2.setBackground(new java.awt.Color(255, 190, 15));
+        Password2.setBackground(new java.awt.Color(255, 255, 255));
         Password2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Password2.setForeground(new java.awt.Color(140, 140, 140));
         Password2.setText(bundle.getString("crear_cuenta.Password2.text")); // NOI18N
@@ -124,7 +134,7 @@ public class crear_cuenta extends javax.swing.JFrame {
         Password1Text.setDoubleBuffered(true);
         Fondo1.add(Password1Text, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
 
-        Password1.setBackground(new java.awt.Color(255, 190, 15));
+        Password1.setBackground(new java.awt.Color(255, 255, 255));
         Password1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Password1.setForeground(new java.awt.Color(140, 140, 140));
         Password1.setText(bundle.getString("crear_cuenta.Password1.text")); // NOI18N
@@ -136,7 +146,7 @@ public class crear_cuenta extends javax.swing.JFrame {
         });
         Fondo1.add(Password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 470, 40));
 
-        User1.setBackground(new java.awt.Color(255, 190, 15));
+        User1.setBackground(new java.awt.Color(255, 255, 255));
         User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         User1.setForeground(java.awt.Color.gray);
         User1.setText(bundle.getString("crear_cuenta.User1.text")); // NOI18N
@@ -154,16 +164,9 @@ public class crear_cuenta extends javax.swing.JFrame {
         });
         Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
 
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        Fondo1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, 200));
-
         jLabel3.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel3.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
         Fondo1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setText(bundle.getString("crear_cuenta.LogoN3.text")); // NOI18N
-        Fondo1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
 
         IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
         IniciarSesionTexto1.setText(bundle.getString("crear_cuenta.IniciarSesionTexto1.text")); // NOI18N
@@ -172,10 +175,6 @@ public class crear_cuenta extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
         jLabel7.setText(bundle.getString("crear_cuenta.jLabel7.text")); // NOI18N
         Fondo1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, -1, -1));
-
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        Fondo1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 660, 90));
 
         SeparadorUser.setBackground(new java.awt.Color(0, 0, 0));
         Fondo1.add(SeparadorUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 500, 1));
@@ -187,49 +186,49 @@ public class crear_cuenta extends javax.swing.JFrame {
         jLabel2.setText(bundle.getString("crear_cuenta.jLabel2.text")); // NOI18N
         Fondo1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 620, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(189, 32, 0));
-        jPanel1.setForeground(new java.awt.Color(140, 0, 0));
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        InicioSesion.setBackground(new java.awt.Color(255, 255, 255));
+        InicioSesion.setForeground(new java.awt.Color(255, 255, 255));
+        InicioSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        InicioSesion.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        InicioSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
+                InicioSesionMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel1MouseEntered(evt);
+                InicioSesionMouseEntered(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel1MousePressed(evt);
+                InicioSesionMousePressed(evt);
             }
         });
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        InicioSesion.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText(bundle.getString("crear_cuenta.jLabel1.text")); // NOI18N
-        jPanel1.add(jLabel1, new java.awt.GridBagConstraints());
+        InicioSesion.add(jLabel1, new java.awt.GridBagConstraints());
 
-        Fondo1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 750, 160, 70));
+        Fondo1.add(InicioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 750, 160, 70));
 
         SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
         Fondo1.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 570, 500, 1));
 
-        jPanel5.setBackground(new java.awt.Color(189, 32, 0));
-        jPanel5.setForeground(new java.awt.Color(140, 0, 0));
-        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        CrearCuenta.setBackground(new java.awt.Color(255, 255, 255));
+        CrearCuenta.setForeground(new java.awt.Color(140, 0, 0));
+        CrearCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CrearCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jPanel5MousePressed(evt);
+                CrearCuentaMousePressed(evt);
             }
         });
-        jPanel5.setLayout(new java.awt.GridBagLayout());
+        CrearCuenta.setLayout(new java.awt.GridBagLayout());
 
         jLabel6.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText(bundle.getString("crear_cuenta.jLabel6.text")); // NOI18N
-        jPanel5.add(jLabel6, new java.awt.GridBagConstraints());
+        CrearCuenta.add(jLabel6, new java.awt.GridBagConstraints());
 
-        Fondo1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 750, 160, 70));
+        Fondo1.add(CrearCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 750, 160, 70));
 
         Mensaje.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         Mensaje.setForeground(new java.awt.Color(204, 255, 204));
@@ -266,9 +265,13 @@ public class crear_cuenta extends javax.swing.JFrame {
         });
         Fondo1.add(Password2See, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 660, -1, 30));
 
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        jLabel10.setText(bundle.getString("crear_cuenta.jLabel10.text")); // NOI18N
+        Fondo1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
+
         getContentPane().add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
 
-        Fondo2.setBackground(new java.awt.Color(140, 0, 0));
+        Fondo2.setBackground(new java.awt.Color(0, 0, 0));
         Fondo2.setForeground(new java.awt.Color(0, 60, 67));
         Fondo2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Fondo2.add(Carrusel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 70, 830, 930));
@@ -278,9 +281,9 @@ public class crear_cuenta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+    private void InicioSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioSesionMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel1MouseClicked
+    }//GEN-LAST:event_InicioSesionMouseClicked
 
     private void User1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_User1MousePressed
         if(Password2.getText().equals("")){
@@ -289,7 +292,7 @@ public class crear_cuenta extends javax.swing.JFrame {
         if(Password1.getText().equals("")){
                 Password1Text.setText("Ingrese su contraseña");
         }
-        if(!User1.getText().equals("Ingrese el nombre de usuario")){
+        if(!User1.getText().equals("Ingrese su nombre de usuario")){
             return;
         }
         else{
@@ -300,63 +303,59 @@ public class crear_cuenta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_User1MousePressed
 
-    private void jPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseEntered
+    private void InicioSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioSesionMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel1MouseEntered
+    }//GEN-LAST:event_InicioSesionMouseEntered
 
-    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+    private void CrearCuentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearCuentaMousePressed
         
         if(User1.getText().contains(" ")){
-            Mensaje.setText("El usuario no puede tener espacios");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"El usuario no puede tener espacios"); 
             return;
         }
         if(User1.getText().equals("") || User1.getText().equals("Ingrese el nombre de usuario")){
-            Mensaje.setText("Ingrese un nombre de usuario");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Ingrese un nombre de usuario");
             return;
         }
         if(Password1.getText().equals("")){
-            Mensaje.setText("Ingrese la contraseña");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Ingrese la contraseña");
             return;
         }
         if(Password2.getText().equals("")){
-            Mensaje.setText("Ingrese nuevamente la contraseña");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Ingrese nuevamente la contraseña");
             return;
         }
         if(!Password1.getText().equals(Password2.getText())){
-            Mensaje.setText("Contraseñas no coinciden");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"Contraseñas no coinciden");
             return;
         }
         if(Password1.getText().length() < 8){
-            Mensaje.setText("La contraseña debe tener al menos 8 caracteres");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.INFO,Notifications.Location.TOP_CENTER,"La contraseña debe tener al menos 8 caracteres");
             return;
         }
         if(Password1.getText().length() > 32){
-            Mensaje.setText("La contraseña puede tener maximo 32 caracteres");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"La contraseña puede tener maximo 32 caracteres");
             return;
         }
         if ((Password1.getText().matches(".*[A-Z].*") && Password1.getText().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}.*") && !Password1.getText().contains(" "))){
-            cox.addTotableUsers(User1.getText(), Password1.getText(), Mensaje);
+            Boolean veri = cox.addTotableUsers(User1.getText(), Password1.getText());
+            if(veri == true){
+                Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"El usuario ha sido creado");
+                return;
+            }
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El usuario ya existe");
+            
         }
         else{
-            Mensaje.setText("La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
-            Mensaje.setForeground(Color.RED);
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
             return;
         }
         if((!Password1.getText().matches(".*[A-Z].*") && !Password1.getText().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}.*") && Password1.getText().contains(" "))){
-            Mensaje.setText("La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
-            Mensaje.setForeground(Color.RED);
-            return;
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"La contraseña no puede tener espacios, debe tener al menos 2 caracteres espaciales y 1 mayuscula");
         }
         
         
-    }//GEN-LAST:event_jPanel5MousePressed
+    }//GEN-LAST:event_CrearCuentaMousePressed
 
     private void User1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User1ActionPerformed
         // TODO add your handling code here:
@@ -429,9 +428,9 @@ public class crear_cuenta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Password2SeeMousePressed
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+    private void InicioSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioSesionMousePressed
         JFrame frame = this;
-        Inicio_sesion is = new Inicio_sesion(grafo);
+        Inicio_sesion is = new Inicio_sesion(grafo,cox,new Buffer());
         is.setVisible(true); 
         is.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Timer timer = new Timer(1, new ActionListener() {
@@ -440,7 +439,7 @@ public class crear_cuenta extends javax.swing.JFrame {
             }
         });
         timer.start();
-    }//GEN-LAST:event_jPanel1MousePressed
+    }//GEN-LAST:event_InicioSesionMousePressed
     private void carrusel(){
         
         
@@ -467,12 +466,11 @@ public class crear_cuenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Carrusel;
+    private javax.swing.JPanel CrearCuenta;
     private javax.swing.JPanel Fondo1;
     private javax.swing.JPanel Fondo2;
     private javax.swing.JLabel IniciarSesionTexto1;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
+    private javax.swing.JPanel InicioSesion;
     private javax.swing.JLabel Mensaje;
     private javax.swing.JPasswordField Password1;
     private javax.swing.JLabel Password1See;
@@ -485,13 +483,12 @@ public class crear_cuenta extends javax.swing.JFrame {
     private javax.swing.JPanel SeparadorUser;
     private javax.swing.JTextField User1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

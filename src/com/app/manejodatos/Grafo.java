@@ -70,9 +70,8 @@ public class Grafo {
             visitados.agregarNodo2(act2);
         
             vecinos = Aristas.obtenerPorInicio(act1.getNombre());
-        Arista vec = vecinos.getCabeza();
         
-        while (vec != null) {
+        for (Arista vec : vecinos) {
             if(vec.isEscaleras() && escaleras){
                 vec = vec.getSiguiente();
                 continue;
@@ -85,22 +84,22 @@ public class Grafo {
                 padres[nodoVecino.getId()] = act1.getId();
                 pq.push(new Arista(null, nodoVecino, nDis,vec.isEscaleras()));
             }
-            
-            vec = vec.getSiguiente();
         }
     }
     
     if(distancias[fn.getId()] < Integer.MAX_VALUE){
-        a.append("Metros: " + distancias[fn.getId()] + ", Camino: ");
+        a.append("Metros: " + distancias[fn.getId()] + "\nCamino: ");
         if(distancias[fn.getId()] == 0){
             a.setText("Se encuentra sobre el mismo nodo");
             drawerGrafo.reiniciarAristas(Aristas);
+            return new ListaEnlazada();
         }
     }
     
     else{
         a.append("La ruta entra " + iniS + " y " + finS + " no existe");
         drawerGrafo.reiniciarAristas(Aristas);
+        return new ListaEnlazada();
     }
     return rCamino(ini, fn, padres);
 }
@@ -121,7 +120,7 @@ public class Grafo {
         return caminoList;
     }
 
-    Stack pila = new Stack();
+    Stack<Nodo> pila = new Stack();
     int actualId = destino.getId();
     boolean caminoValido = true;
     
@@ -146,7 +145,7 @@ public class Grafo {
         }
     }
     if (!caminoValido || pila.isEmpty() || 
-        !pila.peek().getNombre().equals(origen.getNombre())) {
+        !pila.peek().getValor().getNombre().equals(origen.getNombre())) {
         return new ListaEnlazada();
     }
 

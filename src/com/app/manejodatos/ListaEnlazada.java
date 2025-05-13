@@ -4,14 +4,16 @@
  */
 package com.app.manejodatos;
 
+import java.util.Iterator;
+
 /**
  *
  * @author bohor
  */
+public class ListaEnlazada implements Iterable<Nodo> {
 
-
-public class ListaEnlazada {
     private Nodo cabeza;
+    private Nodo cola;
     private int size;
 
     public ListaEnlazada() {
@@ -32,81 +34,137 @@ public class ListaEnlazada {
     public void setSize(int size) {
         this.size = size;
     }
-    
+
     public void agregarNodo(Nodo nuevo) {
-        if(nuevo == null){
+        if (nuevo == null) {
             return;
         }
         if (cabeza == null) {
             cabeza = nuevo;
+            cola = nuevo;
         } else {
-            Nodo temp = cabeza;
-            while (temp.getSiguiente() != null) {
-                temp = (Nodo) temp.getSiguiente();
-            }
-            temp.setSiguiente(nuevo);
+            cola.setSiguiente(nuevo);
+            cola = nuevo;
         }
         nuevo.setId(size);
         size++;
     }
+
     public void agregarNodo2(Nodo nuevo) {
         if (cabeza == null) {
             cabeza = nuevo;
+            cola = nuevo;
         } else {
-            Nodo temp = cabeza;
-            while (temp.getSiguiente() != null) {
-                temp = (Nodo) temp.getSiguiente();
-            }
-            temp.setSiguiente(nuevo);
+            cola.setSiguiente(nuevo);
+            cola = nuevo;
         }
         size++;
     }
+
+    public boolean eliminarNodo(String nombre) {
+        if (cabeza == null) {
+            return false;
+        }
+        if (cabeza.getNombre().equals(nombre)) {
+            cabeza = cabeza.getSiguiente();
+            size--;
+            return true;
+        }
+        Nodo actual = cabeza;
+        while (actual.getSiguiente() != null) {
+            Nodo siguiente = (Nodo) actual.getSiguiente();
+            if (siguiente.getNombre().equals(nombre)) {
+                actual.setSiguiente(siguiente.getSiguiente());
+                size--;
+                return true;
+            }
+            actual = siguiente;
+        }
+        return false;
+    }
+
+    public void eliminarNodoBIEN(String nombreNodo) {
+        if (cabeza == null) {
+            return;
+        }
+
+        if (cabeza.getNombre().equals(nombreNodo)) {
+            if(cabeza.getSiguiente() == null){
+                cabeza = null;
+            }
+            else{
+                cabeza = cabeza.getSiguiente();
+            }
+            if (cabeza == null) {
+                cola = null;
+            }
+            size--;
+            return;
+        }
+        Nodo actual = cabeza;
+        while (actual.getSiguiente() != null) {
+            Nodo siguiente = actual.getSiguiente();
+            if (siguiente.getNombre().equals(nombreNodo)) {
+                actual.setSiguiente(siguiente.getSiguiente());
+                if (siguiente == cola) {
+                    cola = actual;
+                }
+                size--;
+                return;
+            }
+            actual = actual.getSiguiente();
+        }
+    }
+
     public int obtenerIndice(String nombre) {
         Nodo temp = cabeza;
         while (temp != null) {
-            
-            if (temp.getNombre() == nombre){
+
+            if (temp.getNombre() == nombre) {
                 return temp.getId();
             }
             temp = temp.getSiguiente();
         }
         return -1;
     }
-    public Nodo obtenerNodo(int id){
-        Nodo temp=cabeza;
+
+    public Nodo obtenerNodo(int id) {
+        Nodo temp = cabeza;
         while (temp != null) {
-            if (temp.getId() == id){
+            if (temp.getId() == id) {
                 break;
             }
-            temp =temp.getSiguiente();
+            temp = temp.getSiguiente();
         }
         return temp;
     }
-    public Nodo obtenerNodo(String nombre){
-        Nodo temp=cabeza;
+
+    public Nodo obtenerNodo(String nombre) {
+        Nodo temp = cabeza;
         while (temp != null) {
-            if (temp.getNombre().equals(nombre)){
+            if (temp.getNombre().equals(nombre)) {
                 break;
             }
-            temp =temp.getSiguiente();
+            temp = temp.getSiguiente();
         }
         return temp;
     }
-    public void MostrarLista(){
-        Nodo temp=cabeza;
-        while(temp!=null){
+
+    public void MostrarLista() {
+        Nodo temp = cabeza;
+        while (temp != null) {
             System.out.print(temp.getNombre() + " ");
             temp = temp.getSiguiente();
         }
-        return;
     }
-    public boolean NodoPresente(String nombre){
-        if(cabeza == null){
-         return false;
+
+    public boolean NodoPresente(String nombre) {
+        if (cabeza == null) {
+            return false;
         }
         Nodo temp = cabeza;
-        while(temp != null){
-            if(temp.getNombre().equals(nombre)){
+        while (temp != null) {
+            if (temp.getNombre().equals(nombre)) {
                 return true;
             }
             temp = temp.getSiguiente();
@@ -121,6 +179,36 @@ public class ListaEnlazada {
     public void setCabeza(Nodo cabeza) {
         this.cabeza = cabeza;
     }
-    
-    
+
+    @Override
+    public Iterator<Nodo> iterator() {
+        return new IteratorListaNodos();
+    }
+
+    private class IteratorListaNodos implements Iterator<Nodo> {
+
+        private Nodo actual = cabeza;
+
+        @Override
+        public boolean hasNext() {
+            return actual != null;
+        }
+
+        @Override
+        public Nodo next() {
+            Nodo nodoActual = actual;
+            actual = actual.getSiguiente();
+            return nodoActual;
+        }
+
+    }
+
+    public Nodo getCola() {
+        return cola;
+    }
+
+    public void setCola(Nodo cola) {
+        this.cola = cola;
+    }
+
 }

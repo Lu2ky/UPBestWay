@@ -4,17 +4,71 @@
  */
 package com.app.interfaz;
 
+import com.app.utilidad.PanelRound;
+import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
+import com.app.manejodatos.Arista;
+import com.app.manejodatos.Grafo;
+import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.Nodo;
+import com.app.manejodatos.Stack;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.Timer;
+import raven.toast.Notifications;
+
 /**
  *
  * @author ADMIN
  */
 public class EliminarNodo extends javax.swing.JFrame {
 
+    Grafo grafo = null;
+    Sesion sesion = null;
+    Conexion cox = null;
+    Drawer draw = null;
+    ListaEnlazada cargar = null;
+    Buffer buffer;
+
     /**
      * Creates new form EliminarNodo
      */
-    public EliminarNodo() {
+    public EliminarNodo(Sesion ses, Conexion coxload, Grafo grafoload, Boolean perm, Buffer buf, Drawer draw) {
+        buffer = buf;
+        this.draw = draw;
+        this.sesion = ses;
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
         initComponents();
+        Buscar4.setLayout(new BorderLayout());
+        Buscar4.add(dgree1, BorderLayout.CENTER);
+        Buscar4.setOpaque(true);
+        
+        CerrarSesion.setLayout(new BorderLayout());
+        CerrarSesion.add(dgree2 , BorderLayout.CENTER);
+        CerrarSesion.setOpaque(true);
+        cox = coxload;
+        grafo = grafoload;
+        cargar = grafo.getNodos();
+
+        // Removed duplicate initComponents call
+        jPanel3.add(draw, BorderLayout.CENTER);
+        jPanel3.setVisible(true);
+        Bienvenida2.setText("¡Bienvenido(a) " + this.sesion.getNombre() + "!");
+        if (draw.getNodos().NodoPresente("J")) {
+            Nodoeliminar.addItem("Biblioteca");
+            Nodoeliminar.addItem("Auditorio menor");
+        }
+        if (draw.getNodos().NodoPresente("H")) {
+            Nodoeliminar.addItem("Auditorio mayor");
+        }
+
+        Bienvenida2.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+        poblarComponentes();
     }
 
     /**
@@ -27,38 +81,29 @@ public class EliminarNodo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        LogoN4 = new javax.swing.JLabel();
-        Logo1 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
         Buscar4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        CerrarSesion = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         Bienvenida2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        NodoInicial = new combo_suggestion.ComboBoxSuggestion();
+        Nodoeliminar = new combo_suggestion.ComboBoxSuggestion();
         a = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 190, 15));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
-        LogoN4.setText(bundle.getString("crear_cuenta.LogoN4.text")); // NOI18N
-        jPanel1.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 660, 90));
-
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel1.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel1.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 340, 80));
-
-        Buscar4.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar4.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                Buscar4Agergar_Nodo(evt);
+                EliminarNodo(evt);
             }
         });
         Buscar4.setLayout(new java.awt.GridBagLayout());
@@ -70,95 +115,133 @@ public class EliminarNodo extends javax.swing.JFrame {
 
         jPanel1.add(Buscar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 660, 170, 70));
 
-        Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
-        Bienvenida2.setText("¡Bienvenido(a)!");
-        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        CerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CerrarSesionMousePressed(evt);
+            }
+        });
+        CerrarSesion.setLayout(new java.awt.GridBagLayout());
 
-        jPanel2.setBackground(new java.awt.Color(140, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Volver");
+        CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
+
+        jPanel1.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 1000, 170, 70));
+
+        Bienvenida2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
+        Bienvenida2.setForeground(new java.awt.Color(0, 0, 0));
+        Bienvenida2.setText("¡Bienvenido(a)!");
+        jPanel1.add(Bienvenida2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+
+        Nodoeliminar.setBackground(new java.awt.Color(0, 0, 0));
+        Nodoeliminar.setBorder(null);
+        Nodoeliminar.setMaximumRowCount(5);
+        Nodoeliminar.setFocusCycleRoot(true);
+        Nodoeliminar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jPanel1.add(Nodoeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
+
+        a.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        a.setForeground(new java.awt.Color(0, 0, 0));
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
+        a.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
+        jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, -1, -1));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setFocusable(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, -20, 150, 870));
 
-        NodoInicial.setBackground(new java.awt.Color(140, 0, 0));
-        NodoInicial.setBorder(null);
-        NodoInicial.setMaximumRowCount(5);
-        NodoInicial.setFocusCycleRoot(true);
-        NodoInicial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jPanel1.add(NodoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 220, 50));
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
 
-        a.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        a.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
-        jPanel1.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 910, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 358, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Buscar4Agergar_Nodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Buscar4Agergar_Nodo
-        String nombrenodo = Nombre_texto.getText() ;
-        Nodo nodonuevo = new Nodo(01,nombrenodo,null);
-        Grafo.agregarNodo(nodonuevo);
-    }//GEN-LAST:event_Buscar4Agergar_Nodo
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EliminarNodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void EliminarNodo(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarNodo
+        draw.reiniciar();
+        Nodo nodoAEliminar = null;
+        String nodoNombre = (String) Nodoeliminar.getSelectedItem();
+        if (nodoNombre == null || nodoNombre.isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Seleccione un nodo");
+            return;
         }
-        //</editor-fold>
+        if (nodoNombre.equals("Auditorio mayor")) {
+            nodoAEliminar = draw.getNodos().obtenerNodo("H");
+        } else if (nodoNombre.equals("Auditorio menor") || nodoNombre.equals("Biblioteca")) {
+            nodoAEliminar = draw.getNodos().obtenerNodo("J");
+        } else {
+            // aca se encuanta el nodo a remover
+            nodoAEliminar = draw.getNodos().obtenerNodo(nodoNombre);
+        }
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EliminarNodo().setVisible(true);
+        if (nodoAEliminar != null) {
+            draw.getNodos().eliminarNodoBIEN(nodoAEliminar.getNombre());
+            System.out.println("Nodo a eliminar: " + nodoAEliminar.getNombre());
+
+            buffer.getNeliminar().push(nodoAEliminar);
+            draw.eliminarArista(nodoAEliminar.getNombre(), buffer);
+            Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Nodo '" + nodoNombre + "' eliminado.");
+
+        } else {
+            Notifications.getInstance().show(Notifications.Type.ERROR, Notifications.Location.TOP_CENTER, "Nodo " + nodoNombre + " no encontrado");
+        }
+        DefaultComboBoxModel<String> nueva = new DefaultComboBoxModel<>();
+        for (Nodo nombreNodo : draw.getNodos()) {
+            nueva.addElement(nombreNodo.getNombre());
+            draw.reiniciar();
+        }
+        if (cargar.NodoPresente("J")) {
+            nueva.addElement("Biblioteca");
+            nueva.addElement("Auditorio menor");
+        }
+        if (cargar.NodoPresente("H")) {
+            nueva.addElement("Auditorio mayor");
+        }
+        Nodoeliminar.setModel(nueva);
+    }//GEN-LAST:event_EliminarNodo
+
+    private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
+
+        JFrame frame = this;
+        ADMIN inis = new ADMIN(grafo, cox, sesion, buffer, draw);
+        inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        inis.setVisible(true);
+        Timer timer = new Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
             }
         });
+        timer.start();
+    }//GEN-LAST:event_CerrarSesionMousePressed
+    private void poblarComponentes() {
+        Nodo temp = draw.getNodos().getCabeza();
+        while (temp != null) {
+            Nodoeliminar.addItem(temp.getNombre());
+            temp = temp.getSiguiente();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida2;
     private javax.swing.JPanel Buscar4;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
-    private combo_suggestion.ComboBoxSuggestion NodoInicial;
+    private javax.swing.JPanel CerrarSesion;
+    private combo_suggestion.ComboBoxSuggestion Nodoeliminar;
     private javax.swing.JLabel a;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

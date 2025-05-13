@@ -4,17 +4,75 @@
  */
 package com.app.interfaz;
 
+import com.app.conexion.Conexion;
+import com.app.conexion.data.Sesion;
+import com.app.interfaz.Drawer;
+import com.app.manejodatos.Arista;
+import com.app.manejodatos.Grafo;
+import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.Nodo;
+import com.app.utilidad.PanelRound;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.Timer;
+import raven.toast.Notifications;
+
 /**
  *
  * @author ADMIN
  */
 public class AgregarArista extends javax.swing.JFrame {
 
+    private Grafo grafo = null;
+    private boolean check = true;
+    private Sesion sesion = null;
+    private Conexion cox = null;
+    private Drawer draw = null;
+    private ListaEnlazada cargar = null;
+    private Buffer buffer;
+
     /**
      * Creates new form AgregarArista
      */
-    public AgregarArista() {
+    public AgregarArista(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm, Buffer buf, Drawer draw) {
         initComponents();
+        cox = coxload;
+        buffer = buf;
+        this.draw = draw;
+        grafo = grafoload;
+        cargar = grafo.getNodos();
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+        jPanel5.setLayout(new BorderLayout());
+        jPanel5.add(draw,BorderLayout.CENTER);
+        jPanel5.setVisible(true);
+        this.sesion = sesion;
+        Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+         if (draw.getNodos().NodoPresente("J")) {
+            NodoInicial.addItem("Biblioteca");
+            NodoInicial.addItem("Auditorio menor");
+            NodoFinal.addItem("Auditorio menor");
+            NodoFinal.addItem("Biblioteca");
+        }
+        if (draw.getNodos().NodoPresente("H")) {
+            NodoInicial.addItem("Auditorio mayor");
+            NodoFinal.addItem("Auditorio mayor");
+        }
+        PanelRound dgree1 = new PanelRound();
+        PanelRound dgree2 = new PanelRound();
+        Buscar.setLayout(new BorderLayout());
+        Buscar.add(dgree1,BorderLayout.CENTER);
+        Buscar.setVisible(true);
+        
+        CerrarSesion.setLayout(new BorderLayout());
+        CerrarSesion.add(dgree2,BorderLayout.CENTER);
+        CerrarSesion.setVisible(true);
+        
+        Bienvenida.setText("¡Bienvenido(a) " + sesion.getNombre() + "!");
+        poblarComponentes();
     }
 
     /**
@@ -26,11 +84,7 @@ public class AgregarArista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        Logo1 = new javax.swing.JLabel();
-        LogoN3 = new javax.swing.JLabel();
-        LogoN4 = new javax.swing.JLabel();
         dndva2 = new javax.swing.JLabel();
         NodoFinal = new combo_suggestion.ComboBoxSuggestion();
         NodoInicial = new combo_suggestion.ComboBoxSuggestion();
@@ -41,35 +95,29 @@ public class AgregarArista extends javax.swing.JFrame {
         CerrarSesion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         Bienvenida = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        SeparadorPass = new javax.swing.JPanel();
+        Ponderado = new javax.swing.JTextField();
+        dndviene = new javax.swing.JLabel();
+        Check = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(140, 0, 0));
-        jPanel4.setFocusable(false);
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 0, 1350, 1180));
-
-        jPanel3.setBackground(new java.awt.Color(255, 190, 15));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Logo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/imagen_2025-04-13_002438034 (1).png"))); // NOI18N
-        jPanel3.add(Logo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 210, -1));
-
-        LogoN3.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
-        LogoN3.setText(bundle.getString("Inicio_sesion.LogoN3.text")); // NOI18N
-        jPanel3.add(LogoN3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 340, 80));
-
-        LogoN4.setFont(new java.awt.Font("Roboto Black", 0, 60)); // NOI18N
-        LogoN4.setText(bundle.getString("Inicio_sesion.LogoN4.text")); // NOI18N
-        jPanel3.add(LogoN4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 610, 90));
-
+        dndva2.setBackground(new java.awt.Color(0, 0, 0));
         dndva2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        dndva2.setForeground(new java.awt.Color(0, 0, 0));
         dndva2.setText("Edificio final");
         jPanel3.add(dndva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 190, 40));
 
-        NodoFinal.setBackground(new java.awt.Color(140, 0, 0));
+        NodoFinal.setBackground(new java.awt.Color(0, 0, 0));
         NodoFinal.setBorder(null);
         NodoFinal.setMaximumRowCount(5);
         NodoFinal.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -80,20 +128,33 @@ public class AgregarArista extends javax.swing.JFrame {
         });
         jPanel3.add(NodoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, 220, 50));
 
-        NodoInicial.setBackground(new java.awt.Color(140, 0, 0));
+        NodoInicial.setBackground(new java.awt.Color(0, 0, 0));
         NodoInicial.setBorder(null);
         NodoInicial.setMaximumRowCount(5);
         NodoInicial.setFocusCycleRoot(true);
         NodoInicial.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        NodoInicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NodoInicialActionPerformed(evt);
+            }
+        });
         jPanel3.add(NodoInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 220, 50));
 
-        Buscar.setBackground(new java.awt.Color(140, 0, 0));
-        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Buscar.setBackground(new java.awt.Color(255, 255, 255));
+        Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearNuevaArista(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                crearNuevaArista(evt);
+            }
+        });
         Buscar.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Eliminar");
+        jLabel1.setText("Agregar");
         Buscar.add(jLabel1, new java.awt.GridBagConstraints());
 
         jPanel2.setBackground(new java.awt.Color(140, 0, 0));
@@ -101,14 +162,16 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Buscar.add(jPanel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 620, 170, 70));
+        jPanel3.add(Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 780, 170, 70));
 
+        dndviene2.setBackground(new java.awt.Color(0, 0, 0));
         dndviene2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        dndviene2.setForeground(new java.awt.Color(0, 0, 0));
         dndviene2.setText("Edificio Inicial ");
         jPanel3.add(dndviene2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 40));
 
-        CerrarSesion.setBackground(new java.awt.Color(140, 0, 0));
-        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CerrarSesion.setBackground(new java.awt.Color(255, 255, 255));
+        CerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CerrarSesionMousePressed(evt);
@@ -118,16 +181,76 @@ public class AgregarArista extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Cerrar Sesion");
+        jLabel2.setText("Volver");
         CerrarSesion.add(jLabel2, new java.awt.GridBagConstraints());
 
-        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 980, 170, 70));
+        jPanel3.add(CerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 1000, 170, 70));
 
+        Bienvenida.setBackground(new java.awt.Color(0, 0, 0));
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
+        Bienvenida.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida.setText("¡Bienvenido(a)!");
         jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 1080));
+        jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Ponderado");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 210, -1));
+
+        SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel3.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 701, 500, 1));
+
+        Ponderado.setBackground(new java.awt.Color(255, 255, 255));
+        Ponderado.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        Ponderado.setForeground(java.awt.Color.gray);
+        Ponderado.setText("Ingrese el ponderado de la arista");
+        Ponderado.setBorder(null);
+        Ponderado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PonderadoMousePressed(evt);
+            }
+        });
+        Ponderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PonderadoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Ponderado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 660, 500, 50));
+
+        dndviene.setBackground(new java.awt.Color(0, 0, 0));
+        dndviene.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
+        dndviene.setForeground(new java.awt.Color(0, 0, 0));
+        dndviene.setText("Escaleras");
+        jPanel3.add(dndviene, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 150, 30));
+
+        Check.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png"))); // NOI18N
+        Check.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Check.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CheckMousePressed(evt);
+            }
+        });
+        jPanel3.add(Check, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, 50, 50));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("com/app/interfaz/Bundle"); // NOI18N
+        jLabel9.setText(bundle.getString("Inicio_sesion.jLabel9.text")); // NOI18N
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel4.setFocusable(false);
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel5.setEnabled(false);
+        jPanel5.setFocusable(false);
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -137,59 +260,140 @@ public class AgregarArista extends javax.swing.JFrame {
     }//GEN-LAST:event_NodoFinalActionPerformed
 
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
- 
+
+        JFrame frame = this;
+        ADMIN inis = new ADMIN(grafo, cox, sesion, buffer, draw);
+        inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        inis.setVisible(true);
+        Timer timer = new Timer(1, new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+            }
+        });
+        timer.start();
     }//GEN-LAST:event_CerrarSesionMousePressed
+
+    private void PonderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PonderadoActionPerformed
+        Ponderado.setText("");
+        Ponderado.setForeground(Color.black);
+
+    }//GEN-LAST:event_PonderadoActionPerformed
+
+    private void NodoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NodoInicialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NodoInicialActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarArista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void poblarComponentes() {
+        Nodo temp = cargar.getCabeza();
+        while (temp != null) {
+            NodoInicial.addItem(temp.getNombre());
+            NodoFinal.addItem(temp.getNombre());
+            temp = temp.getSiguiente();
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AgregarArista().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bienvenida;
     private javax.swing.JPanel Buscar;
     private javax.swing.JPanel CerrarSesion;
-    private javax.swing.JLabel Logo1;
-    private javax.swing.JLabel LogoN3;
-    private javax.swing.JLabel LogoN4;
+    private javax.swing.JLabel Check;
     private combo_suggestion.ComboBoxSuggestion NodoFinal;
     private combo_suggestion.ComboBoxSuggestion NodoInicial;
+    private javax.swing.JTextField Ponderado;
+    private javax.swing.JPanel SeparadorPass;
     private javax.swing.JLabel dndva2;
+    private javax.swing.JLabel dndviene;
     private javax.swing.JLabel dndviene2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
+
+
+    private void BuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BuscarMousePressed
+
+    }//GEN-LAST:event_BuscarMousePressed
+
+    private void CheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckMousePressed
+        if (check == false) {
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/NoChecked-removebg-preview.png")));
+            check = true;
+        } else {
+            Check.setIcon(new ImageIcon(getClass().getResource("/com/app/imagenes/Checked-removebg-preview.png")));
+            check = false;
+        }
+    }//GEN-LAST:event_CheckMousePressed
+
+    private void crearNuevaArista(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearNuevaArista
+        String inicioNombre = (String) NodoInicial.getSelectedItem();
+        String finNombre = (String) NodoFinal.getSelectedItem();
+        String pesoStr = Ponderado.getText().trim();
+        boolean escaleras = check;
+
+        if (inicioNombre == null || finNombre == null || inicioNombre.isEmpty() || finNombre.isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"Seleccione nodos de inicio y fin válidos");
+            return;
+        }
+        if (inicioNombre.equals(finNombre)) {
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El nodo inicial y final no pueden ser iguales");
+            return;
+        }
+        int peso = 0;
+        if (pesoStr.isEmpty()) {
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"Ingrese un peso válido");
+            return;
+        }
+        peso = Integer.parseInt(pesoStr);
+        if (peso <= 0) {
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El peso debe ser un número entero positivo");
+            return;
+        }
+
+        Nodo nodoInicio = grafo.getNodos().obtenerNodo(inicioNombre);
+        Nodo nodoFin = grafo.getNodos().obtenerNodo(finNombre);
+
+        if (nodoInicio == null || nodoFin == null) {
+            Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"No se encontraron los nodos seleccionados en el grafo");
+            return;
+        }
+
+        Arista nuevaArista = new Arista(nodoInicio, nodoFin, peso, escaleras);
+        Arista nuevaArista1 = new Arista(nodoFin, nodoInicio, peso, escaleras);
+        draw.getAristas().agregarArista((nuevaArista));
+        draw.getAristas().agregarArista((nuevaArista1));
+        Arista temp = new Arista(nuevaArista.getInicio(), nuevaArista.getFin(), nuevaArista.getPeso(), nuevaArista.isEscaleras());
+        draw.getTemp().getAagregar().push(temp);
+        
+        draw.reiniciar();
+        Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"Arista agregada exitosamente");
+
+        // se resetio para despues 
+        Ponderado.setText("");
+
+    }//GEN-LAST:event_crearNuevaArista
+
+    private void PonderadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PonderadoMousePressed
+        if(Ponderado.getText().equals("Ingrese el ponderado de la arista")){
+            Ponderado.setForeground(Color.BLACK);
+            Ponderado.setText("");
+            return;
+        }
+        if(Ponderado.getText().equals("")){
+            Ponderado.setForeground(Color.GRAY);
+            Ponderado.setText("Ingrese el ponderado de la arista");
+            return;
+        }
+        Ponderado.setForeground(Color.BLACK);
+        Ponderado.setText("");
+        
+        
+    }//GEN-LAST:event_PonderadoMousePressed
 }
