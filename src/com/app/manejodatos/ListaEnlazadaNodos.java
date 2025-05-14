@@ -10,18 +10,18 @@ import java.util.Iterator;
  *
  * @author bohor
  */
-public class ListaEnlazada implements Iterable<Nodo> {
+public class ListaEnlazadaNodos implements Iterable<Nodo> {
 
     private Nodo cabeza;
     private Nodo cola;
     private int size;
 
-    public ListaEnlazada() {
+    public ListaEnlazadaNodos() {
         this.cabeza = null;
         this.size = 0;
     }
 
-    public ListaEnlazada(Nodo cabeza) {
+    public ListaEnlazadaNodos(Nodo cabeza) {
         this.cabeza = cabeza;
         cabeza.setId(0);
         size++;

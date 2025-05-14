@@ -13,7 +13,7 @@ import com.app.utilidad.PanelRound;
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
-import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.ListaEnlazadaNodos;
 import com.app.manejodatos.Nodo;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -34,7 +34,7 @@ public class interfaz extends javax.swing.JFrame {
     Conexion cox = null;
     Boolean perm = false;
     Drawer draw = null;
-    ListaEnlazada cargar = null;
+    ListaEnlazadaNodos cargar = null;
     Buffer buffer = null;
 
     public interfaz(Sesion sesion, Conexion coxload, Grafo grafoload, Boolean perm, Buffer buf) {
@@ -379,7 +379,7 @@ public class interfaz extends javax.swing.JFrame {
         if (nodoINI == nodoFIN) {
             temp3 = "";
         }
-        ListaEnlazada camino = grafo.Dijkstra(nodoINI, nodoFIN, check, Camino, draw);
+        ListaEnlazadaNodos camino = grafo.Dijkstra(nodoINI, nodoFIN, check, Camino, draw);
         draw.setCamino(camino);
         if (camino.getCabeza() != null) {
             draw.ponerCamino();

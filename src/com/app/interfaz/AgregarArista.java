@@ -9,7 +9,7 @@ import com.app.conexion.data.Sesion;
 import com.app.interfaz.Drawer;
 import com.app.manejodatos.Arista;
 import com.app.manejodatos.Grafo;
-import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.ListaEnlazadaNodos;
 import com.app.manejodatos.Nodo;
 import com.app.utilidad.PanelRound;
 import java.awt.BorderLayout;
@@ -32,7 +32,7 @@ public class AgregarArista extends javax.swing.JFrame {
     private Sesion sesion = null;
     private Conexion cox = null;
     private Drawer draw = null;
-    private ListaEnlazada cargar = null;
+    private ListaEnlazadaNodos cargar = null;
     private Buffer buffer;
 
     /**

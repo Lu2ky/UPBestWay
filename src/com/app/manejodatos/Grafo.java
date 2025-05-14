@@ -12,7 +12,7 @@ import com.app.manejodatos.PriorityQueue;
 import com.app.manejodatos.Stack;
 import com.app.manejodatos.Nodo;
 import com.app.manejodatos.ListaEnlazadaAristas;
-import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.ListaEnlazadaNodos;
 import com.app.conexion.Conexion;
 import com.app.interfaz.Drawer;
 import com.mysql.cj.jdbc.PreparedStatementWrapper;
@@ -27,7 +27,7 @@ import javax.swing.JTextArea;
  */
 public class Grafo {
     private ListaEnlazadaAristas Aristas = new ListaEnlazadaAristas();
-    private ListaEnlazada Nodos = new ListaEnlazada();;
+    private ListaEnlazadaNodos Nodos = new ListaEnlazadaNodos();;
     private Conexion cox = null;
     
     public Grafo(Conexion conexion){
@@ -45,11 +45,11 @@ public class Grafo {
         Aristas.agregarArista(new Arista(nuevo.getFin(),nuevo.getInicio(),nuevo.getPeso(),nuevo.isEscaleras()));
         Aristas.agregarArista(nuevo);
     }
-    public ListaEnlazada Dijkstra(String iniS, String finS, boolean escaleras,JTextArea a, Drawer drawerGrafo) {
+    public ListaEnlazadaNodos Dijkstra(String iniS, String finS, boolean escaleras,JTextArea a, Drawer drawerGrafo) {
         Nodo ini = Nodos.obtenerNodo(iniS);
         Nodo fn = Nodos.obtenerNodo(finS);
         int[] distancias = new int[Nodos.getSize()];
-        ListaEnlazada visitados = new ListaEnlazada();
+        ListaEnlazadaNodos visitados = new ListaEnlazadaNodos();
         int[] padres = new int[Nodos.getSize()];
         Arrays.fill(padres, -1);
         Arrays.fill(distancias, Integer.MAX_VALUE);
@@ -92,19 +92,19 @@ public class Grafo {
         if(distancias[fn.getId()] == 0){
             a.setText("Se encuentra sobre el mismo nodo");
             drawerGrafo.reiniciarAristas(Aristas);
-            return new ListaEnlazada();
+            return new ListaEnlazadaNodos();
         }
     }
     
     else{
         a.append("La ruta entra " + iniS + " y " + finS + " no existe");
         drawerGrafo.reiniciarAristas(Aristas);
-        return new ListaEnlazada();
+        return new ListaEnlazadaNodos();
     }
     return rCamino(ini, fn, padres);
 }
-    public ListaEnlazada rCamino(Nodo origen, Nodo destino, int[] padres) {
-    ListaEnlazada caminoList = new ListaEnlazada();
+    public ListaEnlazadaNodos rCamino(Nodo origen, Nodo destino, int[] padres) {
+    ListaEnlazadaNodos caminoList = new ListaEnlazadaNodos();
 
     if (origen == null || destino == null || padres == null) {
         return caminoList;
@@ -146,7 +146,7 @@ public class Grafo {
     }
     if (!caminoValido || pila.isEmpty() || 
         !pila.peek().getValor().getNombre().equals(origen.getNombre())) {
-        return new ListaEnlazada();
+        return new ListaEnlazadaNodos();
     }
 
     while (!pila.isEmpty()) {
@@ -166,11 +166,11 @@ public class Grafo {
         this.Aristas = Aristas;
     }
 
-    public ListaEnlazada getNodos() {
+    public ListaEnlazadaNodos getNodos() {
         return Nodos;
     }
 
-    public void setNodos(ListaEnlazada Nodos) {
+    public void setNodos(ListaEnlazadaNodos Nodos) {
         this.Nodos = Nodos;
     }
     private void loadDB(Conexion conexion){

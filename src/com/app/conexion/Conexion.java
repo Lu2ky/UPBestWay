@@ -13,7 +13,7 @@ import com.app.manejodatos.Nodo;
 import com.app.conexion.data.enumData;
 import java.awt.Color;
 import javax.swing.JLabel;
-import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.ListaEnlazadaNodos;
 import raven.toast.Notifications;
 
 public class Conexion{
@@ -325,9 +325,9 @@ public class Conexion{
         }
         return nodo;
     }
-    public ListaEnlazada getNodos(){
+    public ListaEnlazadaNodos getNodos(){
         String sql = "SELECT * FROM nodos";
-        ListaEnlazada ret = new ListaEnlazada();
+        ListaEnlazadaNodos ret = new ListaEnlazadaNodos();
         try(PreparedStatement ps = conexion.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             if(!rs.next()){

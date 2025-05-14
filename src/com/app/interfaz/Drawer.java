@@ -8,15 +8,15 @@ import java.awt.event.*;
 
 public class Drawer extends JPanel {
 
-    private ListaEnlazada nodos = new ListaEnlazada();
+    private ListaEnlazadaNodos nodos = new ListaEnlazadaNodos();
     private ListaEnlazadaAristas aristas = new ListaEnlazadaAristas();
-    private ListaEnlazada camino = null;
+    private ListaEnlazadaNodos camino = null;
     private Boolean privilegios;
     private MouseAdapter listener;
     private JTextField nombreNodo;
     private Buffer temp;
     
-    public Drawer(Boolean privilegios, Conexion cox, ListaEnlazada camino, ListaEnlazada nodos, ListaEnlazadaAristas ar,Buffer buf) {
+    public Drawer(Boolean privilegios, Conexion cox, ListaEnlazadaNodos camino, ListaEnlazadaNodos nodos, ListaEnlazadaAristas ar,Buffer buf) {
         temp = buf;
         setPreferredSize(new Dimension(831, 940));
         setBackground(Color.BLACK);
@@ -25,7 +25,7 @@ public class Drawer extends JPanel {
         repaint();
     }
 
-    public void setCamino(ListaEnlazada camino) {
+    public void setCamino(ListaEnlazadaNodos camino) {
         this.camino = camino;
     }
 
@@ -91,11 +91,11 @@ public class Drawer extends JPanel {
         this.aristas = aristas;
     }
 
-    public ListaEnlazada getNodos() {
+    public ListaEnlazadaNodos getNodos() {
         return nodos;
     }
 
-    public void setNodos(ListaEnlazada nodos) {
+    public void setNodos(ListaEnlazadaNodos nodos) {
         this.nodos = nodos;
     }
 

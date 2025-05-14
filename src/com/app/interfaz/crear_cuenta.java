@@ -72,7 +72,6 @@ public class crear_cuenta extends javax.swing.JFrame {
         Password1Text = new javax.swing.JLabel();
         Password1 = new javax.swing.JPasswordField();
         User1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         IniciarSesionTexto1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         SeparadorUser = new javax.swing.JPanel();
@@ -88,6 +87,7 @@ public class crear_cuenta extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         Password2See = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         Fondo2 = new javax.swing.JPanel();
         Carrusel = new javax.swing.JLabel();
 
@@ -110,7 +110,6 @@ public class crear_cuenta extends javax.swing.JFrame {
         Password2Text.setDoubleBuffered(true);
         Fondo1.add(Password2Text, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 670, -1, -1));
 
-        Password2.setBackground(new java.awt.Color(255, 255, 255));
         Password2.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Password2.setForeground(new java.awt.Color(140, 140, 140));
         Password2.setText(bundle.getString("crear_cuenta.Password2.text")); // NOI18N
@@ -134,7 +133,6 @@ public class crear_cuenta extends javax.swing.JFrame {
         Password1Text.setDoubleBuffered(true);
         Fondo1.add(Password1Text, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, -1, -1));
 
-        Password1.setBackground(new java.awt.Color(255, 255, 255));
         Password1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Password1.setForeground(new java.awt.Color(140, 140, 140));
         Password1.setText(bundle.getString("crear_cuenta.Password1.text")); // NOI18N
@@ -146,7 +144,6 @@ public class crear_cuenta extends javax.swing.JFrame {
         });
         Fondo1.add(Password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 530, 470, 40));
 
-        User1.setBackground(new java.awt.Color(255, 255, 255));
         User1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         User1.setForeground(java.awt.Color.gray);
         User1.setText(bundle.getString("crear_cuenta.User1.text")); // NOI18N
@@ -163,10 +160,6 @@ public class crear_cuenta extends javax.swing.JFrame {
             }
         });
         Fondo1.add(User1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, 500, 30));
-
-        jLabel3.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
-        jLabel3.setText(bundle.getString("crear_cuenta.jLabel3.text")); // NOI18N
-        Fondo1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         IniciarSesionTexto1.setFont(new java.awt.Font("Roboto Condensed Black", 0, 48)); // NOI18N
         IniciarSesionTexto1.setText(bundle.getString("crear_cuenta.IniciarSesionTexto1.text")); // NOI18N
@@ -268,6 +261,10 @@ public class crear_cuenta extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/imagenes/upblogo.jpg"))); // NOI18N
         jLabel10.setText(bundle.getString("crear_cuenta.jLabel10.text")); // NOI18N
         Fondo1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 570, 220));
+
+        jLabel4.setFont(new java.awt.Font("Roboto Condensed", 0, 36)); // NOI18N
+        jLabel4.setText(bundle.getString("crear_cuenta.jLabel4.text")); // NOI18N
+        Fondo1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
 
         getContentPane().add(Fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 1080));
 
@@ -485,7 +482,7 @@ public class crear_cuenta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;

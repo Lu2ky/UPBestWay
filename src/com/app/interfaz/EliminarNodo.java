@@ -9,7 +9,7 @@ import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Arista;
 import com.app.manejodatos.Grafo;
-import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.ListaEnlazadaNodos;
 import com.app.manejodatos.Nodo;
 import com.app.manejodatos.Stack;
 import java.awt.BorderLayout;
@@ -31,7 +31,7 @@ public class EliminarNodo extends javax.swing.JFrame {
     Sesion sesion = null;
     Conexion cox = null;
     Drawer draw = null;
-    ListaEnlazada cargar = null;
+    ListaEnlazadaNodos cargar = null;
     Buffer buffer;
 
     /**
@@ -185,10 +185,11 @@ public class EliminarNodo extends javax.swing.JFrame {
         }
 
         if (nodoAEliminar != null) {
+            buffer.getNeliminar().push(cox.searchNodoName(nodoNombre));
             draw.getNodos().eliminarNodoBIEN(nodoAEliminar.getNombre());
             System.out.println("Nodo a eliminar: " + nodoAEliminar.getNombre());
 
-            buffer.getNeliminar().push(nodoAEliminar);
+            
             draw.eliminarArista(nodoAEliminar.getNombre(), buffer);
             Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Nodo '" + nodoNombre + "' eliminado.");
 

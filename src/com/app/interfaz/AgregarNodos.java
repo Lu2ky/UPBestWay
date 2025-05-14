@@ -8,7 +8,7 @@ import com.app.utilidad.PanelRound;
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
 import com.app.manejodatos.Grafo;
-import com.app.manejodatos.ListaEnlazada;
+import com.app.manejodatos.ListaEnlazadaNodos;
 import com.app.manejodatos.Nodo;
 import com.app.manejodatos.Stack;
 import java.awt.BorderLayout;
@@ -30,7 +30,7 @@ public class AgregarNodos extends javax.swing.JFrame {
     Conexion cox = null;
     Boolean agregar = false;
     Drawer draw = null;
-    ListaEnlazada cargar = null;
+    ListaEnlazadaNodos cargar = null;
     Stack<Nodo> nuevos = new Stack();
     Buffer buffer;
     /**
