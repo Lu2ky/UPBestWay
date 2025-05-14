@@ -216,8 +216,8 @@ public class Grafo {
                
                 Nodo nodo1 = Nodos.obtenerNodo(rs.getString("Nombre"));
                 Nodo nodo2 =  Nodos.obtenerNodo(rs1.getString("Nombre"));
-                Aristas.agregarArista(new Arista(nodo1,nodo2,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));   
-                Aristas.agregarArista(new Arista(nodo2,nodo1,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));
+                Aristas.agregarAristaNofantasma(new Arista(nodo1,nodo2,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));   
+                Aristas.agregarAristaNofantasma(new Arista(nodo2,nodo1,rs.getInt("Ponderado"),rs.getBoolean("Stairs")));
                 System.out.println(rs.getInt("idArista"));
                 
             }while(rs.next() && rs1.next());  

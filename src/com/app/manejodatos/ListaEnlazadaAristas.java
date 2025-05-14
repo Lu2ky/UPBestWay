@@ -47,13 +47,24 @@ public class ListaEnlazadaAristas implements Iterable<Arista> {
         this.cabeza = cabeza;
     }
 
-   public void agregarArista(Arista nuevo) {
+   public void agregarAristaNofantasma(Arista nuevo) {
     if (nuevo.getPeso() == 0) {
         return;
     }
     if (nuevo.getPeso() < 0) {
         return;
     }
+
+    if (cabeza == null) {
+        cabeza = nuevo;
+        cola = cabeza;
+    } else {
+        cola.setSiguiente(nuevo);
+        cola = nuevo;
+    }
+    size++;
+}
+   public void agregarArista(Arista nuevo) {
 
     if (cabeza == null) {
         cabeza = nuevo;
