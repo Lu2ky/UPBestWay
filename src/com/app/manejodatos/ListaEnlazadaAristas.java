@@ -7,6 +7,7 @@ package com.app.manejodatos;
 import com.app.interfaz.Buffer;
 import com.app.interfaz.Drawer;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -46,19 +47,23 @@ public class ListaEnlazadaAristas implements Iterable<Arista> {
         this.cabeza = cabeza;
     }
 
-    public void agregarArista(Arista nuevo) {
-        if (nuevo == null) {
-            return;
-        }
-        if (cabeza == null) {
-            cabeza = nuevo;
-            cola = cabeza;
-        } else {
-            cola.setSiguiente(nuevo);
-            cola = nuevo;
-        }
-        size++;
+   public void agregarArista(Arista nuevo) {
+    if (nuevo.getPeso() == 0) {
+        return;
     }
+    if (nuevo.getPeso() < 0) {
+        return;
+    }
+
+    if (cabeza == null) {
+        cabeza = nuevo;
+        cola = cabeza;
+    } else {
+        cola.setSiguiente(nuevo);
+        cola = nuevo;
+    }
+    size++;
+}
 
     public ListaEnlazadaAristas obtenerPorInicio(String nombre) {
         ListaEnlazadaAristas vecinos = new ListaEnlazadaAristas();
@@ -237,6 +242,9 @@ public class ListaEnlazadaAristas implements Iterable<Arista> {
 
         @Override
         public Arista next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             Arista nodoActual = actual;
             actual = actual.getSiguiente();
             return nodoActual;

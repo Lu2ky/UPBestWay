@@ -371,7 +371,6 @@ public class AgregarArista extends javax.swing.JFrame {
         draw.getAristas().agregarArista((nuevaArista1));
         Arista temp = new Arista(nuevaArista.getInicio(), nuevaArista.getFin(), nuevaArista.getPeso(), nuevaArista.isEscaleras());
         draw.getTemp().getAagregar().push(temp);
-        
         draw.reiniciar();
         Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"Arista agregada exitosamente");
 

@@ -5,6 +5,7 @@
 package com.app.manejodatos;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -120,7 +121,7 @@ public class ListaEnlazadaNodos implements Iterable<Nodo> {
         Nodo temp = cabeza;
         while (temp != null) {
 
-            if (temp.getNombre() == nombre) {
+            if (temp.getNombre().equals(nombre)) {
                 return temp.getId();
             }
             temp = temp.getSiguiente();
@@ -196,9 +197,12 @@ public class ListaEnlazadaNodos implements Iterable<Nodo> {
 
         @Override
         public Nodo next() {
-            Nodo nodoActual = actual;
-            actual = actual.getSiguiente();
-            return nodoActual;
+            if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        Nodo nodoActual = actual;
+        actual = actual.getSiguiente();
+        return nodoActual;
         }
 
     }
