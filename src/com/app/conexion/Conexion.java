@@ -11,10 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.app.manejodatos.Nodo;
 import com.app.conexion.data.enumData;
-import java.awt.Color;
-import javax.swing.JLabel;
 import com.app.manejodatos.ListaEnlazadaNodos;
-import raven.toast.Notifications;
 
 public class Conexion{
        private Connection conexion;

@@ -65,9 +65,9 @@ public class Drawer extends JPanel {
         return temp.getNagregar().peek() != null;
     }
     public void eliminarArista1(String ini, String fin,Buffer buf){
-        aristas.eliminarAristaInicioFin(ini, fin,this,buf);
+       aristas.eliminarAristaInicioFin(ini, fin,this,buf);
        aristas.eliminarAristaInicioFin(fin, ini,this,buf);
-        repaint();
+       repaint();
     }
     public void eliminarArista(String nodo,Buffer buf){
 

@@ -48,10 +48,7 @@ public class ListaEnlazadaAristas implements Iterable<Arista> {
     }
 
    public void agregarAristaNofantasma(Arista nuevo) {
-    if (nuevo.getPeso() == 0) {
-        return;
-    }
-    if (nuevo.getPeso() < 0) {
+    if (nuevo.getPeso() <= 0) {
         return;
     }
 

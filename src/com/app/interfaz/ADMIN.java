@@ -16,6 +16,7 @@ import javax.swing.Timer;
 import com.app.manejodatos.Arista;
 import com.app.manejodatos.Stack;
 import java.awt.BorderLayout;
+import raven.toast.Notifications;
 
 /**
  *
@@ -455,6 +456,7 @@ public class ADMIN extends javax.swing.JFrame {
              cox.eliminarTOtableArista(id2, id1);
          }
          }
+         Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"Cambios guardados");
     }//GEN-LAST:event_Buscar3MousePressed
 
 
