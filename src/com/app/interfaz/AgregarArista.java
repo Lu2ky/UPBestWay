@@ -6,7 +6,6 @@ package com.app.interfaz;
 
 import com.app.conexion.Conexion;
 import com.app.conexion.data.Sesion;
-import com.app.interfaz.Drawer;
 import com.app.manejodatos.Arista;
 import com.app.manejodatos.Grafo;
 import com.app.manejodatos.ListaEnlazadaNodos;
@@ -113,7 +112,6 @@ public class AgregarArista extends javax.swing.JFrame {
 
         dndva2.setBackground(new java.awt.Color(0, 0, 0));
         dndva2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
-        dndva2.setForeground(new java.awt.Color(0, 0, 0));
         dndva2.setText("Edificio final");
         jPanel3.add(dndva2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 190, 40));
 
@@ -143,9 +141,6 @@ public class AgregarArista extends javax.swing.JFrame {
         Buscar.setBackground(new java.awt.Color(255, 255, 255));
         Buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Buscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                crearNuevaArista(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 crearNuevaArista(evt);
             }
@@ -166,7 +161,6 @@ public class AgregarArista extends javax.swing.JFrame {
 
         dndviene2.setBackground(new java.awt.Color(0, 0, 0));
         dndviene2.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
-        dndviene2.setForeground(new java.awt.Color(0, 0, 0));
         dndviene2.setText("Edificio Inicial ");
         jPanel3.add(dndviene2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 230, 40));
 
@@ -188,19 +182,16 @@ public class AgregarArista extends javax.swing.JFrame {
 
         Bienvenida.setBackground(new java.awt.Color(0, 0, 0));
         Bienvenida.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 48)); // NOI18N
-        Bienvenida.setForeground(new java.awt.Color(0, 0, 0));
         Bienvenida.setText("¡Bienvenido(a)!");
         jPanel3.add(Bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Ponderado");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 610, 210, -1));
 
         SeparadorPass.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.add(SeparadorPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 701, 500, 1));
 
-        Ponderado.setBackground(new java.awt.Color(255, 255, 255));
         Ponderado.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         Ponderado.setForeground(java.awt.Color.gray);
         Ponderado.setText("Ingrese el ponderado de la arista");
@@ -219,7 +210,6 @@ public class AgregarArista extends javax.swing.JFrame {
 
         dndviene.setBackground(new java.awt.Color(0, 0, 0));
         dndviene.setFont(new java.awt.Font("Roboto Condensed ExtraBold", 0, 36)); // NOI18N
-        dndviene.setForeground(new java.awt.Color(0, 0, 0));
         dndviene.setText("Escaleras");
         jPanel3.add(dndviene, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 520, 150, 30));
 
@@ -248,7 +238,7 @@ public class AgregarArista extends javax.swing.JFrame {
         jPanel5.setEnabled(false);
         jPanel5.setFocusable(false);
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 830, 900));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 830, 900));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 830, 1080));
 
@@ -356,6 +346,19 @@ public class AgregarArista extends javax.swing.JFrame {
             Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"El peso debe ser un número entero positivo");
             return;
         }
+        if(inicioNombre.equals("Biblioteca") || inicioNombre.equals("Auditorio menor")){
+            inicioNombre = "J";
+        }
+        if(finNombre.equals("Biblioteca") || finNombre.equals("Auditorio menor")){
+            finNombre = "J";
+        }
+        if(inicioNombre.equals("Auditorio mayor")){
+            inicioNombre = "H";
+        }
+        if(finNombre.equals("Auditorio mayor")){
+            finNombre = "H";
+        }
+        
 
         Nodo nodoInicio = grafo.getNodos().obtenerNodo(inicioNombre);
         Nodo nodoFin = grafo.getNodos().obtenerNodo(finNombre);

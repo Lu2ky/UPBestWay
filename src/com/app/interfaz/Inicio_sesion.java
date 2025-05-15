@@ -14,26 +14,10 @@ import javax.swing.Timer;
 import com.app.conexion.data.Sesion;
 import com.app.conexion.Conexion;
 import com.app.manejodatos.Grafo;
-import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.extras.FlatAnimatedLafChange;
-import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
-import com.formdev.flatlaf.ui.FlatUIUtils;
 import java.awt.BorderLayout;
-import java.util.concurrent.ScheduledExecutorService;
-import java.awt.EventQueue;
-import java.awt.Font;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 import raven.toast.Notifications;
 
 /**
