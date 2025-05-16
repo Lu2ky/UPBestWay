@@ -3,16 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/interfaz/AgregarArista.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/interfaz/Buffer.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/interfaz/Drawer.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/interfaz/ADMIN.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/conexion/data/enumData.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/interfaz/Inicio_sesion.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/interfaz/crear_cuenta.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/interfaz/Bundle.properties</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/manejodatos/Grafo.java</file>
-            <file>file:/C:/Users/bohor/source/repos/ProyectoGrafos/ProyectoGrafos/src/com/app/manejodatos/ListaEnlazadaAristas.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/Inicio_sesion.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/AgregarNodos.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/Drawer.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/conexion/Conexion.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/EliminarArista.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/AgregarArista.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/EliminarNodo.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/crear_cuenta.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/manejodatos/ListaEnlazadaAristas.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/manejodatos/Grafo.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/conexion/data/enumData.java</file>
+            <file>file:/C:/Users/bohor/OneDrive/Documentos/GitHub/ProyectoGrafos/src/com/app/interfaz/ADMIN.java</file>
         </group>
     </open-files>
 </project-private>

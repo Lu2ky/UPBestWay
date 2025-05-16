@@ -447,11 +447,20 @@ public class ADMIN extends javax.swing.JFrame {
                 cox.addtoTableArist(id1,id2,agregada.getPeso(),agregada.isEscaleras());
             }
          }
+         int id1 = -1;
+         int id2 = -1;
          Stack<Arista> AristaAEliminar = buffer.getAeliminar();
          if(AristaAEliminar.peek() != null){
              for(Arista eliminada : AristaAEliminar ){
-             int id1 = cox.searchNodoName(eliminada.getInicio().getNombre()).getId();
-             int id2 = cox.searchNodoName(eliminada.getFin().getNombre()).getId();
+             Nodo nodo1 = cox.searchNodoName(eliminada.getInicio().getNombre());
+             Nodo nodo2 = cox.searchNodoName(eliminada.getFin().getNombre());
+             if(nodo1 != null){
+                 id1 = nodo1.getId();
+                         
+             }
+             if(nodo2 != null){
+                 id2 = nodo2.getId();
+             }
              cox.eliminarTOtableArista(id1, id2);
              cox.eliminarTOtableArista(id2, id1);
          }
