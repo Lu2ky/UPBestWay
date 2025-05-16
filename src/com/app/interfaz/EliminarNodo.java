@@ -211,6 +211,7 @@ public class EliminarNodo extends javax.swing.JFrame {
     private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
 
         JFrame frame = this;
+        draw.reiniciar();
         ADMIN inis = new ADMIN(grafo, cox, sesion, buffer, draw);
         inis.setExtendedState(JFrame.MAXIMIZED_BOTH);
         inis.setVisible(true);
