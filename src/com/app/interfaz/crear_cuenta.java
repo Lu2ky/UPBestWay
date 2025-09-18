@@ -332,8 +332,13 @@ public class crear_cuenta extends javax.swing.JFrame {
             Notifications.getInstance().show(Notifications.Type.ERROR,Notifications.Location.TOP_CENTER,"La contraseña puede tener maximo 32 caracteres");
             return;
         }
+        
         if ((Password1.getText().matches(".*[A-Z].*") && Password1.getText().matches(".*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]{2,}.*") && !Password1.getText().contains(" "))){
-            Boolean veri = cox.addTotableUsers(User1.getText(), Password1.getText());
+            String temp = String.valueOf(Password1.getText().hashCode());
+            for (int i = 0; i < 10; i++) {
+                temp = String.valueOf(temp.hashCode());
+            }
+            Boolean veri = cox.addTotableUsers(User1.getText(), temp);
             if(veri == true){
                 Notifications.getInstance().show(Notifications.Type.SUCCESS,Notifications.Location.TOP_CENTER,"El usuario ha sido creado");
                 return;

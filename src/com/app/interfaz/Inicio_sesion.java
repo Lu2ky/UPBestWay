@@ -355,10 +355,15 @@ public class Inicio_sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MousePressed
 
     private void InicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InicioMousePressed
-        if (cox.searchUser(User1.getText(), Password.getText())) {
+        String temp = String.valueOf(Password.getText().hashCode());
+            for (int i = 0; i < 10; i++) {
+                temp = String.valueOf(temp.hashCode());
+            }
+        if (cox.searchUser(User1.getText(), temp)) {
             sesion = new Sesion(User1.getText());
             Notifications.getInstance().show(Notifications.Type.SUCCESS, Notifications.Location.TOP_CENTER, "Se inicio sesion");
-            Boolean verificarPer = cox.verificarPermisos(User1.getText(), Password.getText());
+            
+            Boolean verificarPer = cox.verificarPermisos(User1.getText(), temp);
             JFrame frame = this;
             buffer = new Buffer();
             interfaz inte = new interfaz(sesion, cox, grafo, verificarPer, buffer);
